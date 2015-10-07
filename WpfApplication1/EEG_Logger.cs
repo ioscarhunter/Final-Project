@@ -13,6 +13,8 @@ namespace WpfApplication1
     public class EEG_Logger
     {
 
+        public int led_num { private get; set; }
+
         public event EventHandler<EEG_LoggerEventArgs> DataUpdate;
         public event EventHandler<EEG_StatusEventArgs> StatusUpdate;
 
@@ -24,6 +26,7 @@ namespace WpfApplication1
         private Profile profile = new Profile();
         private string profileName = "";
 
+
         private bool isLoad = true;
         private bool oneTime = false;
 
@@ -34,7 +37,7 @@ namespace WpfApplication1
         private double data_o1 = 0;
         private double data_o2 = 0;
 
-        int[] interest = new int[] { 0, 1, 10, 11 };
+        int[] interest = new int[] { 0, 1, 9, 10 };
 
         String[] eachSignal = new String[16];
 
@@ -91,6 +94,7 @@ namespace WpfApplication1
             engine.EE_DataSetBufferSizeInSec(1);
 
         }
+
         private void processEvent(object sender, System.Timers.ElapsedEventArgs e)
         {
             // Handle any waiting events
@@ -104,10 +108,11 @@ namespace WpfApplication1
                 throw new NotConnectException();
             }
         }
+
         public void Run()
         {
-
-                engine.ProcessEvents();
+            //while(true)
+            engine.ProcessEvents();
 
             _timer = new System.Timers.Timer();
             _timer.Interval = 1;
@@ -117,8 +122,8 @@ namespace WpfApplication1
 
         public void getEEG()
         {
-            double do1=0;
-            double do2=0;
+            double do1 = 0;
+            double do2 = 0;
 
             Dictionary<EdkDll.EE_DataChannel_t, double[]> data = engine.GetData((uint) userID);
             if (data == null)
@@ -126,46 +131,58 @@ namespace WpfApplication1
 
             int _bufferSize = data[EdkDll.EE_DataChannel_t.TIMESTAMP].Length;
 
-            if (back_o1 == 0 && back_o2 == 0)
-            {
-                back_o1 = data[EdkDll.EE_DataChannel_t.O1].Average();
-                back_o2 = data[EdkDll.EE_DataChannel_t.O2].Average();
-            }
+            //if (back_o1 == 0 && back_o2 == 0)
+            //{
+            //    back_o1 = data[EdkDll.EE_DataChannel_t.O1].Average();
+            //    back_o2 = data[EdkDll.EE_DataChannel_t.O2].Average();
+            //}
 
             Console.WriteLine("Writing " + _bufferSize.ToString() + " lines of data ");
 
             // Write the data to a file
             TextWriter file = new StreamWriter(filename, true);
 
-            for (int i = 0;i < _bufferSize;i++)
+            data[EdkDll.EE_DataChannel_t.O1] = SignalProcessing.HighPassFilter(data[EdkDll.EE_DataChannel_t.O1]);
+            data[EdkDll.EE_DataChannel_t.O2] = SignalProcessing.HighPassFilter(data[EdkDll.EE_DataChannel_t.O2]);
+
+            for (int i = 0;i < 128;i++)
             {
                 // now write the data
-                foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
-                    file.Write(data[channel][i] + ",");
-                file.WriteLine("");
+                //foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
+                //    file.Write(data[channel][i] + ",");
+                //file.WriteLine("");
 
                 // now write the data
-                //foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
-                //{
-                //    if (channel == EdkDll.EE_DataChannel_t.O1)
-                //    {
-                //        back_o1 = (back_o1 * (IIR_TC - 1) + data[channel][i]) / IIR_TC;
-                //        data_o1 = data[channel][i] - back_o1;
-                //        do1 = data[channel][i];
-                //    }
-                //    else if (channel == EdkDll.EE_DataChannel_t.O2)
-                //    {
-                //        back_o2 = (back_o2 * (IIR_TC - 1) + data[channel][i]) / IIR_TC;
-                //        data_o2 = data[channel][i] - back_o2;
-                //        do2 = data[channel][i];
-                //    }
-
-                //    file.Write(do1 + ", " + do2);
-                //    file.WriteLine("");
-
-                //    OnDataUpdate(data_o1, data_o2);
-            //}
-
+                file.Write(i/16 + ", ");
+                if (i < _bufferSize)
+                {
+                    foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
+                    {
+                        if (channel == EdkDll.EE_DataChannel_t.O1)
+                        {
+                            //back_o1 = (back_o1 * (IIR_TC - 1) + data[channel][i]) / IIR_TC;
+                            //data_o1 = data[channel][i] - back_o1;
+                            data_o1 = data[channel][i];
+                            file.Write(data_o1 + ", ");
+                            //Console.Write(data_o1 + ", ");
+                        }
+                        else if (channel == EdkDll.EE_DataChannel_t.O2)
+                        {
+                            //back_o2 = (back_o2 * (IIR_TC - 1) + data[channel][i]) / IIR_TC;
+                            //data_o2 = data[channel][i] - back_o2;
+                            data_o2 = data[channel][i];
+                            file.Write(data_o2 + ", ");
+                            //Console.Write(data_o2 + ", ");
+                        }
+                    }
+                    OnDataUpdate(data_o1, data_o2);
+                }
+                else
+                {
+                    file.Write("0, 0");
+                }
+                file.WriteLine("");
+                //Console.WriteLine("");
             }
             file.Close();
         }
@@ -244,7 +261,8 @@ namespace WpfApplication1
                 headsetOn, signalStrength.ToString(), chargeLevel, maxChargeLevel, eachSignal);
 
         }
-    }
+
+}
 
     public class EEG_LoggerEventArgs:EventArgs
     {

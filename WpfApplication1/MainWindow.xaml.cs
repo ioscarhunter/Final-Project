@@ -89,8 +89,8 @@ namespace WpfApplication1
                 baseL.Content = "Base L" + e.eSignal[0];
                 baseR.Content = "Base R" + e.eSignal[1];
 
-                OL.Content = "O L" + e.eSignal[10];
-                OR.Content = "O R" + e.eSignal[11];
+                OL.Content = "O L" + e.eSignal[9];
+                OR.Content = "O R" + e.eSignal[10];
 
             });
 
@@ -102,25 +102,31 @@ namespace WpfApplication1
                 light = new Label[] { light1, light2, light3, light4, light5, light6, light7, light8 };
             Dispatcher.Invoke(() =>
             {
-                for (int i = 0;i < light.Length;i++)
+                if (e.cycle == 1)
                 {
-                    switch (e.status[i])
+                    p.getEEG();
+                }
+                else
+                {
+                    for (int i = 0;i < light.Length;i++)
                     {
-                        case 1:
-                            light[i].Foreground = Brushes.ForestGreen;
-                            if (i == 1)
-                            {
-                                p.getEEG();
-                            }
-                            break;
-                        case 0:
-                            light[i].Foreground = Brushes.WhiteSmoke;
-                            break;
-                        default:
-                            break;
+
+                        switch (e.status[i])
+                        {
+                            case 1:
+                                light[i].Foreground = Brushes.ForestGreen;
+                                break;
+                            case 0:
+
+                                light[i].Foreground = Brushes.WhiteSmoke;
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
             });
+
         }
 
         private void connect_but_Click(object sender, RoutedEventArgs e)
@@ -133,7 +139,8 @@ namespace WpfApplication1
                 {
                     Console.WriteLine(i);
                     try
-                    {if (loggerThread == null)
+                    {
+                        if (loggerThread == null)
                         {
                             loggerThread = new Thread(p.Run);
                             loggerThread.Start();

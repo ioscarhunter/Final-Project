@@ -48,29 +48,32 @@ namespace WpfApplication1
         {
             while (true)
             {
-                Thread.Sleep(20);
+                Thread.Sleep(50);
                 for (int i = 0;i < lednum;i++)
                 {
+                    Thread.Sleep(1);
                     //Console.WriteLine("on");
-                    leds[i].turnon();
                     ledstatus[i] = 1;
-                    OnLEDStatusUpdate();
-                    Thread.Sleep(110);
+                    OnLEDStatusUpdate(0);
+                    leds[i].turnon();
+                    
+                    Console.WriteLine("l: " + i);
+                    Thread.Sleep(123);
                     //Console.WriteLine("off");
-                    leds[i].turnoff();
+                    leds[i].blackout();
                     ledstatus[i] = 0;
                     //OnLEDStatusUpdate();
-                    Thread.Sleep(3);
+                    Thread.Sleep(1);
 
                 }
-                
+                OnLEDStatusUpdate(1);
             }
         }
 
-        public void OnLEDStatusUpdate()
+        public void OnLEDStatusUpdate(int i)
         {
             if (LEDUpdate != null)
-                LEDUpdate(this, new LED_StatusEventArgs(ledstatus));
+                LEDUpdate(this, new LED_StatusEventArgs(ledstatus,i));
         }
 
         private string AutodetectArduinoPort()
@@ -94,7 +97,7 @@ namespace WpfApplication1
             }
             catch (ManagementException e)
             {
-                /* Do Nothing */
+                throw new NotConnectException();
             }
 
             return null;
@@ -110,9 +113,11 @@ namespace WpfApplication1
     public class LED_StatusEventArgs:EventArgs
     {
         public int[] status;
+        public int cycle;
 
-        public LED_StatusEventArgs(int[] ledstatus)
+        public LED_StatusEventArgs(int[] ledstatus,int cycle)
         {
+            this.cycle = cycle;
             status = ledstatus;
         }
     }

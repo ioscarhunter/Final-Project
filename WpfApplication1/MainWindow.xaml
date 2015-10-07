@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="361" Width="422" Background="#FF919191">
+        Title="MainWindow" Height="435" Width="616" Background="#FF919191">
+
     <Grid HorizontalAlignment="Center" Width="400" VerticalAlignment="Center" Height="300" Margin="7,14,9,13" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="57*"/>
+            <ColumnDefinition Width="23*"/>
+        </Grid.ColumnDefinitions>
+
+        <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#ffc1e0f3" Data="F1 M 474.126,71.470 C 367.219,-22.892 206.544,-23.489 98.965,69.695 L 287.433,258.163 L 474.126,71.470 Z" Margin="105,0,60.298,135.453" Stretch="Fill" Grid.ColumnSpan="2"/>
+
+        <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#fff7a48c" Data="F1 M 73.248,94.932 C -23.492,202.494 -24.074,365.874 71.473,474.124 L 261.956,283.640 L 73.248,94.932 Z" Margin="52.702,51.66,65.2,6.622" Stretch="Fill"/>
+
         <Label x:Name="O1" Content="Label" HorizontalAlignment="Left" Margin="10,23,0,0" VerticalAlignment="Top" Width="90"/>
         <Label x:Name="O2" Content="Label" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="90"/>
         <Button x:Name="connect_but" Content="Connect" Margin="10,0,0,10" HorizontalAlignment="Left" Width="94" Height="20" VerticalAlignment="Bottom" Click="connect_but_Click"/>
@@ -20,18 +30,34 @@
         <Label x:Name="baseR" Content="Label" HorizontalAlignment="Left" Margin="152,130,0,0" VerticalAlignment="Top"/>
         <Label x:Name="OL" Content="Label" HorizontalAlignment="Left" Margin="152,182,0,0" VerticalAlignment="Top"/>
         <Label x:Name="OR" Content="Label" HorizontalAlignment="Left" Margin="152,208,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="saveEEGButt" Content="Save EEG" HorizontalAlignment="Left" Margin="315,270,0,0" VerticalAlignment="Top" Width="75" Click="saveEEGButt_Click"/>
+        <Button x:Name="saveEEGButt" Content="Save EEG" HorizontalAlignment="Left" Margin="30,270,0,0" VerticalAlignment="Top" Width="75" Click="saveEEGButt_Click" Grid.Column="1"/>
 
-        <Label x:Name="light1" Content="1" Margin="0,0,112,0" VerticalAlignment="Top" Foreground="Black"/>
-        <Label x:Name="light2" Content="2" Margin="16,0,96,0" VerticalAlignment="Top" Foreground="Black"/>
-        <Label x:Name="light3" Content="3" Margin="32,0,80,0" VerticalAlignment="Top" Foreground="Black"/>
-        <Label x:Name="light4" Content="4" Margin="48,0,64,0" VerticalAlignment="Top" Foreground="Black"/>
-        <Label x:Name="light5" Content="5" Margin="64,0,48,0" VerticalAlignment="Top" Foreground="Black"/>
-        <Label x:Name="light6" Content="6" Margin="80,0,32,0" VerticalAlignment="Top" Foreground="Black"/>
-        <Label x:Name="light7" Content="7" Margin="96,0,16,0" VerticalAlignment="Top" Foreground="Black"/>
-        <Label x:Name="light8" Content="8" Margin="112,0,0,0" VerticalAlignment="Top" Foreground="Black"/>
+        <Label x:Name="light1" Content="1" Margin="0,0,112,0" VerticalAlignment="Top" Foreground="Black" Grid.ColumnSpan="2"/>
+        <Label x:Name="light2" Content="2" Margin="16,0,96,0" VerticalAlignment="Top" Foreground="Black" Grid.ColumnSpan="2"/>
+        <Label x:Name="light3" Content="3" Margin="32,0,80,0" VerticalAlignment="Top" Foreground="Black" Grid.ColumnSpan="2"/>
+        <Label x:Name="light4" Content="4" Margin="48,0,64,0" VerticalAlignment="Top" Foreground="Black" Grid.ColumnSpan="2"/>
+        <Label x:Name="light5" Content="5" Margin="64,0,48,0" VerticalAlignment="Top" Foreground="Black" Grid.ColumnSpan="2"/>
+        <Label x:Name="light6" Content="6" Margin="80,0,32,0" VerticalAlignment="Top" Foreground="Black" Grid.ColumnSpan="2"/>
+        <Label x:Name="light7" Content="7" Margin="96,0,16,0" VerticalAlignment="Top" Foreground="Black" Grid.ColumnSpan="2"/>
+        <Label x:Name="light8" Content="8" Margin="112,0,0,0" VerticalAlignment="Top" Foreground="Black" Grid.ColumnSpan="2"/>
 
-        <Button x:Name="startlight" Content="Start Light" HorizontalAlignment="Left" Margin="315,245,0,0" VerticalAlignment="Top" Width="75" Click="startlight_Click"/>
+        <Button x:Name="startlight" Content="Start Light" HorizontalAlignment="Left" Margin="30,245,0,0" VerticalAlignment="Top" Width="75" Click="startlight_Click" Grid.Column="1"/>
+        <!--<Button Margin="255,345,30,-45" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1" ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Canvas>
+                <Path Fill="#ffe5e5e5" Data="F1 M 41.946,49.485 C 35.401,51.877 28.171,48.504 25.779,41.968 C 23.392,35.423 26.755,28.193 33.296,25.804 C 39.837,23.416 47.071,26.780 49.463,33.318 C 51.855,39.859 48.482,47.103 41.946,49.485 Z M 72.517,20.838 C 72.181,19.920 71.165,19.452 70.250,19.785 L 67.193,20.897 C 66.268,21.233 65.047,20.875 64.468,20.087 L 56.767,11.903 C 56.028,11.270 55.746,10.033 56.158,9.148 L 57.471,6.329 C 57.883,5.438 57.495,4.381 56.612,3.973 L 49.816,0.804 C 48.931,0.394 47.876,0.779 47.454,1.670 L 46.031,4.744 C 45.614,5.632 44.478,6.245 43.521,6.113 L 33.843,5.826 C 32.871,5.894 31.797,5.203 31.465,4.290 L 30.325,1.160 C 29.988,0.247 28.963,-0.224 28.053,0.105 L 21.005,2.678 C 20.094,3.012 19.616,4.035 19.945,4.948 L 21.091,8.078 C 21.422,8.986 21.056,10.220 20.276,10.803 L 12.023,18.573 C 11.405,19.319 10.176,19.589 9.291,19.189 L 6.295,17.790 C 5.410,17.381 4.345,17.763 3.940,18.654 L 0.775,25.452 C 0.358,26.338 0.746,27.398 1.639,27.807 L 4.902,29.334 C 5.800,29.741 6.408,30.862 6.283,31.838 L 6.010,41.419 C 6.094,42.392 5.397,43.465 4.479,43.793 L 1.158,45.005 C 0.240,45.339 -0.226,46.362 0.108,47.282 L 2.676,54.315 C 3.008,55.240 4.031,55.721 4.943,55.388 L 8.265,54.176 C 9.185,53.840 10.412,54.195 10.998,54.983 L 18.598,63.123 C 19.357,63.744 19.624,64.975 19.227,65.856 L 17.770,68.974 C 17.360,69.858 17.742,70.917 18.626,71.324 L 25.431,74.477 C 26.312,74.899 27.372,74.519 27.774,73.626 L 29.332,70.304 C 29.749,69.416 30.860,68.812 31.830,68.943 L 41.618,69.232 C 42.587,69.168 43.655,69.868 43.986,70.780 L 45.178,74.041 C 45.514,74.951 46.540,75.425 47.445,75.093 L 54.488,72.522 C 55.408,72.191 55.882,71.166 55.548,70.246 L 54.361,66.988 C 54.030,66.078 54.395,64.856 55.190,64.270 L 63.254,56.731 C 63.892,55.992 65.109,55.722 65.999,56.125 L 68.941,57.504 C 69.827,57.906 70.891,57.528 71.299,56.645 L 74.461,49.842 C 74.883,48.956 74.491,47.896 73.602,47.491 L 70.465,46.037 C 69.594,45.615 68.983,44.496 69.113,43.532 L 69.429,33.655 C 69.348,32.683 70.062,31.619 70.982,31.270 L 74.039,30.154 C 74.945,29.823 75.423,28.800 75.089,27.885 L 72.518,20.839 L 72.517,20.838 Z" Grid.Column="1" Stretch="Fill" Canvas.Left="-224" Canvas.Top="301"/>
+            </Canvas>
+        </Button>-->
+        <Button x:Name="button" Margin="125,0,-80,226" Background="#00000000" Grid.Column="1" BorderBrush="#00707070" >
+            <Path Fill="#ffe5e5e5" Data="F1 M 41.946,49.485 C 35.401,51.877 28.171,48.504 25.779,41.968 C 23.392,35.423 26.755,28.193 33.296,25.804 C 39.837,23.416 47.071,26.780 49.463,33.318 C 51.855,39.859 48.482,47.103 41.946,49.485 Z M 72.517,20.838 C 72.181,19.920 71.165,19.452 70.250,19.785 L 67.193,20.897 C 66.268,21.233 65.047,20.875 64.468,20.087 L 56.767,11.903 C 56.028,11.270 55.746,10.033 56.158,9.148 L 57.471,6.329 C 57.883,5.438 57.495,4.381 56.612,3.973 L 49.816,0.804 C 48.931,0.394 47.876,0.779 47.454,1.670 L 46.031,4.744 C 45.614,5.632 44.478,6.245 43.521,6.113 L 33.843,5.826 C 32.871,5.894 31.797,5.203 31.465,4.290 L 30.325,1.160 C 29.988,0.247 28.963,-0.224 28.053,0.105 L 21.005,2.678 C 20.094,3.012 19.616,4.035 19.945,4.948 L 21.091,8.078 C 21.422,8.986 21.056,10.220 20.276,10.803 L 12.023,18.573 C 11.405,19.319 10.176,19.589 9.291,19.189 L 6.295,17.790 C 5.410,17.381 4.345,17.763 3.940,18.654 L 0.775,25.452 C 0.358,26.338 0.746,27.398 1.639,27.807 L 4.902,29.334 C 5.800,29.741 6.408,30.862 6.283,31.838 L 6.010,41.419 C 6.094,42.392 5.397,43.465 4.479,43.793 L 1.158,45.005 C 0.240,45.339 -0.226,46.362 0.108,47.282 L 2.676,54.315 C 3.008,55.240 4.031,55.721 4.943,55.388 L 8.265,54.176 C 9.185,53.840 10.412,54.195 10.998,54.983 L 18.598,63.123 C 19.357,63.744 19.624,64.975 19.227,65.856 L 17.770,68.974 C 17.360,69.858 17.742,70.917 18.626,71.324 L 25.431,74.477 C 26.312,74.899 27.372,74.519 27.774,73.626 L 29.332,70.304 C 29.749,69.416 30.860,68.812 31.830,68.943 L 41.618,69.232 C 42.587,69.168 43.655,69.868 43.986,70.780 L 45.178,74.041 C 45.514,74.951 46.540,75.425 47.445,75.093 L 54.488,72.522 C 55.408,72.191 55.882,71.166 55.548,70.246 L 54.361,66.988 C 54.030,66.078 54.395,64.856 55.190,64.270 L 63.254,56.731 C 63.892,55.992 65.109,55.722 65.999,56.125 L 68.941,57.504 C 69.827,57.906 70.891,57.528 71.299,56.645 L 74.461,49.842 C 74.883,48.956 74.491,47.896 73.602,47.491 L 70.465,46.037 C 69.594,45.615 68.983,44.496 69.113,43.532 L 69.429,33.655 C 69.348,32.683 70.062,31.619 70.982,31.270 L 74.039,30.154 C 74.945,29.823 75.423,28.800 75.089,27.885 L 72.518,20.839 L 72.517,20.838 Z" Grid.Column="1" Stretch="Fill" Canvas.Left="-224" Canvas.Top="301" StrokeThickness="0"/>
+        </Button>
 
     </Grid>
 </Window>
