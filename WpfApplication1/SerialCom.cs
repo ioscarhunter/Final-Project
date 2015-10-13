@@ -58,7 +58,7 @@ namespace WpfApplication1
                     leds[i].turnon();
                     
                     Console.WriteLine("l: " + i);
-                    Thread.Sleep(123);
+                    Thread.Sleep(500);
                     //Console.WriteLine("off");
                     leds[i].blackout();
                     ledstatus[i] = 0;

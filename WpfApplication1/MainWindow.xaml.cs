@@ -104,7 +104,7 @@ namespace WpfApplication1
             {
                 if (e.cycle == 1)
                 {
-                    p.getEEG();
+
                 }
                 else
                 {
@@ -114,6 +114,8 @@ namespace WpfApplication1
                         switch (e.status[i])
                         {
                             case 1:
+                                if (i==0||i==4) { p.getEEG(128,64,i); }
+
                                 light[i].Foreground = Brushes.ForestGreen;
                                 break;
                             case 0:
@@ -168,7 +170,7 @@ namespace WpfApplication1
 
         private void saveEEGButt_Click(object sender, RoutedEventArgs e)
         {
-            p.getEEG();
+            //p.getEEG();
         }
 
         private void startlight_Click(object sender, RoutedEventArgs e)

@@ -43,6 +43,8 @@ namespace WpfApplication1
 
         public System.Timers.Timer _timer;
 
+        private SignalProcessing sn = new SignalProcessing();
+
         public EEG_Logger()
         {
             // create the engine
@@ -85,7 +87,7 @@ namespace WpfApplication1
             Console.WriteLine("User Added Event has occured" + e.userId);
 
             // record the user 
-            userID = (int) e.userId;
+            userID = 1;
 
             // enable data aquisition for this user.
             engine.DataAcquisitionEnable((uint) userID, true);
@@ -120,10 +122,10 @@ namespace WpfApplication1
             _timer.Enabled = true;
         }
 
-        public void getEEG()
+        public void getEEG(int max,int sample,int start)
         {
-            double do1 = 0;
-            double do2 = 0;
+            double[] do1 ;
+            double[] do2 ;
 
             Dictionary<EdkDll.EE_DataChannel_t, double[]> data = engine.GetData((uint) userID);
             if (data == null)
@@ -141,11 +143,12 @@ namespace WpfApplication1
 
             // Write the data to a file
             TextWriter file = new StreamWriter(filename, true);
+            do1 = (double[])(data[EdkDll.EE_DataChannel_t.O1]).Clone();
+            do2 = (double[]) (data[EdkDll.EE_DataChannel_t.O2]).Clone();
+            data[EdkDll.EE_DataChannel_t.O1] = sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O1]);
+            data[EdkDll.EE_DataChannel_t.O2] = sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O2]);
 
-            data[EdkDll.EE_DataChannel_t.O1] = SignalProcessing.HighPassFilter(data[EdkDll.EE_DataChannel_t.O1]);
-            data[EdkDll.EE_DataChannel_t.O2] = SignalProcessing.HighPassFilter(data[EdkDll.EE_DataChannel_t.O2]);
-
-            for (int i = 0;i < 128;i++)
+            for (int i = 0;i < max;i++)
             {
                 // now write the data
                 //foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
@@ -153,7 +156,7 @@ namespace WpfApplication1
                 //file.WriteLine("");
 
                 // now write the data
-                file.Write(i/16 + ", ");
+                file.Write(start+(i/sample) + ", ");
                 if (i < _bufferSize)
                 {
                     foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
@@ -163,7 +166,8 @@ namespace WpfApplication1
                             //back_o1 = (back_o1 * (IIR_TC - 1) + data[channel][i]) / IIR_TC;
                             //data_o1 = data[channel][i] - back_o1;
                             data_o1 = data[channel][i];
-                            file.Write(data_o1 + ", ");
+                            //file.Write(data_o1 + ", ");
+                            file.Write(do1[i] + ", " + data_o1 + ", ");
                             //Console.Write(data_o1 + ", ");
                         }
                         else if (channel == EdkDll.EE_DataChannel_t.O2)
@@ -171,7 +175,8 @@ namespace WpfApplication1
                             //back_o2 = (back_o2 * (IIR_TC - 1) + data[channel][i]) / IIR_TC;
                             //data_o2 = data[channel][i] - back_o2;
                             data_o2 = data[channel][i];
-                            file.Write(data_o2 + ", ");
+                            //file.Write(data_o2 + ", ");
+                            file.Write(do2[i] + ", " + data_o2 + ", ");
                             //Console.Write(data_o2 + ", ");
                         }
                     }
@@ -179,6 +184,7 @@ namespace WpfApplication1
                 }
                 else
                 {
+                    Console.WriteLine(start + (i / 42));
                     file.Write("0, 0");
                 }
                 file.WriteLine("");

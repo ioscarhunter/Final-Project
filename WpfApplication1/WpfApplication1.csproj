@@ -56,6 +56,10 @@
     <StartupObject>WpfApplication1.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge.Math, Version=2.2.5.0, Culture=neutral, PublicKeyToken=abba2e25397ee8c9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\AForge.NET\Framework\Release\AForge.Math.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
@@ -77,6 +81,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FilterButterworth.cs" />
     <Compile Include="SerialCom.cs" />
     <Compile Include="SignalProcessing.cs" />
     <Page Include="light.xaml">
