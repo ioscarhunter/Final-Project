@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using Emotiv;
 using System.Threading;
 using System.Windows.Threading;
-
+using System.Collections.ObjectModel;
 
 namespace WpfApplication1
 {
@@ -36,9 +36,16 @@ namespace WpfApplication1
 
         SerialCom s;
 
+        private LineTrend lineTrend;
+        Random rnd = new Random();
+        SgraphControl ctrl;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            lineTrend = new LineTrend { Points = new ObservableCollection<TrendPoint>(), TrendColor = Brushes.Coral };
+
             status.Content = "EEG Data Reader Example";
 
             p = new EEG_Logger();
@@ -187,6 +194,21 @@ namespace WpfApplication1
                 LEDrunning = false;
             }
         }
+        private void updateGraph()
+        {
+            lineTrend.Points.Clear();
+            for (int i = 0; i < 500; i += 2)
+            {
+
+                lineTrend.Points.Add(new TrendPoint { X = i, Y = rnd.Next(300) });
+            }
+            ctrl = new SgraphControl();
+            ctrl.Trends.Add(lineTrend);
+            graph_o1.Children.Clear();
+            graph_o1.Children.Add(ctrl);
+        }
     }
+   
+
 }
 

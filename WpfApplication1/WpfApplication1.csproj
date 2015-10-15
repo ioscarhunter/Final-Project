@@ -81,12 +81,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="FilterButterworth.cs" />
+    <Compile Include="EEG\FilterButterworth.cs" />
     <Compile Include="Graph\LineTrend.cs" />
     <Compile Include="Graph\SgraphControl.cs" />
-    <Compile Include="SerialCom.cs" />
-    <Compile Include="SignalProcessing.cs" />
-    <Page Include="light.xaml">
+    <Compile Include="Serial\SerialCom.cs" />
+    <Compile Include="EEG\SignalProcessing.cs" />
+    <Page Include="xmal\light.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -98,31 +98,31 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EEG_Logger.cs" />
-    <Compile Include="LED.cs" />
+    <Compile Include="EEG\EEG_Logger.cs" />
+    <Compile Include="Serial\LED.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="other.xaml">
+    <Page Include="xmal\other.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="pizza.xaml">
+    <Page Include="xmal\pizza.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="setting.xaml">
+    <Page Include="xmal\setting.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="tv.xaml">
+    <Page Include="xmal\tv.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NotConnectException.cs" />
+    <Compile Include="EEG\NotConnectException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
