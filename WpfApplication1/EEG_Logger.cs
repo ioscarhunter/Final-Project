@@ -78,7 +78,7 @@ namespace WpfApplication1
         public void LoadUP()
         {
             engine.LoadUserProfile(userId, ".//starboy.emu");
-            profile = engine.GetUserProfile((uint) userId);
+            profile = engine.GetUserProfile((uint)userId);
             engine.SetUserProfile(userId, profile);
         }
 
@@ -87,10 +87,10 @@ namespace WpfApplication1
             Console.WriteLine("User Added Event has occured" + e.userId);
 
             // record the user 
-            userID = 1;
+            userID = (int)e.userId;
 
             // enable data aquisition for this user.
-            engine.DataAcquisitionEnable((uint) userID, true);
+            engine.DataAcquisitionEnable((uint)userID, true);
 
             // ask for up to 1 second of buffered data
             engine.EE_DataSetBufferSizeInSec(1);
@@ -103,7 +103,7 @@ namespace WpfApplication1
             engine.ProcessEvents();
             //Console.WriteLine(userID);
             // If the user has not yet connected, do not proceed
-            if ((int) userID == -1)
+            if ((int)userID == -1)
             {
                 //return;
                 Console.WriteLine("return");
@@ -122,12 +122,12 @@ namespace WpfApplication1
             _timer.Enabled = true;
         }
 
-        public void getEEG(int max,int sample,int start)
+        public void getEEG(int max, int sample, int start)
         {
-            double[] do1 ;
-            double[] do2 ;
+            double[] do1;
+            double[] do2;
 
-            Dictionary<EdkDll.EE_DataChannel_t, double[]> data = engine.GetData((uint) userID);
+            Dictionary<EdkDll.EE_DataChannel_t, double[]> data = engine.GetData((uint)userID);
             if (data == null)
                 return;
 
@@ -144,19 +144,19 @@ namespace WpfApplication1
             // Write the data to a file
             TextWriter file = new StreamWriter(filename, true);
             do1 = (double[])(data[EdkDll.EE_DataChannel_t.O1]).Clone();
-            do2 = (double[]) (data[EdkDll.EE_DataChannel_t.O2]).Clone();
+            do2 = (double[])(data[EdkDll.EE_DataChannel_t.O2]).Clone();
             data[EdkDll.EE_DataChannel_t.O1] = sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O1]);
             data[EdkDll.EE_DataChannel_t.O2] = sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O2]);
 
-            for (int i = 0;i < max;i++)
+            for (int i = 0; i < max; i++)
             {
                 // now write the data
                 //foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
                 //    file.Write(data[channel][i] + ",");
                 //file.WriteLine("");
-
+                
                 // now write the data
-                file.Write(start+(i/sample) + ", ");
+                file.Write(start + (i / sample) + ", ");
                 if (i < _bufferSize)
                 {
                     foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
@@ -169,6 +169,7 @@ namespace WpfApplication1
                             //file.Write(data_o1 + ", ");
                             file.Write(do1[i] + ", " + data_o1 + ", ");
                             //Console.Write(data_o1 + ", ");
+                            //OnDataUpdate(data_o1, data_o2);
                         }
                         else if (channel == EdkDll.EE_DataChannel_t.O2)
                         {
@@ -178,9 +179,11 @@ namespace WpfApplication1
                             //file.Write(data_o2 + ", ");
                             file.Write(do2[i] + ", " + data_o2 + ", ");
                             //Console.Write(data_o2 + ", ");
+                            //
                         }
+                        OnDataUpdate(data_o1, data_o2);
                     }
-                    OnDataUpdate(data_o1, data_o2);
+
                 }
                 else
                 {
@@ -207,7 +210,7 @@ namespace WpfApplication1
 
         public bool isuserconnect()
         {
-            if ((int) userID == -1)
+            if ((int)userID == -1)
                 return false;
             else return true;
         }
@@ -237,7 +240,7 @@ namespace WpfApplication1
             headsetOn = es.GetHeadsetOn();
 
             //EdkDll.EE_EEG_ContactQuality_t[] cq = es.GetContactQualityFromAllChannels();
-            for (int i = 0;i < interest.Length;++i)
+            for (int i = 0; i < interest.Length; ++i)
             {
                 //if (interest.Contains(i))
                 //{
@@ -268,9 +271,9 @@ namespace WpfApplication1
 
         }
 
-}
+    }
 
-    public class EEG_LoggerEventArgs:EventArgs
+    public class EEG_LoggerEventArgs : EventArgs
     {
         public double Data_O1 { get; private set; }
         public double Data_O2 { get; private set; }
@@ -281,7 +284,7 @@ namespace WpfApplication1
         }
     }
 
-    public class EEG_StatusEventArgs:EventArgs
+    public class EEG_StatusEventArgs : EventArgs
     {
         public Single timePass;
         public int headsetOn;

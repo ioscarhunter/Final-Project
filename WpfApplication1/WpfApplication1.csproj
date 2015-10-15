@@ -82,6 +82,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="FilterButterworth.cs" />
+    <Compile Include="Graph\LineTrend.cs" />
+    <Compile Include="Graph\SgraphControl.cs" />
     <Compile Include="SerialCom.cs" />
     <Compile Include="SignalProcessing.cs" />
     <Page Include="light.xaml">
@@ -165,6 +167,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
