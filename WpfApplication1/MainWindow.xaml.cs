@@ -60,9 +60,6 @@ namespace WpfApplication1
             {
                 updateGraph(ref graph_o1, e.Data_O1);
                 updateGraph(ref graph_o2, e.Data_O2);
-                
-                //O1.Content = "O1 " + e.Data_O1;
-                //O2.Content = "O2 " + e.Data_O2;
             });
 
         }
@@ -166,12 +163,7 @@ namespace WpfApplication1
                     }
                 }
             }
-            //else
-            //{
-            //    status.Content = "Connected";
 
-            //}
-            //connect_but.Content = "Connect";
         }
 
         private void saveEEGButt_Click(object sender, RoutedEventArgs e)
@@ -206,10 +198,10 @@ namespace WpfApplication1
 
                 lineTrend.Points.Add(new TrendPoint { X = i, Y = y });
                 count++;
-                //lineTrend.Points.Add(new TrendPoint { X = i, Y = rnd.Next(100) });
             }
             ctrl = new SgraphControl();
             ctrl.Trends.Add(lineTrend);
+            graph.Children.Clear();
             graph.Children.Add(ctrl);
         }
 
