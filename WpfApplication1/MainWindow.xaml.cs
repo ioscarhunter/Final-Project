@@ -192,16 +192,14 @@ namespace WpfApplication1
             for (int i = 0; i < 192; i += 3)
             {
                 int y;
-                if (value[count] >= 50) y = 50;
-                else if (value[count] <= -50) y = -50;
+                if (value[count] >= 50) y = 99;
+                else if (value[count] <= -50) y = 1;
                 else y = (int)value[count] + 50;
-
                 lineTrend.Points.Add(new TrendPoint { X = i, Y = y });
                 count++;
             }
             ctrl = new SgraphControl();
             ctrl.Trends.Add(lineTrend);
-            graph.Children.Clear();
             graph.Children.Add(ctrl);
         }
 
