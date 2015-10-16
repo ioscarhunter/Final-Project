@@ -82,6 +82,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="EEG\FilterButterworth.cs" />
+    <Compile Include="EEG\HeadsetBaseState.cs" />
     <Compile Include="Graph\LineTrend.cs" />
     <Compile Include="Graph\SgraphControl.cs" />
     <Compile Include="Serial\SerialCom.cs" />

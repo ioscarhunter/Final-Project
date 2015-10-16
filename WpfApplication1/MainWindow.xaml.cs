@@ -22,7 +22,7 @@ namespace WpfApplication1
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow:Window
+    public partial class MainWindow : Window
     {
         double data_o1 = 0;
         double data_o2 = 0;
@@ -94,10 +94,13 @@ namespace WpfApplication1
                 batt.Content = "Battery " + e.chargeLevel + "/" + e.maxChargeLevel;
 
                 baseL.Content = "Base L" + e.eSignal[0];
+                update_contact_quality(c_base1, e.eSignal[0]);
                 baseR.Content = "Base R" + e.eSignal[1];
-
+                update_contact_quality(c_base2, e.eSignal[1]);
                 OL.Content = "O L" + e.eSignal[9];
+                update_contact_quality(c_o1, e.eSignal[9]);
                 OR.Content = "O R" + e.eSignal[10];
+                update_contact_quality(c_o2, e.eSignal[10]);
 
             });
 
@@ -115,13 +118,13 @@ namespace WpfApplication1
                 }
                 else
                 {
-                    for (int i = 0;i < light.Length;i++)
+                    for (int i = 0; i < light.Length; i++)
                     {
 
                         switch (e.status[i])
                         {
                             case 1:
-                                if (i==0||i==4) { p.getEEG(128,64,i); }
+                                if (i == 0 || i == 2 || i == 4 || i == 6) { p.getEEG(128, 64, i); }
 
                                 light[i].Foreground = Brushes.ForestGreen;
                                 break;
@@ -144,7 +147,7 @@ namespace WpfApplication1
             {
                 status.Content = "not connect";
                 connect_but.Content = "Connecting";
-                for (int i = 0;i < 2;i++)
+                for (int i = 0; i < 2; i++)
                 {
                     Console.WriteLine(i);
                     try
@@ -194,21 +197,46 @@ namespace WpfApplication1
                 LEDrunning = false;
             }
         }
-        private void updateGraph()
+        private void updateGraph(Grid graph, double[] value)
         {
             lineTrend.Points.Clear();
-            for (int i = 0; i < 500; i += 2)
+            for (int i = 0; i < 192; i += 3)
             {
 
                 lineTrend.Points.Add(new TrendPoint { X = i, Y = rnd.Next(300) });
             }
             ctrl = new SgraphControl();
             ctrl.Trends.Add(lineTrend);
-            graph_o1.Children.Clear();
-            graph_o1.Children.Add(ctrl);
+            graph.Children.Clear();
+            graph.Children.Add(ctrl);
+        }
+
+        private void update_contact_quality(Ellipse ec, string status)
+        {
+            switch (status)
+            {
+                case "EEG_CQ_NO_SIGNAL":
+                    ec.Fill = Brushes.Black;
+                    break;
+                case "EEG_CQ_VERY_BAD":
+                    ec.Fill = Brushes.Red;
+                    break;
+                case "EEG_CQ_POOR":
+                    ec.Fill = Brushes.Orange;
+                    break;
+                case "EEG_CQ_FAIR":
+                    ec.Fill = Brushes.Yellow;
+                    break;
+                case "EEG_CQ_GOOD":
+                    ec.Fill = Brushes.LimeGreen;
+                    break;
+                default:
+                    ec.Fill = Brushes.MediumPurple;
+                    break;
+            }
         }
     }
-   
+
 
 }
 

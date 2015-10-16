@@ -117,7 +117,7 @@ namespace WpfApplication1
             engine.ProcessEvents();
 
             _timer = new System.Timers.Timer();
-            _timer.Interval = 1;
+            _timer.Interval = 0.1;
             _timer.Elapsed += new System.Timers.ElapsedEventHandler(processEvent);
             _timer.Enabled = true;
         }
@@ -167,7 +167,7 @@ namespace WpfApplication1
                             //data_o1 = data[channel][i] - back_o1;
                             data_o1 = data[channel][i];
                             //file.Write(data_o1 + ", ");
-                            file.Write(do1[i] + ", " + data_o1 + ", ");
+                            file.Write(data_o1 + ", ");
                             //Console.Write(data_o1 + ", ");
                             //OnDataUpdate(data_o1, data_o2);
                         }
@@ -177,7 +177,7 @@ namespace WpfApplication1
                             //data_o2 = data[channel][i] - back_o2;
                             data_o2 = data[channel][i];
                             //file.Write(data_o2 + ", ");
-                            file.Write(do2[i] + ", " + data_o2 + ", ");
+                            file.Write(data_o2 + ", ");
                             //Console.Write(data_o2 + ", ");
                             //
                         }
