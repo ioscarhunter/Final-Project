@@ -124,8 +124,6 @@ namespace WpfApplication1
 
         public void getEEG(int max, int sample, int start)
         {
-            double[] do1;
-            double[] do2;
 
             Dictionary<EdkDll.EE_DataChannel_t, double[]> data = engine.GetData((uint)userID);
             if (data == null)
@@ -143,10 +141,9 @@ namespace WpfApplication1
 
             // Write the data to a file
             TextWriter file = new StreamWriter(filename, true);
-            do1 = (double[])(data[EdkDll.EE_DataChannel_t.O1]).Clone();
-            do2 = (double[])(data[EdkDll.EE_DataChannel_t.O2]).Clone();
             data[EdkDll.EE_DataChannel_t.O1] = sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O1]);
             data[EdkDll.EE_DataChannel_t.O2] = sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O2]);
+            OnDataUpdate(data[EdkDll.EE_DataChannel_t.O1], data[EdkDll.EE_DataChannel_t.O2]);
 
             for (int i = 0; i < max; i++)
             {
@@ -181,7 +178,7 @@ namespace WpfApplication1
                             //Console.Write(data_o2 + ", ");
                             //
                         }
-                        OnDataUpdate(data_o1, data_o2);
+                        
                     }
 
                 }
@@ -215,7 +212,7 @@ namespace WpfApplication1
             else return true;
         }
 
-        private void OnDataUpdate(double data_o1, double data_o2)
+        private void OnDataUpdate(double[] data_o1, double []data_o2)
         {
             //Console.WriteLine("update Var");
             if (DataUpdate != null)
@@ -275,9 +272,9 @@ namespace WpfApplication1
 
     public class EEG_LoggerEventArgs : EventArgs
     {
-        public double Data_O1 { get; private set; }
-        public double Data_O2 { get; private set; }
-        public EEG_LoggerEventArgs(double data_o1, double data_o2)
+        public double[] Data_O1 { get; private set; }
+        public double[] Data_O2 { get; private set; }
+        public EEG_LoggerEventArgs(double[] data_o1, double[] data_o2)
         {
             Data_O1 = data_o1;
             Data_O2 = data_o2;

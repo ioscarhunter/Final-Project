@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Emotiv;
 using System.Threading;
 using System.Windows.Threading;
 using System.Collections.ObjectModel;
@@ -24,8 +16,6 @@ namespace WpfApplication1
     /// </summary>
     public partial class MainWindow : Window
     {
-        double data_o1 = 0;
-        double data_o2 = 0;
         EEG_Logger p;
         private bool connect;
         private Thread loggerThread;
@@ -35,9 +25,10 @@ namespace WpfApplication1
         Label[] light;
 
         SerialCom s;
-
-        private LineTrend lineTrend;
         Random rnd = new Random();
+
+        LineTrend lineTrend;
+        
         SgraphControl ctrl;
 
         public MainWindow()
@@ -61,13 +52,17 @@ namespace WpfApplication1
 
         }
 
+
         private void HandleDataUpdate(object sender, EEG_LoggerEventArgs e)
         {
             // dispatch the modification to the text box to the UI thread (main window dispatcher)
             Dispatcher.Invoke(() =>
             {
-                O1.Content = "O1 " + e.Data_O1;
-                O2.Content = "O2 " + e.Data_O2;
+                updateGraph(ref graph_o1, e.Data_O1);
+                updateGraph(ref graph_o2, e.Data_O2);
+                
+                //O1.Content = "O1 " + e.Data_O1;
+                //O2.Content = "O2 " + e.Data_O2;
             });
 
         }
@@ -124,7 +119,8 @@ namespace WpfApplication1
                         switch (e.status[i])
                         {
                             case 1:
-                                if (i == 0 || i == 2 || i == 4 || i == 6) { p.getEEG(128, 64, i); }
+                                p.getEEG(64, 64, i);
+                                //if (i == 0 || i == 2 || i == 4 || i == 6) { p.getEEG(128, 64, i); }
 
                                 light[i].Foreground = Brushes.ForestGreen;
                                 break;
@@ -197,17 +193,23 @@ namespace WpfApplication1
                 LEDrunning = false;
             }
         }
-        private void updateGraph(Grid graph, double[] value)
+        private void updateGraph(ref Grid graph, double[] value)
         {
             lineTrend.Points.Clear();
+            int count = 0;
             for (int i = 0; i < 192; i += 3)
             {
+                int y;
+                if (value[count] >= 50) y = 50;
+                else if (value[count] <= -50) y = -50;
+                else y = (int)value[count] + 50;
 
-                lineTrend.Points.Add(new TrendPoint { X = i, Y = rnd.Next(300) });
+                lineTrend.Points.Add(new TrendPoint { X = i, Y = y });
+                count++;
+                //lineTrend.Points.Add(new TrendPoint { X = i, Y = rnd.Next(100) });
             }
             ctrl = new SgraphControl();
             ctrl.Trends.Add(lineTrend);
-            graph.Children.Clear();
             graph.Children.Add(ctrl);
         }
 
