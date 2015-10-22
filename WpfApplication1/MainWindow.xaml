@@ -68,6 +68,13 @@
         <Label x:Name="label_Copy" Content="-50" HorizontalAlignment="Left" Margin="1.333,176.667,0,0" VerticalAlignment="Top" Height="26" Width="28" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="0.607,2.603"/>
         <Label x:Name="label_Copy1" Content="50" HorizontalAlignment="Left" Margin="5.333,0.667,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="22" Grid.Row="2"/>
         <Label x:Name="label_Copy2" Content="-50" HorizontalAlignment="Left" Margin="1.333,176.667,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="28" Grid.Row="2"/>
+        <Grid HorizontalAlignment="Left" Height="26" Margin="169,215.667,0,0" Grid.Row="2" VerticalAlignment="Top" Width="105" Background="#FFF3F3F3">
+            <Rectangle x:Name ="battery_1" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="3,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
+            <Rectangle x:Name ="battery_2" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="22,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
+            <Rectangle x:Name ="battery_3" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="42,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
+            <Rectangle x:Name ="battery_4" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="62,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
+            <Rectangle x:Name ="battery_5" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="82,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
+        </Grid>
 
     </Grid>
 </Window>

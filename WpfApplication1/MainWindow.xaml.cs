@@ -23,6 +23,9 @@ namespace WpfApplication1
 
         private bool LEDrunning;
         Label[] light;
+        Rectangle[] battery_level_rect;
+
+        int battery_level=0;
 
         SerialCom s;
         Random rnd = new Random();
@@ -84,6 +87,11 @@ namespace WpfApplication1
 
                 signal.Content = "Signal " + e.signalStrength;
                 batt.Content = "Battery " + e.chargeLevel + "/" + e.maxChargeLevel;
+                if(e.chargeLevel!= battery_level)
+                {
+                    battery_level = e.chargeLevel;
+                    update_battery(battery_level);
+                }
 
                 baseL.Content = "Base L" + e.eSignal[0];
                 update_contact_quality(c_base1, e.eSignal[0]);
@@ -229,7 +237,26 @@ namespace WpfApplication1
         }
         private void update_battery(int battery)
         {
-
+            if(battery_level_rect== null)
+            {
+                battery_level_rect = new Rectangle[] {battery_1, battery_2, battery_3, battery_4, battery_5};
+            }
+            for(int i = 1; i <= 5; i++)
+            {
+                if (i < battery)
+                {
+                    battery_level_rect[i].Visibility = Visibility.Visible;
+                    battery_level_rect[i].Fill = Brushes.LimeGreen;
+                }
+                else
+                
+                    battery_level_rect[i].Visibility = Visibility.Hidden; 
+                
+            }
+            if(battery == 1)
+            {
+                battery_level_rect[0].Fill = Brushes.Red;
+            }
         }
     }
    
