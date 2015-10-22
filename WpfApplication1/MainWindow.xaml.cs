@@ -58,8 +58,8 @@ namespace WpfApplication1
             // dispatch the modification to the text box to the UI thread (main window dispatcher)
             Dispatcher.Invoke(() =>
             {
-                updateGraph(ref graph_o1, e.Data_O1);
-                updateGraph(ref graph_o2, e.Data_O2);
+                //updateGraph(ref graph_o1, e.Data_O1);
+                //updateGraph(ref graph_o2, e.Data_O2);
             });
 
         }
@@ -189,12 +189,12 @@ namespace WpfApplication1
         {
             lineTrend.Points.Clear();
             int count = 0;
-            for (int i = 0; i < 192; i += 3)
+            for (int i = 0; i < 384; i += 6)
             {
                 int y;
-                if (value[count] >= 50) y = 99;
+                if (value[count] >= 50) y = 199;
                 else if (value[count] <= -50) y = 1;
-                else y = (int)value[count] + 50;
+                else y = (int)(value[count]*2) + 100;
                 lineTrend.Points.Add(new TrendPoint { X = i, Y = y });
                 count++;
             }
@@ -227,7 +227,13 @@ namespace WpfApplication1
                     break;
             }
         }
+        private void update_battery(int battery)
+        {
+
+        }
     }
+   
+
 
 
 }
