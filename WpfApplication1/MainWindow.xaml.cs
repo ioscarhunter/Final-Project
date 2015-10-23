@@ -61,8 +61,8 @@ namespace WpfApplication1
             // dispatch the modification to the text box to the UI thread (main window dispatcher)
             Dispatcher.Invoke(() =>
             {
-                //updateGraph(ref graph_o1, e.Data_O1);
-                //updateGraph(ref graph_o2, e.Data_O2);
+                updateGraph(ref graph_o1, e.Data_O1);
+                updateGraph(ref graph_o2, e.Data_O2);
             });
 
         }
@@ -87,20 +87,20 @@ namespace WpfApplication1
                 }
 
                 signal.Content = "Signal " + e.signalStrength;
-                batt.Content = "Battery " + e.chargeLevel + "/" + e.maxChargeLevel;
+                batt.Content =  e.chargeLevel + "/" + e.maxChargeLevel;
                 if(e.chargeLevel!= battery_level)
                 {
                     battery_level = e.chargeLevel;
                     update_battery(battery_level);
                 }
 
-                baseL.Content = "Base L" + e.eSignal[0];
+                //baseL.Content = "Base L" + e.eSignal[0];
                 update_contact_quality(c_base1, e.eSignal[0]);
-                baseR.Content = "Base R" + e.eSignal[1];
+                //baseR.Content = "Base R" + e.eSignal[1];
                 update_contact_quality(c_base2, e.eSignal[1]);
-                OL.Content = "O L" + e.eSignal[9];
+                //OL.Content = "O L" + e.eSignal[9];
                 update_contact_quality(c_o1, e.eSignal[9]);
-                OR.Content = "O R" + e.eSignal[10];
+                //OR.Content = "O R" + e.eSignal[10];
                 update_contact_quality(c_o2, e.eSignal[10]);
 
             });
