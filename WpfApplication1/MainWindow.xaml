@@ -75,6 +75,19 @@
             <Rectangle x:Name ="battery_4" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="62,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
             <Rectangle x:Name ="battery_5" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="82,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
         </Grid>
-
+        <Ellipse x:Name ="c_signal" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="17" Margin="185,4.667,0,0" Stroke="Black" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0.529,0.55" Grid.Row="1"/>
+        <Label x:Name="signal_label" Content="Signal" HorizontalAlignment="Left" Margin="202,0.667,0,0" VerticalAlignment="Top" Height="26" Width="38" Grid.Row="1"/>
+        <Grid HorizontalAlignment="Left" Height="10" Margin="234.348,230.667,0,0" Grid.Row="2" VerticalAlignment="Top" Width="200" Background="#FFF3F3F3" Grid.Column="1" Grid.ColumnSpan="2">
+            <Rectangle Fill="LimeGreen" HorizontalAlignment="Left" Height="5" Margin="3,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
+            <Rectangle Fill="Yellow" HorizontalAlignment="Left" Height="5" Margin="43,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
+            <Rectangle Fill="Orange" HorizontalAlignment="Left" Height="5" Margin="83,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
+            <Rectangle Fill="Red" HorizontalAlignment="Left" Height="5" Margin="123,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
+            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="5" Margin="163,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
+        </Grid>
+        <Label x:Name="label1" Content="Good" Grid.Column="1" HorizontalAlignment="Left" Margin="238.333,212.667,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Content="Fair" Grid.Column="1" HorizontalAlignment="Left" Margin="283.333,212.667,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label x:Name="label3" Content="Poor" Grid.Column="1" HorizontalAlignment="Left" Margin="320.333,212.667,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label x:Name="label4" Content="Bad" Grid.Column="1" HorizontalAlignment="Left" Margin="362.333,212.667,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label x:Name="label5" Content="Lost" Grid.Column="1" HorizontalAlignment="Left" Margin="400.333,212.667,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>
