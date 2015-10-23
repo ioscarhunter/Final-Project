@@ -14,7 +14,7 @@ namespace WpfApplication1
         private SerialPort port1;
         private int bRate = 460800;
         private LED[] leds;
-        private int lednum = 8;
+        private int lednum = 4;
         private int[] ledstatus;
 
         public event EventHandler<LED_StatusEventArgs> LEDUpdate;
