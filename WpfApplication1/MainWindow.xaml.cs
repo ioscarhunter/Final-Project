@@ -241,7 +241,7 @@ namespace WpfApplication1
             {
                 battery_level_rect = new Rectangle[] {battery_1, battery_2, battery_3, battery_4, battery_5};
             }
-            for(int i = 1; i <= 5; i++)
+            for(int i = 0; i <5; i++)
             {
                 if (i < battery)
                 {
