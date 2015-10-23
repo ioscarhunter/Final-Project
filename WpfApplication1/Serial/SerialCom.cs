@@ -55,10 +55,10 @@ namespace WpfApplication1
                     //Console.WriteLine("on");
                     ledstatus[i] = 1;
                     OnLEDStatusUpdate(0);
-                    leds[i].turnon();
+                    strobe(leds[i], 500, 3);
                     
                     Console.WriteLine("l: " + i);
-                    Thread.Sleep(500);
+                    //Thread.Sleep(500);
                     //Console.WriteLine("off");
                     leds[i].blackout();
                     ledstatus[i] = 0;
@@ -67,6 +67,16 @@ namespace WpfApplication1
 
                 }
                 OnLEDStatusUpdate(1);
+            }
+        }
+
+        public void strobe(LED led,int totaltime,int times)
+        {
+            for (int i = 0;i < times; i++){
+                led.turnon();
+                Thread.Sleep(totaltime / (times * 2));
+                led.turnoff();
+                Thread.Sleep(totaltime / (times * 2));
             }
         }
 
