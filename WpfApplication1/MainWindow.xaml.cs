@@ -204,7 +204,7 @@ namespace WpfApplication1
                 if (value[count] >= 50) y = 199;
                 else if (value[count] <= -50) y = 1;
                 else y = (int)(value[count]*2) + 100;
-                lineTrend.Points.Add(new TrendPoint { X = i, Y = y });
+                lineTrend.Points.Add(new TrendPoint { X = i+1, Y = y });
                 count++;
             }
             ctrl = new SgraphControl();
