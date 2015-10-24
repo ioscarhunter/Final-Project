@@ -87,6 +87,7 @@ namespace WpfApplication1
                 }
 
                 signal.Content = "Signal " + e.signalStrength;
+                update_signal_quality(c_signal, e.signalStrength);
                 batt.Content =  e.chargeLevel + "/" + e.maxChargeLevel;
                 if(e.chargeLevel!= battery_level)
                 {
@@ -229,6 +230,25 @@ namespace WpfApplication1
                     ec.Fill = Brushes.Yellow;
                     break;
                 case "EEG_CQ_GOOD":
+                    ec.Fill = Brushes.LimeGreen;
+                    break;
+                default:
+                    ec.Fill = Brushes.MediumPurple;
+                    break;
+            }
+        }
+
+        private void update_signal_quality(Ellipse ec, string status)
+        {
+            switch (status)
+            {
+                case "NO_SIGNAL":
+                    ec.Fill = Brushes.Black;
+                    break;
+                case "BAD_SIGNAL":
+                    ec.Fill = Brushes.Red;
+                    break;
+                case "GOOD_SIGNAL":
                     ec.Fill = Brushes.LimeGreen;
                     break;
                 default:

@@ -26,14 +26,24 @@
         <Label x:Name="O2" Content="Label" HorizontalAlignment="Left" Margin="10,4.667,0,0" VerticalAlignment="Top" Width="90" Height="26" Grid.Row="1"/>
         <Button x:Name="connect_but" Content="Connect" Margin="10,0,0,10" HorizontalAlignment="Left" Width="94" Height="20" VerticalAlignment="Bottom" Click="connect_but_Click" Grid.Row="2"/>
         <Label x:Name="status" Content="Label" HorizontalAlignment="Left" Margin="109,0,0,7" Height="26" VerticalAlignment="Bottom" Width="37" Grid.Row="2"/>
-        <Label x:Name="time" Content="Label" HorizontalAlignment="Left" Margin="10,67.667,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.184,-0.769" Height="26" Width="38" Grid.Row="1"/>
-        <Label x:Name="headseton" Content="Label" HorizontalAlignment="Left" Margin="10,93.667,0,0" VerticalAlignment="Top" Height="26" Width="38" Grid.Row="1"/>
-        <Label x:Name="signal" Content="Label" HorizontalAlignment="Left" Margin="10,119.667,0,0" VerticalAlignment="Top" Height="26" Width="38" Grid.Row="1"/>
-        <Label x:Name="batt" Content="Label" HorizontalAlignment="Left" Margin="10,145.667,0,0" VerticalAlignment="Top" Height="26" Width="38" Grid.Row="1"/>
-        <Label x:Name="baseL" Content="Label" HorizontalAlignment="Left" Margin="202,61.667,0,0" VerticalAlignment="Top" Height="26" Width="38" Grid.Row="1"/>
-        <Label x:Name="baseR" Content="Label" HorizontalAlignment="Left" Margin="202,92.667,0,0" VerticalAlignment="Top" Height="25" Width="38" Grid.Row="1"/>
-        <Label x:Name="OL" Content="Label" HorizontalAlignment="Left" Margin="202,157.667,0,0" VerticalAlignment="Top" Height="26" Width="38" Grid.Row="1"/>
-        <Label x:Name="OR" Content="Label" HorizontalAlignment="Left" Margin="202,189.667,0,0" VerticalAlignment="Top" Height="26" Width="38" Grid.Row="1"/>
+        <Label x:Name="time" Content="Label" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.184,-0.769" Height="26" Width="94" Grid.Row="1"/>
+        <Label x:Name="headseton" Content="Label" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top" Height="26" Width="90" Grid.Row="1"/>
+        <Label x:Name="signal" Content="Label" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Height="26" Width="150" Grid.Row="1"/>
+        <Grid Grid.Column="1" Margin="27,206,280,-1" Grid.Row="2">
+            <Label x:Name="batt" Content="4/5" HorizontalAlignment="Left" Margin="78,0,0,0" VerticalAlignment="Top" Height="26" Width="27"/>
+            <Grid HorizontalAlignment="Left" Height="26" Margin="0,20,0,0" VerticalAlignment="Top" Width="105" Background="#FFF3F3F3">
+                <Rectangle x:Name ="battery_1" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="3,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
+                <Rectangle x:Name ="battery_2" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="22,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
+                <Rectangle x:Name ="battery_3" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="42,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
+                <Rectangle x:Name ="battery_4" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="62,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
+                <Rectangle x:Name ="battery_5" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="82,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
+            </Grid>
+            <Label x:Name="label6" Content="Battery Level" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </Grid>
+        <Label x:Name="baseL" Content="Base L" HorizontalAlignment="Left" Margin="231,61,0,0" VerticalAlignment="Top" Height="26" Width="49" Grid.Row="1"/>
+        <Label x:Name="baseR" Content="Base R" HorizontalAlignment="Left" Margin="231,92,0,0" VerticalAlignment="Top" Height="25" Width="49" Grid.Row="1"/>
+        <Label x:Name="OL" Content="O1" HorizontalAlignment="Left" Margin="231,157,0,0" VerticalAlignment="Top" Height="26" Width="49" Grid.Row="1"/>
+        <Label x:Name="OR" Content="O2" HorizontalAlignment="Left" Margin="231,189,0,0" VerticalAlignment="Top" Height="26" Width="49" Grid.Row="1"/>
 
         <Label x:Name="light1" Content="1" Margin="0,0,0.667,0" VerticalAlignment="Top" Foreground="Black" Grid.ColumnSpan="2" Height="26"/>
         <Label x:Name="light2" Content="2" Margin="16,0,0.667,0" VerticalAlignment="Top" Foreground="Black" Grid.ColumnSpan="2" Height="26"/>
@@ -58,36 +68,32 @@
                 <Path Fill="#ffe5e5e5" Data="F1 M 41.946,49.485 C 35.401,51.877 28.171,48.504 25.779,41.968 C 23.392,35.423 26.755,28.193 33.296,25.804 C 39.837,23.416 47.071,26.780 49.463,33.318 C 51.855,39.859 48.482,47.103 41.946,49.485 Z M 72.517,20.838 C 72.181,19.920 71.165,19.452 70.250,19.785 L 67.193,20.897 C 66.268,21.233 65.047,20.875 64.468,20.087 L 56.767,11.903 C 56.028,11.270 55.746,10.033 56.158,9.148 L 57.471,6.329 C 57.883,5.438 57.495,4.381 56.612,3.973 L 49.816,0.804 C 48.931,0.394 47.876,0.779 47.454,1.670 L 46.031,4.744 C 45.614,5.632 44.478,6.245 43.521,6.113 L 33.843,5.826 C 32.871,5.894 31.797,5.203 31.465,4.290 L 30.325,1.160 C 29.988,0.247 28.963,-0.224 28.053,0.105 L 21.005,2.678 C 20.094,3.012 19.616,4.035 19.945,4.948 L 21.091,8.078 C 21.422,8.986 21.056,10.220 20.276,10.803 L 12.023,18.573 C 11.405,19.319 10.176,19.589 9.291,19.189 L 6.295,17.790 C 5.410,17.381 4.345,17.763 3.940,18.654 L 0.775,25.452 C 0.358,26.338 0.746,27.398 1.639,27.807 L 4.902,29.334 C 5.800,29.741 6.408,30.862 6.283,31.838 L 6.010,41.419 C 6.094,42.392 5.397,43.465 4.479,43.793 L 1.158,45.005 C 0.240,45.339 -0.226,46.362 0.108,47.282 L 2.676,54.315 C 3.008,55.240 4.031,55.721 4.943,55.388 L 8.265,54.176 C 9.185,53.840 10.412,54.195 10.998,54.983 L 18.598,63.123 C 19.357,63.744 19.624,64.975 19.227,65.856 L 17.770,68.974 C 17.360,69.858 17.742,70.917 18.626,71.324 L 25.431,74.477 C 26.312,74.899 27.372,74.519 27.774,73.626 L 29.332,70.304 C 29.749,69.416 30.860,68.812 31.830,68.943 L 41.618,69.232 C 42.587,69.168 43.655,69.868 43.986,70.780 L 45.178,74.041 C 45.514,74.951 46.540,75.425 47.445,75.093 L 54.488,72.522 C 55.408,72.191 55.882,71.166 55.548,70.246 L 54.361,66.988 C 54.030,66.078 54.395,64.856 55.190,64.270 L 63.254,56.731 C 63.892,55.992 65.109,55.722 65.999,56.125 L 68.941,57.504 C 69.827,57.906 70.891,57.528 71.299,56.645 L 74.461,49.842 C 74.883,48.956 74.491,47.896 73.602,47.491 L 70.465,46.037 C 69.594,45.615 68.983,44.496 69.113,43.532 L 69.429,33.655 C 69.348,32.683 70.062,31.619 70.982,31.270 L 74.039,30.154 C 74.945,29.823 75.423,28.800 75.089,27.885 L 72.518,20.839 L 72.517,20.838 Z" Grid.Column="1" Stretch="Fill" Canvas.Left="-224" Canvas.Top="301"/>
             </Canvas>
         </Button>-->
-        <Ellipse Name ="c_base1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="17" Margin="185,66.667,0,0" Stroke="Black" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0.529,0.55" Grid.Row="1"/>
-        <Ellipse Name ="c_base2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="17" Margin="185,97.667,0,0" Stroke="Black" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0.607,0.622" Grid.Row="1"/>
-        <Ellipse Name ="c_o1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="17" Margin="185,162.667,0,0" Stroke="Black" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0.529,0.55" Grid.Row="1"/>
-        <Ellipse Name ="c_o2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="17" Margin="185,194.667,0,0" Stroke="Black" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0.529,0.55" Grid.Row="1"/>
-        <Label x:Name="label_graph_o1" Content="O1" HorizontalAlignment="Left" Margin="2.333,91.667,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="25" Grid.Row="1"/>
-        <Label x:Name="label_graph_o2" Content="O2" HorizontalAlignment="Left" Margin="3.333,91.667,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="25" Grid.Row="2"/>
-        <Label x:Name="label" Content="50" HorizontalAlignment="Left" Margin="4.333,0.667,0,0" VerticalAlignment="Top" Grid.Column="1" Height="27" Width="22" Grid.Row="1"/>
-        <Label x:Name="label_Copy" Content="-50" HorizontalAlignment="Left" Margin="1.333,176.667,0,0" VerticalAlignment="Top" Height="26" Width="28" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="0.607,2.603"/>
-        <Label x:Name="label_Copy1" Content="50" HorizontalAlignment="Left" Margin="5.333,0.667,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="22" Grid.Row="2"/>
-        <Label x:Name="label_Copy2" Content="-50" HorizontalAlignment="Left" Margin="1.333,176.667,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="28" Grid.Row="2"/>
-        <Grid HorizontalAlignment="Left" Height="26" Margin="169,215.667,0,0" Grid.Row="2" VerticalAlignment="Top" Width="105" Background="#FFF3F3F3">
-            <Rectangle x:Name ="battery_1" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="3,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
-            <Rectangle x:Name ="battery_2" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="22,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
-            <Rectangle x:Name ="battery_3" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="42,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
-            <Rectangle x:Name ="battery_4" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="62,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
-            <Rectangle x:Name ="battery_5" Fill="LimeGreen" HorizontalAlignment="Left" Height="20" Margin="82,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" StrokeThickness="0"/>
+        <Ellipse Name ="c_base1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="17" Margin="214,66,0,0" Stroke="Black" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0.529,0.55" Grid.Row="1"/>
+        <Ellipse Name ="c_base2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="17" Margin="214,97,0,0" Stroke="Black" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0.607,0.622" Grid.Row="1"/>
+        <Ellipse Name ="c_o1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="17" Margin="214,162,0,0" Stroke="Black" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0.529,0.55" Grid.Row="1"/>
+        <Ellipse Name ="c_o2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="17" Margin="214,194,0,0" Stroke="Black" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0.529,0.55" Grid.Row="1"/>
+        <Label x:Name="label_graph_o1" Content=" O1" HorizontalAlignment="Left" Margin="0,92,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="27" Grid.Row="1"/>
+        <Label x:Name="label_graph_o2" Content=" O2" HorizontalAlignment="Left" Margin="0,92,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="28" Grid.Row="2"/>
+        <Label x:Name="label" Content=" 50" HorizontalAlignment="Left" Margin="0,1,0,0" VerticalAlignment="Top" Grid.Column="1" Height="27" Width="26" Grid.Row="1"/>
+        <Label x:Name="label_Copy" Content="-50" HorizontalAlignment="Left" Margin="0,175,0,33" Height="26" Width="28" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="0.607,2.603"/>
+        <Label x:Name="label_Copy1" Content=" 50" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="27" Grid.Row="2"/>
+        <Label x:Name="label_Copy2" Content="-50" HorizontalAlignment="Left" Margin="0,175,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="28" Grid.Row="2"/>
+        <Ellipse x:Name ="c_signal" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="17" Margin="214,4,0,0" Stroke="Black" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0.529,0.55" Grid.Row="1"/>
+        <Label x:Name="signal_label" Content="Signal" HorizontalAlignment="Left" Margin="231,1,0,0" VerticalAlignment="Top" Height="26" Width="43" Grid.Row="1"/>
+        <Grid Grid.ColumnSpan="2" Grid.Column="1" Margin="252,222,8,1" Grid.Row="2">
+            <Grid HorizontalAlignment="Left" Height="10" Margin="0,18,0,0" VerticalAlignment="Top" Width="200" Background="#FFF3F3F3">
+                <Rectangle Fill="LimeGreen" HorizontalAlignment="Left" Height="5" Margin="3,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
+                <Rectangle Fill="Yellow" HorizontalAlignment="Left" Height="5" Margin="43,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
+                <Rectangle Fill="Orange" HorizontalAlignment="Left" Height="5" Margin="83,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
+                <Rectangle Fill="Red" HorizontalAlignment="Left" Height="5" Margin="123,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
+                <Rectangle Fill="Black" HorizontalAlignment="Left" Height="5" Margin="163,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
+            </Grid>
+            <Label x:Name="label1" Content="Good" HorizontalAlignment="Left" Margin="4,0,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label2" Content="Fair" HorizontalAlignment="Left" Margin="49,0,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label3" Content="Poor" HorizontalAlignment="Left" Margin="86,0,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label4" Content="Bad" HorizontalAlignment="Left" Margin="128,0,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label5" Content="Lost" HorizontalAlignment="Left" Margin="166,0,0,0" VerticalAlignment="Top"/>
         </Grid>
-        <Ellipse x:Name ="c_signal" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="17" Margin="185,4.667,0,0" Stroke="Black" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0.529,0.55" Grid.Row="1"/>
-        <Label x:Name="signal_label" Content="Signal" HorizontalAlignment="Left" Margin="202,0.667,0,0" VerticalAlignment="Top" Height="26" Width="38" Grid.Row="1"/>
-        <Grid HorizontalAlignment="Left" Height="10" Margin="234.348,230.667,0,0" Grid.Row="2" VerticalAlignment="Top" Width="200" Background="#FFF3F3F3" Grid.Column="1" Grid.ColumnSpan="2">
-            <Rectangle Fill="LimeGreen" HorizontalAlignment="Left" Height="5" Margin="3,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
-            <Rectangle Fill="Yellow" HorizontalAlignment="Left" Height="5" Margin="43,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
-            <Rectangle Fill="Orange" HorizontalAlignment="Left" Height="5" Margin="83,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
-            <Rectangle Fill="Red" HorizontalAlignment="Left" Height="5" Margin="123,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
-            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="5" Margin="163,3,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" StrokeThickness="0"/>
-        </Grid>
-        <Label x:Name="label1" Content="Good" Grid.Column="1" HorizontalAlignment="Left" Margin="238.333,212.667,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label x:Name="label2" Content="Fair" Grid.Column="1" HorizontalAlignment="Left" Margin="283.333,212.667,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label x:Name="label3" Content="Poor" Grid.Column="1" HorizontalAlignment="Left" Margin="320.333,212.667,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label x:Name="label4" Content="Bad" Grid.Column="1" HorizontalAlignment="Left" Margin="362.333,212.667,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label x:Name="label5" Content="Lost" Grid.Column="1" HorizontalAlignment="Left" Margin="400.333,212.667,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label x:Name="label7" Content="Signal Quality" Grid.Column="1" HorizontalAlignment="Left" Margin="257,205,0,0" Grid.Row="2" VerticalAlignment="Top"/>
     </Grid>
 </Window>
