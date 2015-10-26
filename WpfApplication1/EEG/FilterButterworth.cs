@@ -11,25 +11,25 @@ namespace WpfApplication1
         /// <summary>
         /// rez amount, from sqrt(2) to ~ 0.1
         /// </summary>
-        private readonly float resonance;
+        private readonly double resonance;
 
-        private readonly float frequency;
+        private readonly double frequency;
         private readonly int sampleRate;
         private readonly PassType passType;
 
-        private readonly float c, a1, a2, a3, b1, b2;
+        private readonly double c, a1, a2, a3, b1, b2;
 
         /// <summary>
         /// Array of input values, latest are in front
         /// </summary>
-        private float[] inputHistory = new float[2];
+        private double[] inputHistory = new double[2];
 
         /// <summary>
         /// Array of output values, latest are in front
-        /// </summary>
-        private float[] outputHistory = new float[3];
+        /// </summary>`
+        private double[] outputHistory = new double[3];
 
-        public FilterButterworth(float frequency, int sampleRate, PassType passType, float resonance)
+        public FilterButterworth(double frequency, int sampleRate, PassType passType, double resonance)
         {
             this.resonance = resonance;
             this.frequency = frequency;
@@ -39,7 +39,7 @@ namespace WpfApplication1
             switch (passType)
             {
                 case PassType.Lowpass:
-                    c = 1.0f / (float) Math.Tan(Math.PI * frequency / sampleRate);
+                    c = 1.0f / (double) Math.Tan(Math.PI * frequency / sampleRate);
                     a1 = 1.0f / (1.0f + resonance * c + c * c);
                     a2 = 2f * a1;
                     a3 = a1;
@@ -47,12 +47,18 @@ namespace WpfApplication1
                     b2 = (1.0f - resonance * c + c * c) * a1;
                     break;
                 case PassType.Highpass:
-                    c = (float) Math.Tan(Math.PI * frequency / sampleRate);
-                    a1 = 1.0f / (1.0f + resonance * c + c * c);
-                    a2 = -2f * a1;
-                    a3 = a1;
-                    b1 = 2.0f * (c * c - 1.0f) * a1;
-                    b2 = (1.0f - resonance * c + c * c) * a1;
+                    //c = (double) Math.Tan(Math.PI * frequency / sampleRate);
+                    //a1 = 1.0f / (1.0f + resonance * c + c * c);
+                    //a2 = -2f * a1;
+                    //a3 = a1;
+                    //b1 = 2.0f * (c * c - 1.0f) * a1;
+                    //b2 = (1.0f - resonance * c + c * c) * a1;
+
+                    frequency *= 6.28318530717959F; // 2.0F * Math.Pi
+                    c = 1.0F / (frequency + 2.0 * sampleRate);
+                    a1 = 2.0*sampleRate * c;
+                    a2 = -a1;
+                    b1 = ((2.0 * sampleRate) - frequency) * c;
                     break;
             }
         }
@@ -63,9 +69,10 @@ namespace WpfApplication1
             Lowpass,
         }
 
-        public void Update(float newInput)
+        public double Update(double newInput)
         {
-            float newOutput = a1 * newInput + a2 * this.inputHistory[0] + a3 * this.inputHistory[1] - b1 * this.outputHistory[0] - b2 * this.outputHistory[1];
+            double newOutput = (newInput * a1) + (this.inputHistory[0] * a2) +(this.outputHistory[0] * b1);
+            //double newOutput = a1 * newInput + a2 * this.inputHistory[0] + a3 * this.inputHistory[1] - b1 * this.outputHistory[0] - b2 * this.outputHistory[1];
 
             this.inputHistory[1] = this.inputHistory[0];
             this.inputHistory[0] = newInput;
@@ -73,9 +80,10 @@ namespace WpfApplication1
             this.outputHistory[2] = this.outputHistory[1];
             this.outputHistory[1] = this.outputHistory[0];
             this.outputHistory[0] = newOutput;
+            return this.outputHistory[0];
         }
 
-        public float Value
+        public double Value
         {
             get { return this.outputHistory[0]; }
         }

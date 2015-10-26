@@ -72,6 +72,7 @@ namespace WpfApplication1
             // dispatch the modification to the text box to the UI thread (main window dispatcher)
             Dispatcher.Invoke(() =>
             {
+                Console.WriteLine("ff");
                 time.Content = "Time on " + e.timePass;
                 headseton.Content = "Headset status " + e.headsetOn;
                 if (!connect && e.headsetOn == 1)
@@ -204,7 +205,7 @@ namespace WpfApplication1
                 if (value[count] >= 50) y = 199;
                 else if (value[count] <= -50) y = 1;
                 else y = (int)(value[count]*2) + 100;
-                lineTrend.Points.Add(new TrendPoint { X = i, Y = y });
+                lineTrend.Points.Add(new TrendPoint { X = i+1, Y = y });
                 count++;
             }
             ctrl = new SgraphControl();

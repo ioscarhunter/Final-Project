@@ -9,6 +9,7 @@ namespace WpfApplication1
 {
     class SignalProcessing
     {
+        private FilterButterworth butterfillter = new FilterButterworth(0.16,128,FilterButterworth.PassType.Highpass,Math.PI);
         double[] output;
         public double[] Process(double[] input)
         {
@@ -16,6 +17,17 @@ namespace WpfApplication1
             double[] windowedSamples = HannigWindowing(filteredSamples);
             double[] transformedSamples = FastFourierTransform(windowedSamples);
             return transformedSamples;
+        }
+
+        public double[] Butterworth(double[] input)
+        {
+            double[] output = new double[input.Length];
+
+            for (int i = 0;i < input.Length;i++)
+            {
+                output[i] = butterfillter.Update(input[i]);
+            }
+            return output;
         }
 
         public double[] HighPassFilter(double[] input)
