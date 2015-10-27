@@ -65,14 +65,20 @@ namespace WpfApplication1
         }
         private double[] FastFourierTransform(double[] windowedSamples)
         {
-            Complex[] complex = new Complex[1024];
-            for (int i = 0;i < 1024 - 1;i++)
+            double[] magnitude = new double[windowedSamples.Length];
+            Complex[] complex = new Complex[windowedSamples.Length];
+            for (int i = 0;i < windowedSamples.Length;i++)
             {
                 complex[i] = new Complex(windowedSamples[i], 0);
             }
 
             FourierTransform.FFT(complex, FourierTransform.Direction.Forward);
-            return Array.ConvertAll(complex.Select(x => Convert.ToSingle(x.Re)).ToArray(), x=>(double)x);
+            for (int i = 0;i < windowedSamples.Length;i++)
+            {
+                magnitude[i] = Math.Sqrt(Math.Pow(complex[i].Re, 2) + Math.Pow(complex[i].Im, 2));
+            }
+            //return Array.ConvertAll(complex.Select(x => Convert.ToSingle(x.Re)).ToArray(), x=>(double)x);
+            return magnitude;
         }
     }
 }
