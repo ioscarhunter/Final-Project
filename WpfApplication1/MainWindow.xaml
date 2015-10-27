@@ -95,5 +95,6 @@
             <Label x:Name="label5" Content="Lost" HorizontalAlignment="Left" Margin="166,0,0,0" VerticalAlignment="Top"/>
         </Grid>
         <Label x:Name="label7" Content="Signal Quality" Grid.Column="1" HorizontalAlignment="Left" Margin="257,205,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label x:Name="ledupdate" Content="0" HorizontalAlignment="Left" Margin="16,151,0,0" Grid.Row="1" VerticalAlignment="Top"/>
     </Grid>
 </Window>

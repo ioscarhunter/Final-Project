@@ -75,7 +75,7 @@ namespace ConsoleApplication1
                             data[m] = new double[64];
                         }
                         double maxofmax = max.Max();
-
+                        int maxIndex = max.ToList().IndexOf(maxofmax);
                     }
                 }
                 catch (Exception e)

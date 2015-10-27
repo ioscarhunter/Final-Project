@@ -45,6 +45,7 @@ namespace WpfApplication1
             p = new EEG_Logger();
             p.DataUpdate += HandleDataUpdate;
             p.StatusUpdate += HandleStatusUpdate;
+            p.whichsUpdate += HandleLedUpdate;
 
             s = new SerialCom();
             s.LEDUpdate += HandleLEDUpdate;
@@ -55,6 +56,16 @@ namespace WpfApplication1
 
         }
 
+
+        private void HandleLedUpdate(object sender, EEG_WhichEventArgs e)
+        {
+            // dispatch the modification to the text box to the UI thread (main window dispatcher)
+            Dispatcher.Invoke(() =>
+            {
+                ledupdate.Content = e.lednum.ToString();
+            });
+
+        }
 
         private void HandleDataUpdate(object sender, EEG_LoggerEventArgs e)
         {

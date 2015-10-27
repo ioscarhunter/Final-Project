@@ -63,7 +63,7 @@ namespace ConsoleApplication1
             FourierTransform.FFT(complex, FourierTransform.Direction.Forward);
             for(int i = 0;i < windowedSamples.Length;i++)
             {
-                magnitude[i] = complex[i].Magnitude;
+                magnitude[i] = Math.Sqrt(Math.Pow(complex[i].Re,2) + Math.Pow(complex[i].Im,2));
             }
             //return Array.ConvertAll(complex.Select(x => Convert.ToSingle(x.Re)).ToArray(), x=>(double)x);
             return magnitude;
