@@ -16,6 +16,7 @@ namespace WpfApplication1
         private LED[] leds;
         private int lednum = 8;
         private int[] ledstatus;
+        private int cycle_count = 0;
 
         public event EventHandler<LED_StatusEventArgs> LEDUpdate;
 
@@ -63,10 +64,16 @@ namespace WpfApplication1
                     leds[i].blackout();
                     ledstatus[i] = 0;
                     //OnLEDStatusUpdate();
-                    Thread.Sleep(1);
+                    Thread.Sleep(50);
 
                 }
                 OnLEDStatusUpdate(1);
+                cycle_count++;
+                if (cycle_count == 3)
+                {
+                    Thread.Sleep(1000);
+                    cycle_count = 0;
+                }
             }
         }
 
