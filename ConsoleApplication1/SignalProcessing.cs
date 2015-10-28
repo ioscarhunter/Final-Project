@@ -21,7 +21,7 @@ namespace ConsoleApplication1
         public double[] HighPassFilter(double[] input)
         {
             double fCut = 0.16F;
-            const double W = 2.0F * 128;
+            const double W = 2.0F * 64;
 
             fCut *= 6.28318530717959F; // 2.0F * Math.Pi
             double norm = 1.0F / (fCut + W);

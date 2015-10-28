@@ -46,9 +46,9 @@ namespace WpfApplication1
 
         private SignalProcessing sn = new SignalProcessing();
 
-        int[] count = new int[4];
+        int[] count = new int[8];
 
-        double[][] data = new double[4][];
+        double[][] data = new double[8][];
 
 
 
@@ -172,7 +172,7 @@ namespace WpfApplication1
                 if (i < _bufferSize)
                 {
 
-                    Array.Copy(data[EdkDll.EE_DataChannel_t.O1], temp, max);
+                    Array.Copy(data[EdkDll.EE_DataChannel_t.O1], n, temp, max);
                     which(temp, start + (i / sample));
                     foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
                     {
@@ -205,7 +205,7 @@ namespace WpfApplication1
                 }
                 else
                 {
-                    Console.WriteLine(start + (i / 42));
+                    //Console.WriteLine(start + (i / 42));
                     file.Write("0, 0");
                 }
                 file.WriteLine("");
@@ -228,7 +228,7 @@ namespace WpfApplication1
                 data[led] = sn.Process(data[led]);
                 for (int k = 0;k < 64;k++)
                 {
-                    Console.WriteLine(data[led][k]);
+                    //Console.WriteLine(data[led][k]);
                     //file.WriteLine(led + ", " + data[led][k]);
                 }
 
@@ -240,7 +240,7 @@ namespace WpfApplication1
                 double[] max = new double[count.Length];
                 for (int m = 0;m < count.Length;m++)
                 {
-                    double[] temp = new double[3];
+                    double[] temp = new double[7];
                     Array.Copy(data[m], 5, temp, 0, 1);
                     max[m] = temp.Max();
                     data[m] = new double[64];

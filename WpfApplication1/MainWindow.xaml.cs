@@ -83,7 +83,7 @@ namespace WpfApplication1
             // dispatch the modification to the text box to the UI thread (main window dispatcher)
             Dispatcher.Invoke(() =>
             {
-                Console.WriteLine("ff");
+                //Console.WriteLine("ff");
                 time.Content = "Time on " + e.timePass;
                 headseton.Content = "Headset status " + e.headsetOn;
                 if (!connect && e.headsetOn == 1)

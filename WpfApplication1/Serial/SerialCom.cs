@@ -14,7 +14,7 @@ namespace WpfApplication1
         private SerialPort port1;
         private int bRate = 460800;
         private LED[] leds;
-        private int lednum = 4;
+        private int lednum = 8;
         private int[] ledstatus;
 
         public event EventHandler<LED_StatusEventArgs> LEDUpdate;
@@ -49,7 +49,7 @@ namespace WpfApplication1
             while (true)
             {
                 Thread.Sleep(50);
-                for (int i = 0;i < lednum;i++)
+                for (int i = 1;i < lednum;i+=2)
                 {
                     Thread.Sleep(1);
                     //Console.WriteLine("on");
