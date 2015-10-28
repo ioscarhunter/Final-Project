@@ -13,9 +13,9 @@ namespace WpfApplication1
         double[] output;
         public double[] Process(double[] input)
         {
-            double[] filteredSamples = HighPassFilter(input);
-            double[] windowedSamples = HannigWindowing(filteredSamples);
-            double[] transformedSamples = FastFourierTransform(windowedSamples);
+            //double[] filteredSamples = HighPassFilter(input);
+            //double[] windowedSamples = HannigWindowing(filteredSamples);
+            double[] transformedSamples = FastFourierTransform(input);
             return transformedSamples;
         }
 
@@ -33,7 +33,7 @@ namespace WpfApplication1
         public double[] HighPassFilter(double[] input)
         {
             double fCut = 0.16F;
-            double W = 2.0F * 128;
+            double W = 2.0F * input.Length;
 
             fCut *= 6.28318530717959F; // 2.0F * Math.Pi
             double norm = 1.0F / (fCut + W);

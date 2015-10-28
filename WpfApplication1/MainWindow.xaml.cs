@@ -62,7 +62,22 @@ namespace WpfApplication1
             // dispatch the modification to the text box to the UI thread (main window dispatcher)
             Dispatcher.Invoke(() =>
             {
-                ledupdate.Content = e.lednum.ToString();
+                switch (e.lednum)
+                {
+                    case 1:
+                        ledupdate.Content = "Down";
+                        break;
+                    case 3:
+                        ledupdate.Content = "Right";
+                        break;
+                    case 5:
+                        ledupdate.Content = "Up";
+                        break;
+                    case 7:
+                        ledupdate.Content = "Left";
+                        break;
+                        
+                }
             });
 
         }

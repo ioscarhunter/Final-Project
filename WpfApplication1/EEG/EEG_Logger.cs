@@ -158,9 +158,15 @@ namespace WpfApplication1
             data[EdkDll.EE_DataChannel_t.O2] = sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O2]);
             OnDataUpdate(data[EdkDll.EE_DataChannel_t.O1], data[EdkDll.EE_DataChannel_t.O2]);
 
-            double[] temp = new double[64];
+            //Array.Copy(data[EdkDll.EE_DataChannel_t.O1], n, temp, max);
 
-            for (int i = 0;i < max;i++)
+            double[] temp = new double[64];
+            //TODO select last only
+
+            int startVal = 0;
+            if (_bufferSize > max)
+                startVal = _bufferSize - max;
+            for (int i = startVal;i < _bufferSize;i++)
             {
                 // now write the data
                 //foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
@@ -172,8 +178,7 @@ namespace WpfApplication1
                 if (i < _bufferSize)
                 {
 
-                    Array.Copy(data[EdkDll.EE_DataChannel_t.O1], n, temp, max);
-                    which(temp, start + (i / sample));
+
                     foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
                     {
                         if (channel == EdkDll.EE_DataChannel_t.O1)
@@ -181,7 +186,7 @@ namespace WpfApplication1
                             //back_o1 = (back_o1 * (IIR_TC - 1) + data[channel][i]) / IIR_TC;
                             //data_o1 = data[channel][i] - back_o1;
                             data_o1 = data[channel][i];
-
+                            temp[i- startVal] = data[channel][i];
 
 
                             //file.Write(data_o1 + ", ");
@@ -211,6 +216,7 @@ namespace WpfApplication1
                 file.WriteLine("");
                 //Console.WriteLine("");
             }
+            which(temp, start);
             file.Close();
         }
 
@@ -228,7 +234,7 @@ namespace WpfApplication1
                 data[led] = sn.Process(data[led]);
                 for (int k = 0;k < 64;k++)
                 {
-                    //Console.WriteLine(data[led][k]);
+                    Console.WriteLine(data[led][k]);
                     //file.WriteLine(led + ", " + data[led][k]);
                 }
 
@@ -248,10 +254,10 @@ namespace WpfApplication1
                 double maxofmax = max.Max();
                 int maxIndex = max.ToList().IndexOf(maxofmax);
                 Console.WriteLine(maxIndex);
+                OnledUpdate(maxIndex);
                 file.WriteLine(maxIndex + ", ");
                 file.Close();
             }
-
 
         }
 
