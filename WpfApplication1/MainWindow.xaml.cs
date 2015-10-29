@@ -154,7 +154,7 @@ namespace WpfApplication1
                         switch (e.status[i])
                         {
                             case 1:
-                                Thread.Sleep(150);
+                              
                                 p.getEEG(64, 64, i);
                                 //if (i == 0 || i == 2 || i == 4 || i == 6) { p.getEEG(128, 64, i); }
 

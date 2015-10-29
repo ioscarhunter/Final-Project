@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WpfApplication1
@@ -14,7 +15,7 @@ namespace WpfApplication1
             this._pixel = pixel;
             this._colour = colour;
             this._port = port;
-            
+
         }
         //public int lednum;
         public int _pixel;
@@ -26,9 +27,9 @@ namespace WpfApplication1
             _port.Write("S:" + _pixel + "&" + _colour + "#");
         }
 
-        public void turnon() { _port.Write("B:" + _pixel + "&" + "1" + "#"); }
-        public void turnoff() { _port.Write("B:" + _pixel + "&" + "0" + "#"); }
-        public void blackout() { _port.Write("B:" + _pixel + "&" + "-1" + "#"); }
+        public void turnon() { Thread.Sleep(20); _port.Write("B:" + _pixel + "&" + "1" + "#"); }
+        public void turnoff() { Thread.Sleep(20); _port.Write("B:" + _pixel + "&" + "0" + "#"); }
+        public void blackout() { Thread.Sleep(20); _port.Write("B:" + _pixel + "&" + "-1" + "#"); }
 
     }
 }

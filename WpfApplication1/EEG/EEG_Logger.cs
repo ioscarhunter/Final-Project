@@ -112,7 +112,7 @@ namespace WpfApplication1
         private void processEvent(object sender, System.Timers.ElapsedEventArgs e)
         {
             // Handle any waiting events
-            engine.ProcessEvents();
+            engine.ProcessEvents(500);
             //Console.WriteLine(userID);
             // If the user has not yet connected, do not proceed
             if ((int) userID == -1)
@@ -126,7 +126,7 @@ namespace WpfApplication1
         public void Run()
         {
             //while(true)
-            engine.ProcessEvents();
+            engine.ProcessEvents(500);
 
             _timer = new System.Timers.Timer();
             _timer.Interval = 0.1;
@@ -174,11 +174,10 @@ namespace WpfApplication1
                 //file.WriteLine("");
 
                 // now write the data
-                file.Write(start + (i / sample) + ", ");
+                file.Write(start + ", ");
                 if (i < _bufferSize)
                 {
-
-
+                    
                     foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
                     {
                         if (channel == EdkDll.EE_DataChannel_t.O1)
