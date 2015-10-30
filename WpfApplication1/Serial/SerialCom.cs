@@ -11,6 +11,7 @@ namespace WpfApplication1
 {
     class SerialCom
     {
+
         private SerialPort port1;
         private int bRate = 460800;
         private LED[] leds;
@@ -45,36 +46,35 @@ namespace WpfApplication1
             }
         }
 
-        public void blinking()
+        public void blinking(ref EEG_Logger eeg)
         {
-            while (true)
+            for (int t=0;t<3;t++)
             {
                 Thread.Sleep(50);
                 for (int i = 1;i < lednum;i+=2)
                 {
-                    Thread.Sleep(1);
                     //Console.WriteLine("on");
                     ledstatus[i] = 1;
-                    OnLEDStatusUpdate(0);
+                    
                     strobe(leds[i], 500, 3);
                     
                     Console.WriteLine("l: " + i);
                     //Thread.Sleep(500);
                     //Console.WriteLine("off");
-                    leds[i].blackout();
+                    
                     ledstatus[i] = 0;
+                    OnLEDStatusUpdate(0,i);
+                    leds[i].blackout();
+                    eeg.getEEG(64,64,i);
                     //OnLEDStatusUpdate();
                     Thread.Sleep(50);
 
                 }
-                OnLEDStatusUpdate(1);
-                cycle_count++;
-                if (cycle_count == 3)
-                {
-                    Thread.Sleep(1000);
-                    cycle_count = 0;
-                }
+                OnLEDStatusUpdate(1,0);
+                
+
             }
+            eeg.compute();
         }
 
         public void strobe(LED led,int totaltime,int times)
@@ -82,15 +82,15 @@ namespace WpfApplication1
             for (int i = 0;i < times; i++){
                 led.turnon();
                 Thread.Sleep(totaltime / (times * 2));
-                led.turnoff();
+                led.blackout();
                 Thread.Sleep(totaltime / (times * 2));
             }
         }
 
-        public void OnLEDStatusUpdate(int i)
+        public void OnLEDStatusUpdate(int i,int led)
         {
             if (LEDUpdate != null)
-                LEDUpdate(this, new LED_StatusEventArgs(ledstatus,i));
+                LEDUpdate(this, new LED_StatusEventArgs(led,i));
         }
 
         private string AutodetectArduinoPort()
@@ -129,10 +129,10 @@ namespace WpfApplication1
 
     public class LED_StatusEventArgs:EventArgs
     {
-        public int[] status;
+        public int status;
         public int cycle;
 
-        public LED_StatusEventArgs(int[] ledstatus,int cycle)
+        public LED_StatusEventArgs(int ledstatus,int cycle)
         {
             this.cycle = cycle;
             status = ledstatus;

@@ -14,7 +14,7 @@ namespace WpfApplication1
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow:Window
     {
         EEG_Logger p;
         private bool connect;
@@ -25,16 +25,18 @@ namespace WpfApplication1
         Label[] light;
         Rectangle[] battery_level_rect;
 
-        int battery_level=0;
+        int battery_level = 0;
 
         SerialCom s;
         Random rnd = new Random();
 
         LineTrend lineTrend;
-        
+
         SgraphControl ctrl;
 
-        int cycle_count=0;
+        int cycle_count = 0;
+
+        public System.Timers.Timer _timer;
 
         public MainWindow()
         {
@@ -78,7 +80,7 @@ namespace WpfApplication1
                     case 7:
                         ledupdate.Content = "Left";
                         break;
-                        
+
                 }
             });
 
@@ -116,8 +118,8 @@ namespace WpfApplication1
 
                 signal.Content = "Signal " + e.signalStrength;
                 update_signal_quality(c_signal, e.signalStrength);
-                batt.Content =  e.chargeLevel + "/" + e.maxChargeLevel;
-                if(e.chargeLevel!= battery_level)
+                batt.Content = e.chargeLevel + "/" + e.maxChargeLevel;
+                if (e.chargeLevel != battery_level)
                 {
                     battery_level = e.chargeLevel;
                     update_battery(battery_level);
@@ -148,24 +150,18 @@ namespace WpfApplication1
                 }
                 else
                 {
-                    for (int i = 0; i < light.Length; i++)
+                   
+                    for (int i = 0;i < light.Length;i++)
                     {
-
-                        switch (e.status[i])
+                        //if (i == 0 || i == 2 || i == 4 || i == 6) { p.getEEG(128, 64, i); }
+                        if (e.status == i)
                         {
-                            case 1:
-                              
-                                p.getEEG(64, 64, i);
-                                //if (i == 0 || i == 2 || i == 4 || i == 6) { p.getEEG(128, 64, i); }
+                            light[i].Foreground = Brushes.ForestGreen;
+                        }
 
-                                light[i].Foreground = Brushes.ForestGreen;
-                                break;
-                            case 0:
-
-                                light[i].Foreground = Brushes.WhiteSmoke;
-                                break;
-                            default:
-                                break;
+                        else
+                        {
+                            light[i].Foreground = Brushes.WhiteSmoke;
                         }
                     }
                 }
@@ -179,7 +175,7 @@ namespace WpfApplication1
             {
                 status.Content = "not connect";
                 connect_but.Content = "Connecting";
-                for (int i = 0; i < 2; i++)
+                for (int i = 0;i < 2;i++)
                 {
                     Console.WriteLine(i);
                     try
@@ -214,8 +210,14 @@ namespace WpfApplication1
         {
             if (!LEDrunning)
             {
-                LEDThread = new Thread(s.blinking);
-                LEDThread.Start();
+
+                _timer = new System.Timers.Timer();
+                _timer.Interval = 8000;
+                _timer.Elapsed += new System.Timers.ElapsedEventHandler(set_light);
+                _timer.Enabled = true;
+
+
+
                 LEDrunning = true;
             }
             else
@@ -224,17 +226,24 @@ namespace WpfApplication1
                 LEDrunning = false;
             }
         }
+
+        private void set_light(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            s.blinking(ref p);
+
+        }
+
         private void updateGraph(ref Grid graph, double[] value)
         {
             lineTrend.Points.Clear();
             int count = 0;
-            for (int i = 0; i < 384; i += 6)
+            for (int i = 0;i < 384;i += 6)
             {
                 int y;
                 if (value[count] >= 50) y = 199;
                 else if (value[count] <= -50) y = 1;
-                else y = (int)(value[count]*2) + 100;
-                lineTrend.Points.Add(new TrendPoint { X = i+1, Y = y });
+                else y = (int) (value[count] * 2) + 100;
+                lineTrend.Points.Add(new TrendPoint { X = i + 1, Y = y });
                 count++;
             }
             ctrl = new SgraphControl();
@@ -287,11 +296,11 @@ namespace WpfApplication1
         }
         private void update_battery(int battery)
         {
-            if(battery_level_rect== null)
+            if (battery_level_rect == null)
             {
-                battery_level_rect = new Rectangle[] {battery_1, battery_2, battery_3, battery_4, battery_5};
+                battery_level_rect = new Rectangle[] { battery_1, battery_2, battery_3, battery_4, battery_5 };
             }
-            for(int i = 0; i <5; i++)
+            for (int i = 0;i < 5;i++)
             {
                 if (i < battery)
                 {
@@ -299,17 +308,18 @@ namespace WpfApplication1
                     battery_level_rect[i].Fill = Brushes.LimeGreen;
                 }
                 else
-                
-                    battery_level_rect[i].Visibility = Visibility.Hidden; 
-                
+
+                    battery_level_rect[i].Visibility = Visibility.Hidden;
+
             }
-            if(battery == 1)
+            if (battery == 1)
             {
                 battery_level_rect[0].Fill = Brushes.Red;
             }
         }
+
+
     }
-   
 
 
 
