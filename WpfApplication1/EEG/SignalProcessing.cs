@@ -33,7 +33,7 @@ namespace WpfApplication1
         public double[] HighPassFilter(double[] input)
         {
             double fCut = 0.16F;
-            double W = 2.0F * input.Length;
+            double W = 2.0F *64;
 
             fCut *= 6.28318530717959F; // 2.0F * Math.Pi
             double norm = 1.0F / (fCut + W);

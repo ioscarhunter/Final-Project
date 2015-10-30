@@ -239,11 +239,11 @@ namespace WpfApplication1
                 if (count[i] != 0)
                 {
                     data[i] = sn.Process(data[i]);
-                    for (int k = 0;k < 64;k++)
-                    {
-                        Console.WriteLine(data[i][k]);
-                        //file.WriteLine(led + ", " + data[led][k]);
-                    }
+                    //for (int k = 0;k < 64;k++)
+                    //{
+                    //    Console.WriteLine(data[i][k]);
+                    //    //file.WriteLine(led + ", " + data[led][k]);
+                    //}
                     count[i] = 0;
                 }
 
