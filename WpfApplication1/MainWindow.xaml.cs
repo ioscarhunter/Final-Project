@@ -210,9 +210,9 @@ namespace WpfApplication1
         {
             if (!LEDrunning)
             {
-
+                s.readystate();
                 _timer = new System.Timers.Timer();
-                _timer.Interval = 8000;
+                _timer.Interval = 9000;
                 _timer.Elapsed += new System.Timers.ElapsedEventHandler(set_light);
                 _timer.Enabled = true;
 

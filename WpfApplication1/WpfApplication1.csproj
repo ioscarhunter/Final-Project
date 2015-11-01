@@ -85,6 +85,7 @@
     <Compile Include="EEG\HeadsetBaseState.cs" />
     <Compile Include="Graph\LineTrend.cs" />
     <Compile Include="Graph\SgraphControl.cs" />
+    <Compile Include="Serial\colourset.cs" />
     <Compile Include="Serial\SerialCom.cs" />
     <Compile Include="EEG\SignalProcessing.cs" />
     <Page Include="xmal\light.xaml">

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO.Ports;
 using System.Management;
 using System.Threading;
+using System.Windows.Media;
 
 namespace WpfApplication1
 {
@@ -33,53 +34,101 @@ namespace WpfApplication1
             port1.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
             port1.Open();
             Thread.Sleep(5);
-            setupColour();
+
+            setupColour(colourset.LIMEGREEN);
+            all_off();
         }
 
-        public void setupColour()
+        public void readystate()
+        {
+            changeColour(colourset.RED);
+            all_dim();
+        }
+
+        public void setupColour(int setcolour)
         {
             for (int i = 0;i < leds.Length;i++)
             {
-                leds[i] = new LED(i, 0x228B22, ref port1);
+                leds[i] = new LED(i, setcolour, ref port1);
                 leds[i].setupLED();
-                Thread.Sleep(3);
+                Thread.Sleep(2);
             }
         }
 
+        public void changeColour(int setcolour)
+        {
+            for (int i = 0;i < leds.Length;i++)
+            {
+                leds[i].changecolour(setcolour);
+                Thread.Sleep(2);
+            }
+        }
+
+        public void all_on()
+        {
+            for (int i = 0;i < leds.Length;i++)
+            {
+                leds[i].turnon();
+                Thread.Sleep(2);
+            }
+        }
+
+        public void all_off()
+        {
+            for (int i = 0;i < leds.Length;i++)
+            {
+                leds[i].blackout();
+                Thread.Sleep(2);
+            }
+        }
+
+        public void all_dim()
+        {
+            for (int i = 0;i < leds.Length;i++)
+            {
+                leds[i].turnoff();
+                Thread.Sleep(2);
+            }
+        }
         public void blinking(ref EEG_Logger eeg)
         {
-            for (int t=0;t<3;t++)
+            
+            changeColour(colourset.LIMEGREEN);
+            all_off();
+            for (int t = 0;t < 3;t++)
             {
                 Thread.Sleep(50);
-                for (int i = 1;i < lednum;i+=2)
+                for (int i = 1;i < lednum;i += 2)
                 {
                     //Console.WriteLine("on");
                     ledstatus[i] = 1;
-                    
+
                     strobe(leds[i], 500, 3);
-                    
+
                     Console.WriteLine("l: " + i);
                     //Thread.Sleep(500);
                     //Console.WriteLine("off");
-                    
+
                     ledstatus[i] = 0;
-                    OnLEDStatusUpdate(0,i);
+                    OnLEDStatusUpdate(0, i);
                     leds[i].blackout();
-                    eeg.getEEG(64,64,i);
+                    eeg.getEEG(64, 64, i);
                     //OnLEDStatusUpdate();
                     Thread.Sleep(50);
 
                 }
-                OnLEDStatusUpdate(1,0);
-                
+                OnLEDStatusUpdate(1, 0);
 
             }
+            changeColour(colourset.VERYDARKGRAY);
+            all_on();
             eeg.compute();
         }
 
-        public void strobe(LED led,int totaltime,int times)
+        public void strobe(LED led, int totaltime, int times)
         {
-            for (int i = 0;i < times; i++){
+            for (int i = 0;i < times;i++)
+            {
                 led.turnon();
                 Thread.Sleep(totaltime / (times * 2));
                 led.blackout();
@@ -87,10 +136,10 @@ namespace WpfApplication1
             }
         }
 
-        public void OnLEDStatusUpdate(int i,int led)
+        public void OnLEDStatusUpdate(int i, int led)
         {
             if (LEDUpdate != null)
-                LEDUpdate(this, new LED_StatusEventArgs(led,i));
+                LEDUpdate(this, new LED_StatusEventArgs(led, i));
         }
 
         private string AutodetectArduinoPort()
@@ -132,7 +181,7 @@ namespace WpfApplication1
         public int status;
         public int cycle;
 
-        public LED_StatusEventArgs(int ledstatus,int cycle)
+        public LED_StatusEventArgs(int ledstatus, int cycle)
         {
             this.cycle = cycle;
             status = ledstatus;

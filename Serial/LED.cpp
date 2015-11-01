@@ -42,4 +42,6 @@ void LEDClass::blackout() {
 
 void LEDClass::changeColour(unsigned long colour) {
 	this->colour = colour;
+	leds->setPixelColor(pixel, colour);
+	leds->show();
 }
