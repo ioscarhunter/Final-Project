@@ -152,7 +152,8 @@ namespace WpfApplication1
             Console.WriteLine("Writing " + _bufferSize.ToString() + " lines of data ");
 
             // Write the data to a file
-            TextWriter file = new StreamWriter(filename, true);
+            TextWriter file1 = new StreamWriter(filename + "1.csv", true);
+            TextWriter file2 = new StreamWriter(filename + "2.csv", true);
 
             data[EdkDll.EE_DataChannel_t.O1] = sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O1]);
             data[EdkDll.EE_DataChannel_t.O2] = sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O2]);
@@ -164,9 +165,62 @@ namespace WpfApplication1
             //TODO select last only
 
             int startVal = 0;
+            //if (_bufferSize > max)
+            //    startVal = _bufferSize - max;
+            //for (int i = startVal;i < max+startVal;i++)
+            //{
+            //    // now write the data
+            //    //foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
+            //    //    file.Write(data[channel][i] + ",");
+            //    //file.WriteLine("");
+
+            //    // now write the data
+            //    file1.Write(start + ", ");
+            //    if (i < _bufferSize)
+            //    {
+
+            //        foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
+            //        {
+            //            if (channel == EdkDll.EE_DataChannel_t.O1)
+            //            {
+            //                //back_o1 = (back_o1 * (IIR_TC - 1) + data[channel][i]) / IIR_TC;
+            //                //data_o1 = data[channel][i] - back_o1;
+            //                data_o1 = data[channel][i];
+            //                temp[i - startVal] = data[channel][i];
+
+
+            //                //file.Write(data_o1 + ", ");
+            //                file1.Write(data_o1 + ", ");
+            //                //Console.Write(data_o1 + ", ");
+            //                //OnDataUpdate(data_o1, data_o2);
+            //            }
+            //            else if (channel == EdkDll.EE_DataChannel_t.O2)
+            //            {
+            //                //back_o2 = (back_o2 * (IIR_TC - 1) + data[channel][i]) / IIR_TC;
+            //                //data_o2 = data[channel][i] - back_o2;
+            //                data_o2 = data[channel][i];
+            //                //file.Write(data_o2 + ", ");
+            //                file1.Write(data_o2 + ", ");
+            //                //Console.Write(data_o2 + ", ");
+            //                //
+            //            }
+
+            //        }
+
+            //    }
+            //    else
+            //    {
+            //        //Console.WriteLine(start + (i / 42));
+            //        file1.Write("0, 0");
+            //    }
+            //    file1.WriteLine("");
+            //    //Console.WriteLine("");
+            //}
+
+
             if (_bufferSize > max)
-                startVal = _bufferSize - max;
-            for (int i = startVal;i < _bufferSize;i++)
+                startVal = (_bufferSize - max) / 2;
+            for (int i = startVal;i < max + startVal;i++)
             {
                 // now write the data
                 //foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
@@ -174,7 +228,7 @@ namespace WpfApplication1
                 //file.WriteLine("");
 
                 // now write the data
-                file.Write(start + ", ");
+                file2.Write(start + ", ");
                 if (i < _bufferSize)
                 {
 
@@ -189,7 +243,7 @@ namespace WpfApplication1
 
 
                             //file.Write(data_o1 + ", ");
-                            file.Write(data_o1 + ", ");
+                            file2.Write(data_o1 + ", ");
                             //Console.Write(data_o1 + ", ");
                             //OnDataUpdate(data_o1, data_o2);
                         }
@@ -199,7 +253,7 @@ namespace WpfApplication1
                             //data_o2 = data[channel][i] - back_o2;
                             data_o2 = data[channel][i];
                             //file.Write(data_o2 + ", ");
-                            file.Write(data_o2 + ", ");
+                            file2.Write(data_o2 + ", ");
                             //Console.Write(data_o2 + ", ");
                             //
                         }
@@ -210,13 +264,14 @@ namespace WpfApplication1
                 else
                 {
                     //Console.WriteLine(start + (i / 42));
-                    file.Write("0, 0");
+                    file2.Write("0, 0");
                 }
-                file.WriteLine("");
+                file2.WriteLine("");
                 //Console.WriteLine("");
             }
             which(temp, start);
-            file.Close();
+            file2.Close();
+            file1.Close();
         }
 
         public void which(double[] indata, int led)
@@ -228,8 +283,6 @@ namespace WpfApplication1
                 data[led][j] += (indata[j] / 3);
             }
             count[led]++;
-
-
         }
 
         public void compute()
@@ -238,6 +291,7 @@ namespace WpfApplication1
             {
                 if (count[i] != 0)
                 {
+                    data[i] = diff(data[i]);
                     data[i] = sn.Process(data[i]);
                     //for (int k = 0;k < 64;k++)
                     //{
@@ -248,27 +302,35 @@ namespace WpfApplication1
                 }
 
             }
+            findmax();
+        }
 
-            TextWriter file = new StreamWriter("result.csv", true);
+        private void findmax()
+        {
+            //TextWriter file = new StreamWriter("result.csv", true);
             double[] max = new double[count.Length];
             for (int m = 0;m < count.Length;m++)
             {
-                double[] temp = new double[7];
-                Array.Copy(data[m], 5, temp, 0, 1);
-                max[m] = temp.Max();
+
+                if (data[m][4] < data[m][5] && data[m][5] < data[m][6]) { max[m] = data[m][5]; }
                 data[m] = new double[64];
             }
             double maxofmax = max.Max();
             int maxIndex = max.ToList().IndexOf(maxofmax);
             Console.WriteLine(maxIndex);
             OnledUpdate(maxIndex);
-            file.WriteLine(maxIndex + ", ");
-            file.Close();
+            //file.WriteLine(maxIndex + ", ");
+            //file.Close();
+        }
 
-            
-
-
-
+        private double[] diff(double[] input)
+        {
+            double[] output = new double[input.Length];
+            for (int i = 0;i < input.Length - 1;i++)
+            {
+                output[i] = input[i + 1] - input[i];
+            }
+            return output;
 
         }
 
