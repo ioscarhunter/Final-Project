@@ -31,7 +31,10 @@ namespace WpfApplication1
         public void turnoff() { _port.Write("B:" + _pixel + "&" + "0" + "#"); }
         public void blackout() { _port.Write("B:" + _pixel + "&" + "-1" + "#"); }
 
-        public void changecolour(long colour) { _port.Write("S:" + _pixel + "&" + colour); }
+        public void changecolour(int colour) {
+            _colour = colour;
+            _port.Write("S:" + _pixel + "&" + colour);
+        }
 
     }
 }

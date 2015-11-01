@@ -142,6 +142,6 @@
         public static int LIGHTYELLOW = 0xFFFFE0;
         public static int IVORY = 0xFFFFF0;
         public static int WHITE = 0xFFFFFF;
-        public static int VERYDARKGRAY = 0x303030;
+        public static int VERYDARKGRAY = 0x202020;
     }
 }

@@ -19,13 +19,15 @@ namespace WpfApplication1
         private int lednum = 8;
         private int[] ledstatus;
         private int cycle_count = 0;
+        private int []ledsequence = new int[]{ 1, 3, 5, 7 };
 
         public event EventHandler<LED_StatusEventArgs> LEDUpdate;
 
         public SerialCom()
         {
             leds = new LED[lednum];
-            ledstatus = new int[8];
+            ledstatus = new int[lednum];
+
 
             Console.WriteLine(AutodetectArduinoPort());
             port1 = new SerialPort();
@@ -47,47 +49,47 @@ namespace WpfApplication1
 
         public void setupColour(int setcolour)
         {
-            for (int i = 0;i < leds.Length;i++)
+            for (int i = 0;i < lednum;i++)
             {
                 leds[i] = new LED(i, setcolour, ref port1);
                 leds[i].setupLED();
-                Thread.Sleep(2);
+                Thread.Sleep(8);
             }
         }
 
         public void changeColour(int setcolour)
         {
-            for (int i = 0;i < leds.Length;i++)
+            for (int i = 0;i < lednum;i++)
             {
                 leds[i].changecolour(setcolour);
-                Thread.Sleep(2);
+                Thread.Sleep(5);
             }
         }
 
         public void all_on()
         {
-            for (int i = 0;i < leds.Length;i++)
+            for (int i = 0;i < lednum;i++)
             {
                 leds[i].turnon();
-                Thread.Sleep(2);
+                Thread.Sleep(5);
             }
         }
 
         public void all_off()
         {
-            for (int i = 0;i < leds.Length;i++)
+            for (int i = 0;i < lednum;i++)
             {
                 leds[i].blackout();
-                Thread.Sleep(2);
+                Thread.Sleep(5);
             }
         }
 
         public void all_dim()
         {
-            for (int i = 0;i < leds.Length;i++)
+            for (int i = 0;i < lednum;i++)
             {
                 leds[i].turnoff();
-                Thread.Sleep(2);
+                Thread.Sleep(5);
             }
         }
         public void blinking(ref EEG_Logger eeg)
@@ -97,7 +99,7 @@ namespace WpfApplication1
             all_off();
             for (int t = 0;t < 3;t++)
             {
-                Thread.Sleep(50);
+                Thread.Sleep(40);
                 for (int i = 1;i < lednum;i += 2)
                 {
                     //Console.WriteLine("on");
@@ -114,14 +116,14 @@ namespace WpfApplication1
                     leds[i].blackout();
                     eeg.getEEG(64, 64, i);
                     //OnLEDStatusUpdate();
-                    Thread.Sleep(50);
+                    Thread.Sleep(40);
 
                 }
                 OnLEDStatusUpdate(1, 0);
 
             }
-            changeColour(colourset.VERYDARKGRAY);
-            all_on();
+            //changeColour(colourset.VERYDARKGRAY);
+            all_dim();
             eeg.compute();
         }
 
