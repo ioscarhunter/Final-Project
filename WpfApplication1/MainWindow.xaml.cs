@@ -212,7 +212,7 @@ namespace WpfApplication1
             {
                 s.readystate();
                 _timer = new System.Timers.Timer();
-                _timer.Interval = 10000;
+                _timer.Interval = 9000;
                 _timer.Elapsed += new System.Timers.ElapsedEventHandler(set_light);
                 _timer.Enabled = true;
 

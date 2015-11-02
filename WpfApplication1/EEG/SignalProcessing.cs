@@ -33,7 +33,7 @@ namespace WpfApplication1
         public double[] HighPassFilter(double[] input)
         {
             double fCut = 0.16F;
-            double W = 2.0F *64;
+            double W = 2.0F *128;
 
             fCut *= 6.28318530717959F; // 2.0F * Math.Pi
             double norm = 1.0F / (fCut + W);
@@ -75,7 +75,7 @@ namespace WpfApplication1
             FourierTransform.FFT(complex, FourierTransform.Direction.Forward);
             for (int i = 0;i < windowedSamples.Length;i++)
             {
-                magnitude[i] = Math.Sqrt(Math.Pow(complex[i].Re, 2) + Math.Pow(complex[i].Im, 2));
+                magnitude[i] = complex[i].Magnitude;
             }
             //return Array.ConvertAll(complex.Select(x => Convert.ToSingle(x.Re)).ToArray(), x=>(double)x);
             return magnitude;
