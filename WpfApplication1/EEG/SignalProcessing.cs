@@ -48,7 +48,6 @@ namespace WpfApplication1
 
         public double standard_deviation(double[] input)
         {
-
             double[] temp = new double[input.Length];
             double average = input.Average();
             for (int i = 0;i < input.Length;i++)

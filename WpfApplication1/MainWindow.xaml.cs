@@ -234,7 +234,7 @@ namespace WpfApplication1
         private void saveEEGdata(object sender, System.Timers.ElapsedEventArgs e)
         {
             p.getEEG();
-            s.blinking(ref p);
+            
         }
 
         private void setmarker(object sender, System.Timers.ElapsedEventArgs e)
@@ -242,7 +242,8 @@ namespace WpfApplication1
 
             for (int i = 1;i < 8;i += 2)
             {
-                p.setmarker(i);
+                //p.setmarker(i);
+                s.blinking(ref p);
                 Thread.Sleep(540);
             }
             

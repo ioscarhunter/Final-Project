@@ -19,7 +19,7 @@ namespace WpfApplication1
         private int lednum = 8;
         private int[] ledstatus;
         private int cycle_count = 0;
-        private int []ledsequence = new int[]{ 1, 3, 5, 7 };
+        private int[] ledsequence = new int[] { 1, 3, 5, 7 };
 
         public event EventHandler<LED_StatusEventArgs> LEDUpdate;
 
@@ -94,31 +94,31 @@ namespace WpfApplication1
         }
         public void blinking(ref EEG_Logger eeg)
         {
-            eeg.getEEG();
+            //eeg.getEEG();
             //changeColour(colourset.LIMEGREEN);
             //all_off();
             //for (int t = 0;t < 3;t++)
             //{
-            //    //Thread.Sleep(40);
-            //    for (int i = 1;i < lednum;i += 2)
-            //    {
-            //        Console.WriteLine(i);
-            //        ledstatus[i] = 1;
+            //Thread.Sleep(40);
+            for (int i = 1;i < lednum;i += 2)
+            {
+                Console.WriteLine(i);
+                ledstatus[i] = 1;
+                eeg.setmarker(i);
+                strobe(leds[i], 500, 3);
 
-            //        strobe(leds[i], 500, 3);
+                Console.WriteLine("l: " + i);
+                //Thread.Sleep(500);
+                //Console.WriteLine("off");
 
-            //        Console.WriteLine("l: " + i);
-            //        //Thread.Sleep(500);
-            //        //Console.WriteLine("off");
+                ledstatus[i] = 0;
+                OnLEDStatusUpdate(0, i);
+                leds[i].turnoff();
+                eeg.getEEG();
+                //OnLEDStatusUpdate();
+                Thread.Sleep(40);
 
-            //        ledstatus[i] = 0;
-            //        OnLEDStatusUpdate(0, i);
-            //        leds[i].turnoff();
-            //        eeg.getEEG();
-            //        //OnLEDStatusUpdate();
-            //        Thread.Sleep(40);
-
-            //    }
+            }
             //    OnLEDStatusUpdate(1, 0);
 
             //}
