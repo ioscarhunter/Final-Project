@@ -38,7 +38,7 @@ namespace WpfApplication1
             fCut *= 6.28318530717959F; // 2.0F * Math.Pi
             double norm = 1.0F / (fCut + W);
             double a0 = W * norm;
-            double a1 = -a0;
+            double a1 = - a0;
             double b1 = (W - fCut) * norm;
 
             if (output == null)

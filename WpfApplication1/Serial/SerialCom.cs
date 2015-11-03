@@ -94,37 +94,38 @@ namespace WpfApplication1
         }
         public void blinking(ref EEG_Logger eeg)
         {
-            
-            changeColour(colourset.LIMEGREEN);
-            all_off();
-            for (int t = 0;t < 3;t++)
-            {
-                //Thread.Sleep(40);
-                for (int i = 1;i < lednum;i += 2)
-                {
-                    Console.WriteLine(i);
-                    ledstatus[i] = 1;
+            eeg.getEEG();
+            //changeColour(colourset.LIMEGREEN);
+            //all_off();
+            //for (int t = 0;t < 3;t++)
+            //{
+            //    //Thread.Sleep(40);
+            //    for (int i = 1;i < lednum;i += 2)
+            //    {
+            //        Console.WriteLine(i);
+            //        ledstatus[i] = 1;
 
-                    strobe(leds[i], 500, 3);
+            //        strobe(leds[i], 500, 3);
 
-                    Console.WriteLine("l: " + i);
-                    //Thread.Sleep(500);
-                    //Console.WriteLine("off");
+            //        Console.WriteLine("l: " + i);
+            //        //Thread.Sleep(500);
+            //        //Console.WriteLine("off");
 
-                    ledstatus[i] = 0;
-                    OnLEDStatusUpdate(0, i);
-                    leds[i].turnoff();
-                    eeg.getEEG(64, 64, i);
-                    //OnLEDStatusUpdate();
-                    Thread.Sleep(40);
+            //        ledstatus[i] = 0;
+            //        OnLEDStatusUpdate(0, i);
+            //        leds[i].turnoff();
+            //        eeg.getEEG();
+            //        //OnLEDStatusUpdate();
+            //        Thread.Sleep(40);
 
-                }
-                OnLEDStatusUpdate(1, 0);
+            //    }
+            //    OnLEDStatusUpdate(1, 0);
 
-            }
+            //}
             //changeColour(colourset.VERYDARKGRAY);
             //all_dim();
-            eeg.compute();
+            //eeg.writedata();
+            //eeg.compute();
         }
 
         public void strobe(LED led, int totaltime, int times)
