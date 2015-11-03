@@ -70,7 +70,7 @@ namespace WpfApplication1
 
             for (int i = 0;i < data.Length;i++)
             {
-                data[i] = new double[128];
+                data[i] = new double[896];
             }
         }
 
@@ -115,7 +115,7 @@ namespace WpfApplication1
         private void processEvent(object sender, System.Timers.ElapsedEventArgs e)
         {
             // Handle any waiting events
-            engine.ProcessEvents(500);
+            engine.ProcessEvents();
             //Console.WriteLine(userID);
             // If the user has not yet connected, do not proceed
             if ((int) userID == -1)
@@ -129,10 +129,10 @@ namespace WpfApplication1
         public void Run()
         {
             //while(true)
-            engine.ProcessEvents(500);
+            engine.ProcessEvents();
 
             _timer = new System.Timers.Timer();
-            _timer.Interval = 0.1;
+            _timer.Interval = 500;
             _timer.Elapsed += new System.Timers.ElapsedEventHandler(processEvent);
             _timer.Enabled = true;
             engine.EE_DataSetBufferSizeInSec(7);
@@ -143,6 +143,12 @@ namespace WpfApplication1
             if (engine.EE_DataGetBufferSizeInSec() != 7)
                 engine.EE_DataSetBufferSizeInSec(7);
             getEEG(896, 896, 1);
+        }
+
+        public void setmarker(int mark)
+        {
+            engine.DataSetMarker((uint) userID, mark);
+            Console.WriteLine(mark);
         }
 
         private void getEEG(int max, int sample, int start)
@@ -276,7 +282,8 @@ namespace WpfApplication1
             //    file2.WriteLine("");
             //    Console.WriteLine("");
             //}
-            fastcopy(data[EdkDll.EE_DataChannel_t.O1], data[EdkDll.EE_DataChannel_t.TIMESTAMP], start, startVal);
+            fastcopy(data[EdkDll.EE_DataChannel_t.O1], data[EdkDll.EE_DataChannel_t.MARKER], start, startVal);
+            writedata();
             //Console.WriteLine("f");
             //    temp_o1 = sn.HighPassFilter(temp_o1);
             //temp_o2 = sn.HighPassFilter(temp_o2);
@@ -288,13 +295,13 @@ namespace WpfApplication1
 
         private void fastcopy(double[] input_o1, double[] input_time, int times, int startval)
         {
-            System.Buffer.BlockCopy(input_o1, 0, temp_o1, 896, input_o1.Length);
-            System.Buffer.BlockCopy(input_time, 0, temp_time, 896, input_time.Length);
+            //Console.WriteLine(input_o1.Length);
+            Array.Copy(input_o1, 0, temp_o1, 0, input_o1.Length);
+            Array.Copy(input_time, 0, temp_time, 0, input_time.Length);
         }
 
         private void clear_temp()
         {
-
             temp_o1 = new double[895];
             temp_time = new double[895];
         }
@@ -302,11 +309,12 @@ namespace WpfApplication1
         public void writedata()
         {
             TextWriter file2 = new StreamWriter(filename + "2.csv", true);
-            for (int i = 0;i < 895;i++)
+            for (int i = 0;i < temp_time.Length;i++)
             {
+                Console.WriteLine(temp_time[i]);
                 file2.WriteLine(temp_time[i] + ", " + temp_o1[i] + ", ");
             }
-            clear_temp();
+            file2.Close();
         }
 
         public void which(double[] indata, int led, int times)

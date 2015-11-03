@@ -36,7 +36,8 @@ namespace WpfApplication1
 
         int cycle_count = 0;
 
-        public System.Timers.Timer _timer;
+        public System.Timers.Timer _timerEEGREC;
+        public System.Timers.Timer _timerMARK;
 
         public MainWindow()
         {
@@ -150,7 +151,7 @@ namespace WpfApplication1
                 }
                 else
                 {
-                   
+
                     for (int i = 0;i < light.Length;i++)
                     {
                         //if (i == 0 || i == 2 || i == 4 || i == 6) { p.getEEG(128, 64, i); }
@@ -211,12 +212,15 @@ namespace WpfApplication1
             if (!LEDrunning)
             {
                 s.readystate();
-                _timer = new System.Timers.Timer();
-                _timer.Interval = 9000;
-                _timer.Elapsed += new System.Timers.ElapsedEventHandler(set_light);
-                _timer.Enabled = true;
+                _timerEEGREC = new System.Timers.Timer();
+                _timerEEGREC.Interval = 8000;
+                _timerEEGREC.Elapsed += new System.Timers.ElapsedEventHandler(saveEEGdata);
+                _timerEEGREC.Enabled = true;
 
-
+                _timerMARK = new System.Timers.Timer();
+                _timerMARK.Interval = 2200;
+                _timerMARK.Elapsed += new System.Timers.ElapsedEventHandler(setmarker);
+                _timerMARK.Enabled = true;
 
                 LEDrunning = true;
             }
@@ -227,10 +231,21 @@ namespace WpfApplication1
             }
         }
 
-        private void set_light(object sender, System.Timers.ElapsedEventArgs e)
+        private void saveEEGdata(object sender, System.Timers.ElapsedEventArgs e)
         {
+            p.getEEG();
             s.blinking(ref p);
+        }
 
+        private void setmarker(object sender, System.Timers.ElapsedEventArgs e)
+        {
+
+            for (int i = 1;i < 8;i += 2)
+            {
+                p.setmarker(i);
+                Thread.Sleep(540);
+            }
+            
         }
 
         private void updateGraph(ref Grid graph, double[] value)
