@@ -312,8 +312,9 @@ namespace WpfApplication1
                 if (temp_marker[i] != 0)
                 {
                     double[] nom = new double[64];
-                    nom = sn.normalization(nom);
+                    
                     Array.Copy(temp_o1, i, nom, 0,64);
+                    nom = sn.normalization(nom);
                     for (int j = 0;j < 64;j++)
                     {
                         data[(int) temp_marker[i]][j] += nom[j]/3;
