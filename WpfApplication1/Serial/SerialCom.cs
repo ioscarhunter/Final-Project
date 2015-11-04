@@ -12,7 +12,6 @@ namespace WpfApplication1
 {
     class SerialCom
     {
-
         private SerialPort port1;
         private int bRate = 460800;
         private LED[] leds;
@@ -27,7 +26,6 @@ namespace WpfApplication1
         {
             leds = new LED[lednum];
             ledstatus = new int[lednum];
-
 
             Console.WriteLine(AutodetectArduinoPort());
             port1 = new SerialPort();
@@ -114,9 +112,9 @@ namespace WpfApplication1
                 ledstatus[i] = 0;
                 OnLEDStatusUpdate(0, i);
                 leds[i].turnoff();
-                eeg.getEEG();
+                //eeg.getEEG();
                 //OnLEDStatusUpdate();
-                Thread.Sleep(40);
+                Thread.Sleep(30);
 
             }
             //    OnLEDStatusUpdate(1, 0);

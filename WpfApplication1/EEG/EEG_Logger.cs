@@ -52,7 +52,7 @@ namespace WpfApplication1
         double[][] data = new double[8][];
 
         double[] temp_o1 = new double[896];
-        double[] temp_time = new double[896];
+        double[] temp_marker = new double[896];
 
         public EEG_Logger()
         {
@@ -70,7 +70,7 @@ namespace WpfApplication1
 
             for (int i = 0;i < data.Length;i++)
             {
-                data[i] = new double[896];
+                data[i] = new double[64];
             }
         }
 
@@ -107,8 +107,8 @@ namespace WpfApplication1
             // enable data aquisition for this user.
             engine.DataAcquisitionEnable((uint) userID, true);
 
-            // ask for up to 1 second of buffered data
-            engine.EE_DataSetBufferSizeInSec(1);
+            // ask for up to 7 second of buffered data
+            engine.EE_DataSetBufferSizeInSec(7);
 
         }
 
@@ -135,7 +135,7 @@ namespace WpfApplication1
             _timer.Interval = 500;
             _timer.Elapsed += new System.Timers.ElapsedEventHandler(processEvent);
             _timer.Enabled = true;
-            engine.EE_DataSetBufferSizeInSec(7);
+            //engine.EE_DataSetBufferSizeInSec(7);
         }
 
         public void getEEG()
@@ -284,6 +284,7 @@ namespace WpfApplication1
             //}
             fastcopy(data[EdkDll.EE_DataChannel_t.O1], data[EdkDll.EE_DataChannel_t.MARKER], start, startVal);
             writedata();
+            clear_temp();
             //Console.WriteLine("f");
             //    temp_o1 = sn.HighPassFilter(temp_o1);
             //temp_o2 = sn.HighPassFilter(temp_o2);
@@ -297,22 +298,39 @@ namespace WpfApplication1
         {
             //Console.WriteLine(input_o1.Length);
             Array.Copy(input_o1, 0, temp_o1, 0, input_o1.Length);
-            Array.Copy(input_time, 0, temp_time, 0, input_time.Length);
+            Array.Copy(input_time, 0, temp_marker, 0, input_time.Length);
+        }
+
+        private void filteroutdata()
+        {
+            for (int i = 0;i < temp_o1.Length;i++)
+            {
+                if (temp_marker[i] != 0)
+                {
+                    for (int j = i;j < i + 64;j++)
+                    {
+                        data[(int) temp_marker[i]][j - i] = temp_o1[j];
+                        count[(int) temp_marker[i]]++;
+                    }
+                    i += 64;
+                }
+            }
         }
 
         private void clear_temp()
         {
             temp_o1 = new double[895];
-            temp_time = new double[895];
+            temp_marker = new double[895];
+            count = new int[8];
         }
 
         public void writedata()
         {
             TextWriter file2 = new StreamWriter(filename + "2.csv", true);
-            for (int i = 0;i < temp_time.Length;i++)
+            for (int i = 0;i < temp_marker.Length;i++)
             {
-                Console.WriteLine(temp_time[i]);
-                file2.WriteLine(temp_time[i] + ", " + temp_o1[i] + ", ");
+                Console.WriteLine(temp_marker[i]);
+                file2.WriteLine(temp_marker[i] + ", " + temp_o1[i] + ", ");
             }
             file2.Close();
         }
@@ -380,6 +398,8 @@ namespace WpfApplication1
             return output;
 
         }
+
+
 
         private void doublestore(double[] input, int led)
         {

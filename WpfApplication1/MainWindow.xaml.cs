@@ -218,7 +218,7 @@ namespace WpfApplication1
                 _timerEEGREC.Enabled = true;
 
                 _timerMARK = new System.Timers.Timer();
-                _timerMARK.Interval = 2200;
+                _timerMARK.Interval = 2300;
                 _timerMARK.Elapsed += new System.Timers.ElapsedEventHandler(setmarker);
                 _timerMARK.Enabled = true;
 
@@ -234,19 +234,14 @@ namespace WpfApplication1
         private void saveEEGdata(object sender, System.Timers.ElapsedEventArgs e)
         {
             p.getEEG();
-            
+
         }
 
         private void setmarker(object sender, System.Timers.ElapsedEventArgs e)
         {
 
-            for (int i = 1;i < 8;i += 2)
-            {
-                //p.setmarker(i);
-                s.blinking(ref p);
-                Thread.Sleep(540);
-            }
-            
+            s.blinking(ref p);
+
         }
 
         private void updateGraph(ref Grid graph, double[] value)
