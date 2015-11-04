@@ -218,7 +218,7 @@ namespace WpfApplication1
                 _timerEEGREC.Enabled = true;
 
                 _timerMARK = new System.Timers.Timer();
-                _timerMARK.Interval = 2300;
+                _timerMARK.Interval = 8000;
                 _timerMARK.Elapsed += new System.Timers.ElapsedEventHandler(setmarker);
                 _timerMARK.Enabled = true;
 
@@ -239,9 +239,7 @@ namespace WpfApplication1
 
         private void setmarker(object sender, System.Timers.ElapsedEventArgs e)
         {
-
             s.blinking(ref p);
-
         }
 
         private void updateGraph(ref Grid graph, double[] value)

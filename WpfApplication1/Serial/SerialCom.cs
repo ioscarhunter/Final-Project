@@ -93,33 +93,34 @@ namespace WpfApplication1
         public void blinking(ref EEG_Logger eeg)
         {
             //eeg.getEEG();
-            //changeColour(colourset.LIMEGREEN);
-            //all_off();
-            //for (int t = 0;t < 3;t++)
-            //{
-            //Thread.Sleep(40);
-            for (int i = 1;i < lednum;i += 2)
+            changeColour(colourset.LIMEGREEN);
+            all_off();
+            for (int t = 0;t < 3;t++)
             {
-                Console.WriteLine(i);
-                ledstatus[i] = 1;
-                eeg.setmarker(i);
-                strobe(leds[i], 500, 3);
+                //Thread.Sleep(40);
+                for (int i = 1;i < lednum;i += 2)
+                {
+                    Console.WriteLine(i);
+                    ledstatus[i] = 1;
+                    eeg.setmarker(i);
+                    strobe(leds[i], 500, 3);
 
-                Console.WriteLine("l: " + i);
-                //Thread.Sleep(500);
-                //Console.WriteLine("off");
+                    Console.WriteLine("l: " + i);
+                    //Thread.Sleep(500);
+                    //Console.WriteLine("off");
 
-                ledstatus[i] = 0;
-                OnLEDStatusUpdate(0, i);
-                leds[i].turnoff();
-                //eeg.getEEG();
-                //OnLEDStatusUpdate();
-                Thread.Sleep(30);
+                    ledstatus[i] = 0;
+                    OnLEDStatusUpdate(0, i);
+                    leds[i].turnoff();
+                    //eeg.getEEG();
+                    //OnLEDStatusUpdate();
+                    eeg.setmarker(i);
+                    Thread.Sleep(30);
+
+                }
+                //    OnLEDStatusUpdate(1, 0);
 
             }
-            //    OnLEDStatusUpdate(1, 0);
-
-            //}
             //changeColour(colourset.VERYDARKGRAY);
             //all_dim();
             //eeg.writedata();
