@@ -302,6 +302,7 @@ namespace WpfApplication1
             Array.Copy(input_o1, 0, temp_o1, 0, input_o1.Length);
             Array.Copy(input_time, 0, temp_marker, 0, input_time.Length);
             temp_o1 = sn.HighPassFilter(temp_o1);
+            
         }
 
         private void filteroutdata()
@@ -310,9 +311,12 @@ namespace WpfApplication1
             {
                 if (temp_marker[i] != 0)
                 {
-                    for (int j = i;j < i + 64;j++)
+                    double[] nom = new double[64];
+                    nom = sn.normalization(nom);
+                    Array.Copy(temp_o1, i, nom, 0,64);
+                    for (int j = 0;j < 64;j++)
                     {
-                        data[(int) temp_marker[i]][j - i] += temp_o1[j]/3.0;
+                        data[(int) temp_marker[i]][j] += nom[j]/3;
                     }
                     count[(int) temp_marker[i]]++;
                     i += 64;

@@ -97,7 +97,7 @@ namespace WpfApplication1
             all_off();
             for (int t = 0;t < 3;t++)
             {
-                //Thread.Sleep(40);
+                Thread.Sleep(40);
                 for (int i = 1;i < lednum;i += 2)
                 {
                     Console.WriteLine(i);
@@ -111,11 +111,11 @@ namespace WpfApplication1
 
                     ledstatus[i] = 0;
                     OnLEDStatusUpdate(0, i);
-                    leds[i].turnoff();
+                    leds[i].blackout();
                     //eeg.getEEG();
                     //OnLEDStatusUpdate();
-                    eeg.setmarker(i);
-                    Thread.Sleep(30);
+                    //eeg.setmarker(i);
+                    Thread.Sleep(40);
 
                 }
                 //    OnLEDStatusUpdate(1, 0);
