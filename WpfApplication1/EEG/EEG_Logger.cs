@@ -50,6 +50,7 @@ namespace WpfApplication1
         int[] count = new int[8];
 
         double[][] data = new double[8][];
+        double[][][] threedata = new double[8][][];
 
         double[] temp_o1 = new double[1024];
         double[] temp_marker = new double[1024];
@@ -70,7 +71,15 @@ namespace WpfApplication1
 
             for (int i = 0;i < data.Length;i++)
             {
-                data[i] = new double[64];
+                data[i] = new double[3];
+            }
+            for (int i = 0;i < threedata.Length;i++)
+            {
+                threedata[i] = new double[3][];
+                for (int j = 0;j < threedata[i].Length;j++)
+                {
+                    threedata[i][j] = new double[64];
+                }
             }
         }
 
@@ -286,6 +295,11 @@ namespace WpfApplication1
             writedata();
             filteroutdata();
             printtofile();
+            if (!((threedata[1][0][5] == threedata[3][1][6]) && (threedata[5][1][7] == threedata[7][2][8]) && threedata[7][1][4] == 0))
+            {
+                fft();
+            }
+
             clear_temp();
             //Console.WriteLine("f");
             //    temp_o1 = sn.HighPassFilter(temp_o1);
@@ -302,7 +316,7 @@ namespace WpfApplication1
             Array.Copy(input_o1, 0, temp_o1, 0, input_o1.Length);
             Array.Copy(input_time, 0, temp_marker, 0, input_time.Length);
             temp_o1 = sn.HighPassFilter(temp_o1);
-            
+
         }
 
         private void filteroutdata()
@@ -312,30 +326,47 @@ namespace WpfApplication1
                 if (temp_marker[i] != 0)
                 {
                     double[] nom = new double[64];
-                    
-                    Array.Copy(temp_o1, i, nom, 0,64);
+
+                    Array.Copy(temp_o1, i, nom, 0, 64);
                     nom = sn.normalization(nom);
+                    Array.Copy(nom, 0, threedata[(int) temp_marker[i]][count[(int) temp_marker[i]]], 0, 64);
                     for (int j = 0;j < 64;j++)
                     {
-                        data[(int) temp_marker[i]][j] += nom[j]/3;
+                        Console.WriteLine(nom[j]);
+                        if (temp_marker[i + j + 1] != 0) { Console.WriteLine(temp_marker[i + j + 1]); break; }
+                        data[(int) temp_marker[i]][j] += nom[j] / 3;
                     }
                     count[(int) temp_marker[i]]++;
-                    i += 64;
+                    i += 63;
                 }
             }
         }
 
         private void printtofile()
         {
-            TextWriter file2 = new StreamWriter(filename + "filtered.csv", true);
-            for (int i = 1;i < data.Length;i+=2)
+            TextWriter file2 = new StreamWriter("filtered.csv", true);
+            TextWriter file3 = new StreamWriter("normal.csv", true);
+            Console.WriteLine("PPP");
+            for (int i = 1;i < data.Length;i += 2)
             {
+
+                double sd = sn.standard_deviation(data[i]);
                 for (int j = 0;j < data[i].Length;j++)
                 {
-                    file2.WriteLine(i + ", " + data[i][j] + ", ");
+                    if ((threedata[i][0][j] == threedata[i][1][j]) && (threedata[i][1][j] == threedata[i][2][j]) && threedata[i][1][j] == 0)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("PTF");
+                        file2.WriteLine(i + ", " + data[i][j] + ", " + sd + ", ");
+                        file3.WriteLine(i + ", " + threedata[i][0][j] + ", " + threedata[i][1][j] + ", " + threedata[i][2][j]);
+                    }
                 }
             }
             file2.Close();
+            file3.Close();
         }
 
         private void clear_temp()
@@ -351,7 +382,7 @@ namespace WpfApplication1
 
         public void writedata()
         {
-            TextWriter file2 = new StreamWriter(filename + "2.csv", true);
+            TextWriter file2 = new StreamWriter("raw.csv", true);
             for (int i = 0;i < temp_marker.Length;i++)
             {
                 //Console.WriteLine(temp_marker[i]);
@@ -371,20 +402,23 @@ namespace WpfApplication1
             count[led]++;
         }
 
-        public void compute()
+        public void fft()
         {
             TextWriter file = new StreamWriter("fft.csv", true);
+            Console.WriteLine("FFT");
             for (int i = 0;i < count.Length;i++)
             {
+
                 if (count[i] != 0)
                 {
+                    double[] fft = new double[64];
                     //data[i] = diff(data[i]);
-                    data[i] = sn.Process(data[i]);
+                    fft = sn.Process(data[i]);
                     for (int k = 0;k < 64;k++)
-                        //{
-                        //    Console.WriteLine(data[i][k]);
-                        file.WriteLine(i + ", " + data[i][k]);
-                    //}
+                    {
+                        Console.WriteLine(data[i][k]);
+                        file.WriteLine(i + ", " + fft[k]);
+                    }
                     count[i] = 0;
                 }
 
