@@ -332,7 +332,7 @@ namespace WpfApplication1
                     Array.Copy(nom, 0, threedata[(int) temp_marker[i]][count[(int) temp_marker[i]]], 0, 64);
                     for (int j = 0;j < 64;j++)
                     {
-                        Console.WriteLine(nom[j]);
+                        //Console.WriteLine(nom[j]);
                         if (temp_marker[i + j + 1] != 0) { Console.WriteLine(temp_marker[i + j + 1]); break; }
                         data[(int) temp_marker[i]][j] += nom[j] / 3;
                     }
@@ -346,7 +346,6 @@ namespace WpfApplication1
         {
             TextWriter file2 = new StreamWriter("filtered.csv", true);
             TextWriter file3 = new StreamWriter("normal.csv", true);
-            Console.WriteLine("PPP");
             for (int i = 1;i < data.Length;i += 2)
             {
 
@@ -355,11 +354,10 @@ namespace WpfApplication1
                 {
                     if ((threedata[i][0][j] == threedata[i][1][j]) && (threedata[i][1][j] == threedata[i][2][j]) && threedata[i][1][j] == 0)
                     {
-                        break;
+                        break; 
                     }
                     else
                     {
-                        Console.WriteLine("PTF");
                         file2.WriteLine(i + ", " + data[i][j] + ", " + sd + ", ");
                         file3.WriteLine(i + ", " + threedata[i][0][j] + ", " + threedata[i][1][j] + ", " + threedata[i][2][j]);
                     }
@@ -416,7 +414,7 @@ namespace WpfApplication1
                     fft = sn.Process(data[i]);
                     for (int k = 0;k < 64;k++)
                     {
-                        Console.WriteLine(data[i][k]);
+                        //Console.WriteLine(data[i][k]);
                         file.WriteLine(i + ", " + fft[k]);
                     }
                     count[i] = 0;
