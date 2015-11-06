@@ -18,7 +18,7 @@ namespace WpfApplication1
         private int lednum = 8;
         private int[] ledstatus;
         private int cycle_count = 0;
-        private int[] ledsequence = new int[] { 1, 3, 5, 7 };
+        private int[] ledsequence = new int[] {0, 1, 3, 5, 7 };
 
         private int[,] randomseed = {{4 ,3 ,2 ,1},
                             {4, 3, 1, 2},
@@ -44,6 +44,7 @@ namespace WpfApplication1
                             {1 ,3 ,4 ,2},
                             {1 ,4 ,3 ,2},
                             {1 ,4 ,2 ,3}};
+
         Random rnd = new Random();
         public event EventHandler<LED_StatusEventArgs> LEDUpdate;
 
@@ -122,21 +123,21 @@ namespace WpfApplication1
             all_off();
             for (int t = 0;t < 7;t++)
             {
+                int set = rnd.Next(23);
                 Thread.Sleep(40);
-                for (int i = 1;i < lednum;i += 2)
+                for (int i = 0;i < 4;i ++)
                 {
-                    Console.WriteLine(i);
-                    ledstatus[i] = 1;
-                    eeg.setmarker(i);
-                    strobe(leds[i], 500, 3);
+                    int lednum = ledsequence[randomseed[set,i]];
 
-                    Console.WriteLine("l: " + i);
+                    OnLEDStatusUpdate(0, lednum);
+                    eeg.setmarker(lednum);
+                    strobe(leds[lednum], 500, 3);
+
+                    Console.WriteLine("l: " + lednum);
                     //Thread.Sleep(500);
                     //Console.WriteLine("off");
-
-                    ledstatus[i] = 0;
-                    OnLEDStatusUpdate(0, i);
-                    leds[i].blackout();
+                    
+                    leds[lednum].blackout();
                     //eeg.getEEG();
                     //OnLEDStatusUpdate();
                     //eeg.setmarker(i);
