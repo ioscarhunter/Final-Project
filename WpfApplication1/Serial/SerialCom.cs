@@ -95,7 +95,7 @@ namespace WpfApplication1
             //eeg.getEEG();
             changeColour(colourset.LIMEGREEN);
             all_off();
-            for (int t = 0;t < 3;t++)
+            for (int t = 0;t < 11;t++)
             {
                 Thread.Sleep(40);
                 for (int i = 1;i < lednum;i += 2)

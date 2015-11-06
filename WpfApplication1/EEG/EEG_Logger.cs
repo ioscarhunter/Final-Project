@@ -47,13 +47,16 @@ namespace WpfApplication1
 
         private SignalProcessing sn = new SignalProcessing();
 
+        private static int timesec = 28;
+        private static int times = 11;
+
         int[] count = new int[8];
 
         double[][] data = new double[8][];
         double[][][] threedata = new double[8][][];
 
-        double[] temp_o1 = new double[1024];
-        double[] temp_marker = new double[1024];
+        double[] temp_o1 = new double[128* timesec];
+        double[] temp_marker = new double[128 * timesec];
 
         public EEG_Logger()
         {
@@ -71,11 +74,11 @@ namespace WpfApplication1
 
             for (int i = 0;i < data.Length;i++)
             {
-                data[i] = new double[3];
+                data[i] = new double[64];
             }
             for (int i = 0;i < threedata.Length;i++)
             {
-                threedata[i] = new double[3][];
+                threedata[i] = new double[times][];
                 for (int j = 0;j < threedata[i].Length;j++)
                 {
                     threedata[i][j] = new double[64];
@@ -117,7 +120,7 @@ namespace WpfApplication1
             engine.DataAcquisitionEnable((uint) userID, true);
 
             // ask for up to 7 second of buffered data
-            engine.EE_DataSetBufferSizeInSec(8);
+            engine.EE_DataSetBufferSizeInSec(timesec);
 
         }
 
@@ -147,12 +150,7 @@ namespace WpfApplication1
             //engine.EE_DataSetBufferSizeInSec(7);
         }
 
-        public void getEEG()
-        {
-            if (engine.EE_DataGetBufferSizeInSec() != 8)
-                engine.EE_DataSetBufferSizeInSec(8);
-            getEEG(1024, 1024, 1);
-        }
+       
 
         public void setmarker(int mark)
         {
@@ -160,7 +158,7 @@ namespace WpfApplication1
             //Console.WriteLine(mark);
         }
 
-        private void getEEG(int max, int sample, int start)
+        public void getEEG()
         {
 
             Console.WriteLine(engine.EE_DataGetBufferSizeInSec());
@@ -192,7 +190,7 @@ namespace WpfApplication1
             //double[] temp_o2 = new double[max];
             //TODO select last only
 
-            int startVal = 0;
+            //int startVal = 0;
             //if (_bufferSize > max)
             //    startVal = _bufferSize - max;
             //for (int i = startVal;i < max+startVal;i++)
@@ -246,8 +244,8 @@ namespace WpfApplication1
             //}
 
 
-            if (_bufferSize > max)
-                startVal = (_bufferSize - max);
+            //if (_bufferSize > max)
+            //    startVal = (_bufferSize - max);
 
             //for (int i = startVal;i < max + startVal;i++)
             //{
@@ -291,7 +289,7 @@ namespace WpfApplication1
             //    file2.WriteLine("");
             //    Console.WriteLine("");
             //}
-            fastcopy(data[EdkDll.EE_DataChannel_t.O1], data[EdkDll.EE_DataChannel_t.MARKER], start, startVal);
+            fastcopy(data[EdkDll.EE_DataChannel_t.O1], data[EdkDll.EE_DataChannel_t.MARKER]);
             writedata();
             filteroutdata();
             printtofile();
@@ -310,7 +308,7 @@ namespace WpfApplication1
             //file1.Close();
         }
 
-        private void fastcopy(double[] input_o1, double[] input_time, int times, int startval)
+        private void fastcopy(double[] input_o1, double[] input_time)
         {
             //Console.WriteLine(input_o1.Length);
             Array.Copy(input_o1, 0, temp_o1, 0, input_o1.Length);
@@ -321,6 +319,7 @@ namespace WpfApplication1
 
         private void filteroutdata()
         {
+            Console.WriteLine("filter");
             for (int i = 0;i < temp_o1.Length;i++)
             {
                 if (temp_marker[i] != 0)
@@ -332,11 +331,12 @@ namespace WpfApplication1
                     Array.Copy(nom, 0, threedata[(int) temp_marker[i]][count[(int) temp_marker[i]]], 0, 64);
                     for (int j = 0;j < 64;j++)
                     {
-                        //Console.WriteLine(nom[j]);
+                        Console.WriteLine(nom[j]);
                         if (temp_marker[i + j + 1] != 0) { Console.WriteLine(temp_marker[i + j + 1]); break; }
-                        data[(int) temp_marker[i]][j] += nom[j] / 3;
+                        data[(int) temp_marker[i]][j] += nom[j] / times;
                     }
                     count[(int) temp_marker[i]]++;
+                    Console.WriteLine(count[(int) temp_marker[i]]);
                     i += 63;
                 }
             }
@@ -344,6 +344,7 @@ namespace WpfApplication1
 
         private void printtofile()
         {
+            Console.WriteLine("ptf");
             TextWriter file2 = new StreamWriter("filtered.csv", true);
             TextWriter file3 = new StreamWriter("normal.csv", true);
             for (int i = 1;i < data.Length;i += 2)
@@ -354,12 +355,17 @@ namespace WpfApplication1
                 {
                     if ((threedata[i][0][j] == threedata[i][1][j]) && (threedata[i][1][j] == threedata[i][2][j]) && threedata[i][1][j] == 0)
                     {
-                        break; 
+                        break;
                     }
                     else
                     {
                         file2.WriteLine(i + ", " + data[i][j] + ", " + sd + ", ");
-                        file3.WriteLine(i + ", " + threedata[i][0][j] + ", " + threedata[i][1][j] + ", " + threedata[i][2][j]);
+                        file3.Write(i + ", ");
+                        for (int k = 0;k < threedata[i].Length;k++)
+                        {
+                            file3.Write(threedata[i][k][j] + ", ");
+                        }
+                        file3.WriteLine();
                     }
                 }
             }
@@ -369,8 +375,8 @@ namespace WpfApplication1
 
         private void clear_temp()
         {
-            temp_o1 = new double[1024];
-            temp_marker = new double[1024];
+            temp_o1 = new double[128* timesec];
+            temp_marker = new double[128*timesec];
             count = new int[8];
             for (int i = 0;i < data.Length;i++)
             {
@@ -380,6 +386,7 @@ namespace WpfApplication1
 
         public void writedata()
         {
+            Console.WriteLine("write)");
             TextWriter file2 = new StreamWriter("raw.csv", true);
             for (int i = 0;i < temp_marker.Length;i++)
             {
@@ -433,8 +440,8 @@ namespace WpfApplication1
             for (int m = 0;m < count.Length;m++)
             {
                 //max[m] = data[m][10]; Console.WriteLine(m + " " + max[10]);
-                Console.WriteLine(m + ":" + data[m][10]);
-                if (data[m][9] < data[m][10] && data[m][10] > data[m][11]) { max[m] = data[m][10]; Console.WriteLine(m + " " + max[m]); }
+                Console.WriteLine(m + ":" + data[m][5]);
+                if (data[m][4] < data[m][5] && data[m][5] > data[m][6]) { max[m] = data[m][5]; Console.WriteLine(m + " " + max[m]); }
                 data[m] = new double[64];
             }
             double maxofmax = max.Max();
