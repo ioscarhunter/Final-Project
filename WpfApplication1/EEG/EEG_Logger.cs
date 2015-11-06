@@ -9,10 +9,8 @@ using System.Threading;
 
 namespace WpfApplication1
 {
-
     public class EEG_Logger
     {
-
         public int led_num { private get; set; }
 
         public event EventHandler<EEG_LoggerEventArgs> DataUpdate;
@@ -47,15 +45,15 @@ namespace WpfApplication1
 
         private SignalProcessing sn = new SignalProcessing();
 
-        private static int timesec = 28;
-        private static int times = 11;
+        private static int timesec = 18;
+        private static int times = 7;
 
         int[] count = new int[8];
 
         double[][] data = new double[8][];
         double[][][] threedata = new double[8][][];
 
-        double[] temp_o1 = new double[128* timesec];
+        double[] temp_o1 = new double[128 * timesec];
         double[] temp_marker = new double[128 * timesec];
 
         public EEG_Logger()
@@ -150,7 +148,7 @@ namespace WpfApplication1
             //engine.EE_DataSetBufferSizeInSec(7);
         }
 
-       
+
 
         public void setmarker(int mark)
         {
@@ -375,8 +373,8 @@ namespace WpfApplication1
 
         private void clear_temp()
         {
-            temp_o1 = new double[128* timesec];
-            temp_marker = new double[128*timesec];
+            temp_o1 = new double[128 * timesec];
+            temp_marker = new double[128 * timesec];
             count = new int[8];
             for (int i = 0;i < data.Length;i++)
             {

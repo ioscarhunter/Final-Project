@@ -20,6 +20,31 @@ namespace WpfApplication1
         private int cycle_count = 0;
         private int[] ledsequence = new int[] { 1, 3, 5, 7 };
 
+        private int[,] randomseed = {{4 ,3 ,2 ,1},
+                            {4, 3, 1, 2},
+                            {4, 2, 1, 3},
+                            {4, 2, 3, 1},
+                            {4, 1, 3, 2},
+                            {4, 1, 2, 3},
+                            {3, 2, 1, 4},
+                            {3, 2, 4, 1},
+                            {3 ,1 ,4 ,2},
+                            {3 ,1 ,2 ,4},
+                            {3 ,4 ,2 ,1},
+                            {3 ,4 ,1 ,2},
+                            {2 ,1 ,4 ,3},
+                            {2 ,1 ,3 ,4},
+                            {2 ,3 ,4, 1},
+                            {2 ,3 ,1 ,4},
+                            {2 ,4, 1, 3},
+                            {2 ,4 ,3 ,1},
+                            {1 ,2 ,3 ,4},
+                            {1 ,2 ,4 ,3},
+                            {1 ,3 ,2, 4},
+                            {1 ,3 ,4 ,2},
+                            {1 ,4 ,3 ,2},
+                            {1 ,4 ,2 ,3}};
+        Random rnd = new Random();
         public event EventHandler<LED_StatusEventArgs> LEDUpdate;
 
         public SerialCom()
@@ -95,7 +120,7 @@ namespace WpfApplication1
             //eeg.getEEG();
             changeColour(colourset.LIMEGREEN);
             all_off();
-            for (int t = 0;t < 11;t++)
+            for (int t = 0;t < 7;t++)
             {
                 Thread.Sleep(40);
                 for (int i = 1;i < lednum;i += 2)

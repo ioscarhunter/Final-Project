@@ -213,12 +213,12 @@ namespace WpfApplication1
             {
                 s.readystate();
                 _timerEEGREC = new System.Timers.Timer();
-                _timerEEGREC.Interval = 28000;
+                _timerEEGREC.Interval = 18000;
                 _timerEEGREC.Elapsed += new System.Timers.ElapsedEventHandler(saveEEGdata);
                 _timerEEGREC.Enabled = true;
 
                 _timerMARK = new System.Timers.Timer();
-                _timerMARK.Interval = 28000;
+                _timerMARK.Interval = 18000;
                 _timerMARK.Elapsed += new System.Timers.ElapsedEventHandler(setmarker);
                 _timerMARK.Enabled = true;
 
