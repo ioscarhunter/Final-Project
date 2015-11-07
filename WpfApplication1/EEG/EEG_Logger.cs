@@ -50,8 +50,10 @@ namespace WpfApplication1
 
         int[] count = new int[8];
 
-        double[][] data = new double[8][];
+        double[][] a_data = new double[8][];
         double[][][] threedata = new double[8][][];
+        double[][][] zthreedata = new double[8][][];
+        double[][] z_data = new double[8][];
 
         double[] temp_o1 = new double[128 * timesec];
         double[] temp_marker = new double[128 * timesec];
@@ -70,9 +72,9 @@ namespace WpfApplication1
             //WriteHeader();
 
 
-            for (int i = 0;i < data.Length;i++)
+            for (int i = 0;i < a_data.Length;i++)
             {
-                data[i] = new double[64];
+                a_data[i] = new double[64];
             }
             for (int i = 0;i < threedata.Length;i++)
             {
@@ -80,6 +82,7 @@ namespace WpfApplication1
                 for (int j = 0;j < threedata[i].Length;j++)
                 {
                     threedata[i][j] = new double[64];
+                    zthreedata[i][j] = new double[64];
                 }
             }
         }
@@ -323,15 +326,20 @@ namespace WpfApplication1
                 if (temp_marker[i] != 0)
                 {
                     double[] nom = new double[64];
-
+                    
                     Array.Copy(temp_o1, i, nom, 0, 64);
-                    nom = sn.normalization(nom);
+                    double sd = sn.standard_deviation(nom);
+                    double avg = nom.Average();
+
+                    
+
                     Array.Copy(nom, 0, threedata[(int) temp_marker[i]][count[(int) temp_marker[i]]], 0, 64);
                     for (int j = 0;j < 64;j++)
                     {
                         Console.WriteLine(nom[j]);
                         if (temp_marker[i + j + 1] != 0) { Console.WriteLine(temp_marker[i + j + 1]); break; }
-                        data[(int) temp_marker[i]][j] += nom[j] / times;
+                        a_data[(int) temp_marker[i]][j] += nom[j] / times;
+                        zthreedata[(int) temp_marker[i]][count[(int) temp_marker[i]]][j] = (nom[j]-avg)/sd;
                     }
                     count[(int) temp_marker[i]]++;
                     Console.WriteLine(count[(int) temp_marker[i]]);
@@ -345,11 +353,12 @@ namespace WpfApplication1
             Console.WriteLine("ptf");
             TextWriter file2 = new StreamWriter("filtered.csv", true);
             TextWriter file3 = new StreamWriter("normal.csv", true);
-            for (int i = 1;i < data.Length;i += 2)
+            TextWriter file4 = new StreamWriter("zmean.csv", true);
+            for (int i = 1;i < a_data.Length;i += 2)
             {
 
-                double sd = sn.standard_deviation(data[i]);
-                for (int j = 0;j < data[i].Length;j++)
+                double sd = sn.standard_deviation(a_data[i]);
+                for (int j = 0;j < a_data[i].Length;j++)
                 {
                     if ((threedata[i][0][j] == threedata[i][1][j]) && (threedata[i][1][j] == threedata[i][2][j]) && threedata[i][1][j] == 0)
                     {
@@ -357,28 +366,32 @@ namespace WpfApplication1
                     }
                     else
                     {
-                        file2.WriteLine(i + ", " + data[i][j] + ", " + sd + ", ");
+                        file2.WriteLine(i + ", " + a_data[i][j] + ", " + sd + ", ");
                         file3.Write(i + ", ");
                         for (int k = 0;k < threedata[i].Length;k++)
                         {
                             file3.Write(threedata[i][k][j] + ", ");
+                            file4.Write(threedata[i][k][j] + ", ");
                         }
                         file3.WriteLine();
+                        file4.WriteLine();
                     }
                 }
             }
             file2.Close();
             file3.Close();
+            file4.Close();
         }
 
         private void clear_temp()
         {
             temp_o1 = new double[128 * timesec];
             temp_marker = new double[128 * timesec];
+
             count = new int[8];
-            for (int i = 0;i < data.Length;i++)
+            for (int i = 0;i < a_data.Length;i++)
             {
-                data[i] = new double[64];
+                a_data[i] = new double[64];
             }
         }
 
@@ -400,7 +413,7 @@ namespace WpfApplication1
             for (int j = 0;j < indata.Length;j++)
             {
                 //Console.WriteLine((oCsvList[i + j][1]));
-                data[led][j] += (indata[j] / times);
+                a_data[led][j] += (indata[j] / times);
             }
             count[led]++;
         }
@@ -416,7 +429,7 @@ namespace WpfApplication1
                 {
                     double[] fft = new double[64];
                     //data[i] = diff(data[i]);
-                    fft = sn.Process(data[i]);
+                    fft = sn.Process(a_data[i]);
                     for (int k = 0;k < 64;k++)
                     {
                         //Console.WriteLine(data[i][k]);
@@ -438,9 +451,9 @@ namespace WpfApplication1
             for (int m = 0;m < count.Length;m++)
             {
                 //max[m] = data[m][10]; Console.WriteLine(m + " " + max[10]);
-                Console.WriteLine(m + ":" + data[m][5]);
-                if (data[m][4] < data[m][5] && data[m][5] > data[m][6]) { max[m] = data[m][5]; Console.WriteLine(m + " " + max[m]); }
-                data[m] = new double[64];
+                Console.WriteLine(m + ":" + a_data[m][5]);
+                if (a_data[m][4] < a_data[m][5] && a_data[m][5] > a_data[m][6]) { max[m] = a_data[m][5]; Console.WriteLine(m + " " + max[m]); }
+                a_data[m] = new double[64];
             }
             double maxofmax = max.Max();
             int maxIndex = max.ToList().IndexOf(maxofmax);
@@ -475,7 +488,7 @@ namespace WpfApplication1
 
             for (int i = start;i < start + 64;i++)
             {
-                data[led][i] = input[i - start];
+                a_data[led][i] = input[i - start];
             }
         }
 
