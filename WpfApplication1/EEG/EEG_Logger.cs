@@ -45,9 +45,9 @@ namespace WpfApplication1
 
         private SignalProcessing sn = new SignalProcessing();
 
-        private static int timesec = 18;
-        private static int times = 7;
-
+        private const int timesec = 10;
+        private const int times = 2;
+        private int samplecollect = 128;
         int[] count = new int[8];
 
         double[][] a_data = new double[8][];
@@ -74,16 +74,16 @@ namespace WpfApplication1
 
             for (int i = 0;i < a_data.Length;i++)
             {
-                a_data[i] = new double[64];
+                a_data[i] = new double[samplecollect];
             }
             for (int i = 0;i < threedata.Length;i++)
             {
-                threedata[i] = new double[times+10][];
+                threedata[i] = new double[times + 10][];
                 zthreedata[i] = new double[times + 10][];
                 for (int j = 0;j < threedata[i].Length;j++)
                 {
-                    threedata[i][j] = new double[64];
-                    zthreedata[i][j] = new double[64];
+                    threedata[i][j] = new double[samplecollect];
+                    zthreedata[i][j] = new double[samplecollect];
                 }
             }
         }
@@ -297,7 +297,7 @@ namespace WpfApplication1
             printtofile();
             //if (!((threedata[1][0][5] == threedata[3][1][6]) && (threedata[5][1][7] == threedata[7][2][8]) && threedata[7][1][4] == 0))
             //{
-                //fft();
+            //fft();
             //}
 
             clear_temp();
@@ -327,10 +327,10 @@ namespace WpfApplication1
                 if (temp_marker[i] != 0)
                 {
                     int countnum = 0;
-                    double[] nom = new double[64];
-                    double[] zero = new double[64];
+                    double[] nom = new double[samplecollect];
+                    double[] zero = new double[samplecollect];
 
-                    for (int j = 0;j < 64;j++)
+                    for (int j = 0;j < samplecollect;j++)
                     {
                         //Console.WriteLine(nom[j]);
                         if (temp_marker[i + j + 1] != 0) { Console.WriteLine(temp_marker[i + j + 1]); break; }
@@ -347,7 +347,7 @@ namespace WpfApplication1
                     Array.Copy(zero, 0, zthreedata[(int) temp_marker[i]][count[(int) temp_marker[i]]], 0, countnum);
                     count[(int) temp_marker[i]]++;
                     Console.WriteLine(count[(int) temp_marker[i]]);
-                    i += 63;
+                    i += samplecollect-1;
                 }
             }
         }
@@ -365,7 +365,7 @@ namespace WpfApplication1
                 //double sd = sn.standard_deviation(a_data[i]);
                 for (int j = 0;j < a_data[i].Length;j++)    //sample
                 {
-                    
+
                     if ((threedata[i][0][j] == threedata[i][1][j]) && (threedata[i][1][j] == threedata[i][2][j]) && threedata[i][1][j] == 0)
                     {
                         break;
@@ -386,8 +386,10 @@ namespace WpfApplication1
                             file4.Write(zthreedata[i][k][j] + ", ");
 
                         }
-                        file1.WriteLine(origi + ", ");
-                        file2.WriteLine(zerom+", ");
+                        file3.WriteLine();
+                        file4.WriteLine();
+                        file1.WriteLine(i + ", " + origi + ", ");
+                        file2.WriteLine(i + ", " + zerom + ", ");
                     }
                 }
             }
@@ -406,18 +408,18 @@ namespace WpfApplication1
 
             for (int i = 0;i < threedata.Length;i++)
             {
-                threedata[i] = new double[times+10][];
+                threedata[i] = new double[times + 10][];
                 zthreedata[i] = new double[times + 10][];
                 for (int j = 0;j < threedata[i].Length;j++)
                 {
-                    threedata[i][j] = new double[64];
-                    zthreedata[i][j] = new double[64];
+                    threedata[i][j] = new double[samplecollect];
+                    zthreedata[i][j] = new double[samplecollect];
                 }
             }
 
             for (int i = 0;i < a_data.Length;i++)
             {
-                a_data[i] = new double[64];
+                a_data[i] = new double[samplecollect];
             }
         }
 

@@ -133,18 +133,18 @@ namespace WpfApplication1
             //eeg.getEEG();
             changeColour(colourset.LIMEGREEN);
             all_off();
-            int set = rnd.Next(5);
-            for (int t = 0;t < 7;t++)
+            //int set = rnd.Next(5);
+            for (int t = 0;t < 2;t++)
             {
-                
+                int set = rnd.Next(23);
                 Thread.Sleep(10);
                 for (int i = 0;i < 4;i++)
                 {
-                    int lednum = ledsequence[randomseed7[set, counttimes]];
+                    int lednum = ledsequence[randomseed[set, i]];
 
                     OnLEDStatusUpdate(0, lednum);
                     eeg.setmarker(lednum);
-                    strobe(leds[lednum], 500, 3);
+                    strobe(leds[lednum], 1000, 6);
 
                     Console.WriteLine("l: " + lednum);
                     //Thread.Sleep(500);
