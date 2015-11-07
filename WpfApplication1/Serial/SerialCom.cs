@@ -19,6 +19,7 @@ namespace WpfApplication1
         private int[] ledstatus;
         private int cycle_count = 0;
         private int[] ledsequence = new int[] { 0, 1, 3, 5, 7 };
+        private int counttimes;
 
         private int[,] randomseed = {{4 ,3 ,2 ,1},
                             {4, 3, 1, 2},
@@ -71,7 +72,7 @@ namespace WpfApplication1
             port1.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
             port1.Open();
             Thread.Sleep(5);
-
+            counttimes = 0;
             setupColour(colourset.LIMEGREEN);
             all_off();
         }
@@ -132,13 +133,14 @@ namespace WpfApplication1
             //eeg.getEEG();
             changeColour(colourset.LIMEGREEN);
             all_off();
+            int set = rnd.Next(5);
             for (int t = 0;t < 7;t++)
             {
-                int set = rnd.Next(23);
-                Thread.Sleep(40);
+                
+                Thread.Sleep(10);
                 for (int i = 0;i < 4;i++)
                 {
-                    int lednum = ledsequence[randomseed[set, i]];
+                    int lednum = ledsequence[randomseed7[set, counttimes]];
 
                     OnLEDStatusUpdate(0, lednum);
                     eeg.setmarker(lednum);
@@ -153,11 +155,12 @@ namespace WpfApplication1
                     //OnLEDStatusUpdate();
                     //eeg.setmarker(i);
                     Thread.Sleep(40);
+                    counttimes++;
 
                 }
                 //    OnLEDStatusUpdate(1, 0);
-
             }
+            counttimes = 0;
             //changeColour(colourset.VERYDARKGRAY);
             //all_dim();
             //eeg.writedata();
