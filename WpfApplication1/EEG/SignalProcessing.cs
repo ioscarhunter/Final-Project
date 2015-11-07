@@ -82,6 +82,18 @@ namespace WpfApplication1
             return output;
         }
 
+        public double[] zerostandard(double[] input)
+        {
+            double[] output = new double[input.Length];
+            double sd = standard_deviation(input);
+            double average = input.Average();
+            for(int i = 0;i < input.Length;i++)
+            {
+                output[i] = (input[i] - average) / sd;
+            }
+            return output;
+        }
+
         public double[] HannigWindowing(double[] filteredSamples)
         {
             double[] hanningWindow = new double[filteredSamples.Length];

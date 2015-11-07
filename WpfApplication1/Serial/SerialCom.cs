@@ -18,7 +18,7 @@ namespace WpfApplication1
         private int lednum = 8;
         private int[] ledstatus;
         private int cycle_count = 0;
-        private int[] ledsequence = new int[] {0, 1, 3, 5, 7 };
+        private int[] ledsequence = new int[] { 0, 1, 3, 5, 7 };
 
         private int[,] randomseed = {{4 ,3 ,2 ,1},
                             {4, 3, 1, 2},
@@ -44,6 +44,17 @@ namespace WpfApplication1
                             {1 ,3 ,4 ,2},
                             {1 ,4 ,3 ,2},
                             {1 ,4 ,2 ,3}};
+        private int[,] randomseed5 = { { 2,4,3,3,4,2,4,4,2,3,1,1,3,4,4,1,3,2,1,2},
+                                    { 1,4,2,3,1,3,2,3,3,3,2,1,1,4,1,4,3,4,1,2 },
+                                    { 1,4,1,4,4,4,1,2,2,4,2,4,1,2,1,1,4,3,3,1},
+                                    { 4,3,2,3,2,1,1,1,1,1,2,1,4,4,2,2,2,4,2,1 },
+                                    { 4,2,1,2,1,1,4,4,3,1,1,2,4,1,1,1,3,3,3,2 } };
+
+        private int[,] randomseed7 = { { 3, 2, 3, 1, 3, 1, 2, 3, 4, 1, 4, 4, 2, 2, 2, 2, 3, 3, 4, 4, 3, 2, 4, 3, 2, 4, 4, 3 },
+                                        { 3, 3, 1, 2, 2, 1, 4, 1, 1, 1, 1, 2, 2, 4, 2, 1, 4, 4, 2, 1, 2, 2, 3, 2, 3, 3, 1, 1},
+                                        {2, 2, 2, 3, 1, 2, 4, 1, 4, 3, 2, 3, 1, 2, 4, 3, 3, 1, 2, 3, 3, 2, 2, 4, 1, 4, 4, 4},
+                                        {1, 2, 2, 3, 1, 3, 1, 3, 2, 4, 3, 4, 4, 2, 3, 1, 1, 3, 3, 2, 4, 3, 3, 4, 4, 3, 1, 1},
+                                        {4, 1, 2, 1, 4, 3, 3, 2, 1, 3, 1, 1, 3, 1, 4, 4, 3, 1, 3, 3, 4, 3, 4, 2, 2, 4, 1, 1}};
 
         Random rnd = new Random();
         public event EventHandler<LED_StatusEventArgs> LEDUpdate;
@@ -125,9 +136,9 @@ namespace WpfApplication1
             {
                 int set = rnd.Next(23);
                 Thread.Sleep(40);
-                for (int i = 0;i < 4;i ++)
+                for (int i = 0;i < 4;i++)
                 {
-                    int lednum = ledsequence[randomseed[set,i]];
+                    int lednum = ledsequence[randomseed[set, i]];
 
                     OnLEDStatusUpdate(0, lednum);
                     eeg.setmarker(lednum);
@@ -136,7 +147,7 @@ namespace WpfApplication1
                     Console.WriteLine("l: " + lednum);
                     //Thread.Sleep(500);
                     //Console.WriteLine("off");
-                    
+
                     leds[lednum].blackout();
                     //eeg.getEEG();
                     //OnLEDStatusUpdate();
