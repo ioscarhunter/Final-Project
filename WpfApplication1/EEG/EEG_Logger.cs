@@ -78,7 +78,8 @@ namespace WpfApplication1
             }
             for (int i = 0;i < threedata.Length;i++)
             {
-                threedata[i] = new double[times]+2[];
+                threedata[i] = new double[times+10][];
+                zthreedata[i] = new double[times + 10][];
                 for (int j = 0;j < threedata[i].Length;j++)
                 {
                     threedata[i][j] = new double[64];
@@ -294,10 +295,10 @@ namespace WpfApplication1
             writedata();
             filteroutdata();
             printtofile();
-            if (!((threedata[1][0][5] == threedata[3][1][6]) && (threedata[5][1][7] == threedata[7][2][8]) && threedata[7][1][4] == 0))
-            {
-                fft();
-            }
+            //if (!((threedata[1][0][5] == threedata[3][1][6]) && (threedata[5][1][7] == threedata[7][2][8]) && threedata[7][1][4] == 0))
+            //{
+                //fft();
+            //}
 
             clear_temp();
             //Console.WriteLine("f");
@@ -331,7 +332,7 @@ namespace WpfApplication1
 
                     for (int j = 0;j < 64;j++)
                     {
-                        Console.WriteLine(nom[j]);
+                        //Console.WriteLine(nom[j]);
                         if (temp_marker[i + j + 1] != 0) { Console.WriteLine(temp_marker[i + j + 1]); break; }
                         //a_data[(int) temp_marker[i]][j] += nom[j] / times;
                         countnum++;
@@ -354,7 +355,8 @@ namespace WpfApplication1
         private void printtofile()
         {
             Console.WriteLine("ptf");
-            //TextWriter file2 = new StreamWriter("filtered.csv", true);
+            TextWriter file1 = new StreamWriter("filterednormal.csv", true);
+            TextWriter file2 = new StreamWriter("filteredzero.csv", true);
             TextWriter file3 = new StreamWriter("normal.csv", true);
             TextWriter file4 = new StreamWriter("zmean.csv", true);
             for (int i = 1;i < a_data.Length;i += 2)    //LED num
@@ -384,13 +386,13 @@ namespace WpfApplication1
                             file4.Write(zthreedata[i][k][j] + ", ");
 
                         }
-
-                        file3.WriteLine(origi+", ");
-                        file4.WriteLine(zerom + ", ");
+                        file1.WriteLine(origi + ", ");
+                        file2.WriteLine(zerom+", ");
                     }
                 }
             }
-            //file2.Close();
+            file1.Close();
+            file2.Close();
             file3.Close();
             file4.Close();
         }
@@ -404,7 +406,8 @@ namespace WpfApplication1
 
             for (int i = 0;i < threedata.Length;i++)
             {
-                threedata[i] = new double[times] + 2[];
+                threedata[i] = new double[times+10][];
+                zthreedata[i] = new double[times + 10][];
                 for (int j = 0;j < threedata[i].Length;j++)
                 {
                     threedata[i][j] = new double[64];

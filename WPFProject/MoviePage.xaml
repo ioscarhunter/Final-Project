@@ -5,20 +5,20 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="720">
-
-    <Grid Background="#FF8D8C8C">
+      d:DesignHeight="720" d:DesignWidth="720"
+        Height="1080" Width="1620">
+    <Grid Background="#FF8D8C8C" Margin="0,0,0,0">
         <Canvas Width="571.074" Height="571.074">
             <Canvas>
                 <Canvas>
                     <!-- Layer 1/<Group>/<Path> -->
-                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#ffc1e0f3" Data="F1 M 474.126,71.470 C 367.219,-22.892 206.544,-23.489 98.965,69.695 L 287.433,258.163 L 474.126,71.470 Z"/>
+                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#ffc1e0f3" Data="F1 M 474.126,71.470 C 367.219,-22.892 206.544,-23.489 98.965,69.695 L 287.433,258.163 L 474.126,71.470 Z" Stretch="Fill" Width="750.749" Canvas.Left="-94.873" Height="503.883" Canvas.Top="-262.534"/>
                     <!-- Layer 1/<Group>/<Path> -->
-                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#ffbbdca4" Data="F1 M 501.379,472.109 C 594.563,364.530 593.966,203.855 499.604,96.948 L 312.911,283.640 L 501.379,472.109 Z"/>
+                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#ffbbdca4" Data="F1 M 501.379,472.109 C 594.563,364.530 593.966,203.855 499.604,96.948 L 312.911,283.640 L 501.379,472.109 Z" Canvas.Left="327.454" Stretch="Fill" Width="511.008" Canvas.Top="-76.637" Height="728.342"/>
                     <!-- Layer 1/<Group>/<Path> -->
-                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#fff7a48c" Data="F1 M 73.248,94.932 C -23.492,202.494 -24.074,365.874 71.473,474.124 L 261.956,283.640 L 73.248,94.932 Z"/>
+                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#fff7a48c" Data="F1 M 73.248,94.932 C -23.492,202.494 -24.074,365.874 71.473,474.124 L 261.956,283.640 L 73.248,94.932 Z" Height="749.617" Stretch="Fill" Canvas.Top="-87.739" Width="511.007" Canvas.Left="-279.186"/>
                     <!-- Layer 1/<Group>/<Path> -->
-                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#fffff0a4" Data="F1 M 96.950,499.601 C 205.200,595.148 368.580,594.566 476.142,497.826 L 287.433,309.118 L 96.950,499.601 Z"/>
+                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#fffff0a4" Data="F1 M 96.950,499.601 C 205.200,595.148 368.580,594.566 476.142,497.826 L 287.433,309.118 L 96.950,499.601 Z" Height="503.218" Canvas.Left="-95.7" Stretch="Fill" Width="751.527" Canvas.Top="333.584"/>
                 </Canvas>
             </Canvas>
 
