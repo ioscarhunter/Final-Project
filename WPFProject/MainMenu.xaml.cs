@@ -35,7 +35,7 @@ namespace WPFProject
         }
         private void ButtonTV_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("TV on");
+            Switcher.Switch(new MoviePage());
         }
         private void ButtonNews_Click(object sender, RoutedEventArgs e)
         {
