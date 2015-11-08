@@ -20,9 +20,14 @@ namespace WPFProject
     /// </summary>
     public partial class MoviePage : UserControl,ISwitchable
     {
+        
+        private int status = 0;
         public MoviePage()
         {
             InitializeComponent();
+            media.Source = new Uri("C:/Users/Compark/Desktop/2.mp4");
+            media.Play();
+            Console.WriteLine(media.Volume);
         }
         public void UtilizeState(object state)
         {
@@ -49,5 +54,64 @@ namespace WPFProject
 
         #endregion
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (status == 0)
+            {
+                media.Pause();
+                status = 1;
+            }
+            else
+            {
+                media.Play();
+                status = 0;
+            }
+        }
+
+        private void Up_volume_Click(object sender, RoutedEventArgs e)
+        {
+            if (media.Volume >= 0 && media.Volume < 1)
+            {
+                media.Volume += 0.25;
+                Volume.Value += 0.25;
+            }
+
+            else if (media.Volume >= 1)
+            {
+                media.Volume = 1;
+            }
+            Console.WriteLine(media.Volume);
+            Console.WriteLine(Volume.Value);
+
+        }
+
+        private void Down_volume_Click(object sender, RoutedEventArgs e)
+        {
+            if (media.Volume > 0 && media.Volume <= 1)
+            {
+                media.Volume -= 0.25;
+                Volume.Value -= 0.25;
+            }
+            else if (media.Volume <= 0)
+            {
+                media.Volume = 0;
+            }
+
+            Console.WriteLine(media.Volume);
+            Console.WriteLine(Volume.Value);
+
+        }
+
+        private void back_Click(object sender, RoutedEventArgs e)
+        {
+            media.Stop();
+            Switcher.Switch(new MainMenu());
+
+        }
+
+     
+
+       
     }
 }

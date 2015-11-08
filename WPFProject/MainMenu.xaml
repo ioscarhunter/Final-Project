@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="WPFProject.MainMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Height="720" Width="720">
+        Height="1200" Width="1920">
     <Grid Background="#FF8D8C8C">
         <Canvas Width="571.074" Height="571.074">
             <Canvas>
@@ -93,6 +93,7 @@
                 </Canvas>
             </Button>
         </Canvas>
+        <Label Name="lblTime" Content="Label" HorizontalAlignment="Left" Margin="793,246,0,0" VerticalAlignment="Top" Height="45" Width="346"/>
     </Grid>
 </UserControl>
 
