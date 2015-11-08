@@ -35,25 +35,32 @@ namespace WPFProject
         }
         private void Buttonmusic_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new MusicPage());
+            Switch_music();
         }
+        private void Switch_music() { Switcher.Switch(new MusicPage()); }
 
         private void Buttonsetting_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Setting");
+            Switch_Setting();
         }
+        private void Switch_Setting() { MessageBox.Show("Setting"); }
         private void ButtonTV_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new MoviePage());
+            Switch_TV();
         }
+        private void Switch_TV() { Switcher.Switch(new MoviePage()); }
         private void ButtonNews_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("NEWs Feed");
+            Switch_News();
         }
+        private void Switch_News() { MessageBox.Show("NEWs Feed"); }
+
         private void ButtonFan_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Fan opened");
+            Switch_Fan();
         }
+
+        private void Switch_Fan() { MessageBox.Show("Fan opened"); }
         #region ISwitchable Members
 
         public void UtilizeState(object state)
