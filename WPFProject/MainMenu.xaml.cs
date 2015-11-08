@@ -35,15 +35,15 @@ namespace WPFProject
         }
         private void Buttonmusic_Click(object sender, RoutedEventArgs e)
         {
-            Switch_music();
+            Switch_Music();
         }
-        private void Switch_music() { Switcher.Switch(new MusicPage()); }
+        private void Switch_Music() { Switcher.Switch(new MusicPage()); }
 
         private void Buttonsetting_Click(object sender, RoutedEventArgs e)
         {
             Switch_Setting();
         }
-        private void Switch_Setting() { MessageBox.Show("Setting"); }
+        private void Switch_Setting() { Switcher.Switch(new SettingPage()); }
         private void ButtonTV_Click(object sender, RoutedEventArgs e)
         {
             Switch_TV();
@@ -53,7 +53,7 @@ namespace WPFProject
         {
             Switch_News();
         }
-        private void Switch_News() { MessageBox.Show("NEWs Feed"); }
+        private void Switch_News() { Switcher.Switch(new NewsPage()); }
 
         private void ButtonFan_Click(object sender, RoutedEventArgs e)
         {
