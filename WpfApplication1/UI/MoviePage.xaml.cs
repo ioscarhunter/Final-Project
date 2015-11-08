@@ -41,15 +41,15 @@ namespace WpfApplication1
         }
         private void inc_button1(object sender, RoutedEventArgs e)
         {
-
+            inc_volume();
         }
         private void dec_button1(object sender, RoutedEventArgs e)
         {
-
+            dec_volume();
         }
         private void play_button(object sender, RoutedEventArgs e)
         {
-
+            playing();
         }
 
         #endregion

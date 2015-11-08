@@ -40,9 +40,20 @@ namespace WpfApplication1
                 case 3:
                     break;
                 case 4:
+                    Switch_back();
                     break;
             }
         }
         #endregion
+
+        private void back_button(object sender, RoutedEventArgs e)
+        {
+            Switch_back();
+
+        }
+        private void Switch_back()
+        {
+            Switcher.Switch(new MainMenu());
+        }
     }
 }
