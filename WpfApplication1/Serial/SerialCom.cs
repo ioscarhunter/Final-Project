@@ -18,7 +18,8 @@ namespace WpfApplication1
         private int lednum = 8;
         private int[] ledstatus;
         private int cycle_count = 0;
-        private int[] ledsequence = new int[] {0, 1, 3, 5, 7 };
+        private int[] ledsequence = new int[] { 0, 1, 3, 5, 7 };
+        private int counttimes;
 
         private int[,] randomseed = {{4 ,3 ,2 ,1},
                             {4, 3, 1, 2},
@@ -44,6 +45,17 @@ namespace WpfApplication1
                             {1 ,3 ,4 ,2},
                             {1 ,4 ,3 ,2},
                             {1 ,4 ,2 ,3}};
+        private int[,] randomseed5 = { { 2,4,3,3,4,2,4,4,2,3,1,1,3,4,4,1,3,2,1,2},
+                                    { 1,4,2,3,1,3,2,3,3,3,2,1,1,4,1,4,3,4,1,2 },
+                                    { 1,4,1,4,4,4,1,2,2,4,2,4,1,2,1,1,4,3,3,1},
+                                    { 4,3,2,3,2,1,1,1,1,1,2,1,4,4,2,2,2,4,2,1 },
+                                    { 4,2,1,2,1,1,4,4,3,1,1,2,4,1,1,1,3,3,3,2 } };
+
+        private int[,] randomseed7 = { { 3, 2, 3, 1, 3, 1, 2, 3, 4, 1, 4, 4, 2, 2, 2, 2, 3, 3, 4, 4, 3, 2, 4, 3, 2, 4, 4, 3 },
+                                        { 3, 3, 1, 2, 2, 1, 4, 1, 1, 1, 1, 2, 2, 4, 2, 1, 4, 4, 2, 1, 2, 2, 3, 2, 3, 3, 1, 1},
+                                        {2, 2, 2, 3, 1, 2, 4, 1, 4, 3, 2, 3, 1, 2, 4, 3, 3, 1, 2, 3, 3, 2, 2, 4, 1, 4, 4, 4},
+                                        {1, 2, 2, 3, 1, 3, 1, 3, 2, 4, 3, 4, 4, 2, 3, 1, 1, 3, 3, 2, 4, 3, 3, 4, 4, 3, 1, 1},
+                                        {4, 1, 2, 1, 4, 3, 3, 2, 1, 3, 1, 1, 3, 1, 4, 4, 3, 1, 3, 3, 4, 3, 4, 2, 2, 4, 1, 1}};
 
         Random rnd = new Random();
         public event EventHandler<LED_StatusEventArgs> LEDUpdate;
@@ -60,7 +72,7 @@ namespace WpfApplication1
             port1.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
             port1.Open();
             Thread.Sleep(5);
-
+            counttimes = 0;
             setupColour(colourset.LIMEGREEN);
             all_off();
         }
@@ -121,32 +133,34 @@ namespace WpfApplication1
             //eeg.getEEG();
             changeColour(colourset.LIMEGREEN);
             all_off();
-            for (int t = 0;t < 7;t++)
+            //int set = rnd.Next(5);
+            for (int t = 0;t < 2;t++)
             {
                 int set = rnd.Next(23);
-                Thread.Sleep(40);
-                for (int i = 0;i < 4;i ++)
+                Thread.Sleep(10);
+                for (int i = 0;i < 4;i++)
                 {
-                    int lednum = ledsequence[randomseed[set,i]];
+                    int lednum = ledsequence[randomseed[set, i]];
 
                     OnLEDStatusUpdate(0, lednum);
                     eeg.setmarker(lednum);
-                    strobe(leds[lednum], 500, 3);
+                    strobe(leds[lednum], 1000, 6);
 
                     Console.WriteLine("l: " + lednum);
                     //Thread.Sleep(500);
                     //Console.WriteLine("off");
-                    
+
                     leds[lednum].blackout();
                     //eeg.getEEG();
                     //OnLEDStatusUpdate();
                     //eeg.setmarker(i);
                     Thread.Sleep(40);
+                    counttimes++;
 
                 }
                 //    OnLEDStatusUpdate(1, 0);
-
             }
+            counttimes = 0;
             //changeColour(colourset.VERYDARKGRAY);
             //all_dim();
             //eeg.writedata();

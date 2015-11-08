@@ -37,13 +37,13 @@
                 <!-- Layer 1/+ -->
                 <TextBlock Foreground="#ff000000" Canvas.Left="439" Canvas.Top="268" FontSize="150.00" FontFamily="Myriad Pro" Height="142" Width="117">+</TextBlock>
             </Canvas>
-
+            
             <Button  Name="Down_volume" Canvas.Left="10" Canvas.Top="267" Width="186" RenderTransformOrigin="-1.307,-1.8" Height="150" Background="#00DDDDDD" Foreground="#00DDDDDD" BorderBrush="#00DDDDDD" Click="Down_volume_Click"/>
             <Canvas>
                 <!-- Layer 1/- -->
                 <TextBlock Foreground="#ff000000" Canvas.Left="79" Canvas.Top="236" FontSize="170" FontFamily="Myriad Pro" RenderTransformOrigin="3.55,2.292" Height="131" Width="72">-</TextBlock>
             </Canvas>
-
+            
             <Button Name="back" Width="199" Canvas.Left="178" Canvas.Top="456" Height="99" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Foreground="#00DDDDDD" Click="back_Click"/>
             <Canvas>
                 <!-- Layer 1/BACK -->
