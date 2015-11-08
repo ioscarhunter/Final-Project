@@ -21,5 +21,7 @@ namespace WPFProject
             pageSwitcher.Navigate(newPage, state);
         }
 
+
+        
     }
 }
