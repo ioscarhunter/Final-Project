@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WPFProject.MainMenu"
+﻿<UserControl x:Class="WpfApplication1.MainMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Height="1152" Width="1728">
@@ -88,7 +88,7 @@
                 </Canvas>
             </Button>
         </Canvas>
-        <Label Name="lblTime" Content="Label" HorizontalAlignment="Left" Margin="65,1020,0,0" VerticalAlignment="Top" Height="140" Width="346" FontSize="96" Foreground="White"/>
+        <Label Name="lblTime" Content="Label" HorizontalAlignment="Left" Margin="10,1020,0,-8" VerticalAlignment="Top" Height="140" Width="455" FontSize="96" Foreground="White"/>
     </Grid>
 </UserControl>
 

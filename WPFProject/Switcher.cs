@@ -21,7 +21,10 @@ namespace WPFProject
             pageSwitcher.Navigate(newPage, state);
         }
 
+        public static void remotechange(int command)
+        {
+            pageSwitcher.remotechangepage(command);
+        }
 
-        
     }
 }

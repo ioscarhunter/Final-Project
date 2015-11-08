@@ -100,9 +100,6 @@
     <Compile Include="UI\PageSwitcher.xaml.cs">
       <DependentUpon>PageSwitcher.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingPage.xaml.cs">
-      <DependentUpon>SettingPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\Switcher.cs" />
     <Page Include="UI\MainMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -121,10 +118,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\PageSwitcher.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UI\SettingPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

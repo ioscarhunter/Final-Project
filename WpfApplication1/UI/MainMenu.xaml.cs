@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace WPFProject
+namespace WpfApplication1
 {
     /// <summary>
     /// Interaction logic for MainMenu.xaml
@@ -43,7 +43,7 @@ namespace WPFProject
         {
             Switch_Setting();
         }
-        private void Switch_Setting() { Switcher.Switch(new SettingPage()); }
+        private void Switch_Setting() { Switcher.loadsetting(); }
         private void ButtonTV_Click(object sender, RoutedEventArgs e)
         {
             Switch_TV();
@@ -70,14 +70,19 @@ namespace WPFProject
 
         public void sendcommand(int command)
         {
-            switch (command){
+            switch (command)
+            {
                 case 1:
+                    Switch_News();
                     break;
                 case 2:
+                    Switch_Fan();
                     break;
                 case 3:
+                    Switch_Music();
                     break;
                 case 4:
+                    Switch_TV();
                     break;
             }
         }

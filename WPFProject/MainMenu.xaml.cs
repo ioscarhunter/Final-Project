@@ -72,12 +72,16 @@ namespace WPFProject
         {
             switch (command){
                 case 1:
+                    Switch_News();
                     break;
                 case 2:
+                    Switch_Fan();
                     break;
                 case 3:
+                    Switch_Music();
                     break;
                 case 4:
+                    Switch_TV();
                     break;
             }
         }

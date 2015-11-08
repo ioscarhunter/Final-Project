@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace WPFProject
+namespace WpfApplication1
 {
     public static class Switcher
     {
@@ -21,7 +21,20 @@ namespace WPFProject
             pageSwitcher.Navigate(newPage, state);
         }
 
+        public static void starteeg()
+        {
+            pageSwitcher.starteeg();
+        }
 
+        public static void remotechange(int command)
+        {
+            pageSwitcher.remotechangepage(command);
+        }
+
+        public static void loadsetting()
+        {
+            pageSwitcher.showsetting();
+        }
         
     }
 }

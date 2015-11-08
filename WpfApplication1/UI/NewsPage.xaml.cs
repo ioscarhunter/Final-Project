@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPFProject
+namespace WpfApplication1
 {
     /// <summary>
     /// Interaction logic for NewsPage.xaml

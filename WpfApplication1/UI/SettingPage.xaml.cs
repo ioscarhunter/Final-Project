@@ -13,12 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPFProject
+namespace WpfApplication1
 {
     /// <summary>
     /// Interaction logic for Setting.xaml
     /// </summary>
-    public partial class SettingPage : UserControl, ISwitchable
+    public partial class SettingPage:UserControl, ISwitchable
     {
         public SettingPage()
         {

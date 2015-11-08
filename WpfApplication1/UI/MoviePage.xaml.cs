@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPFProject
+namespace WpfApplication1
 {
     /// <summary>
     /// Interaction logic for MoviePage.xaml
@@ -124,12 +124,16 @@ namespace WPFProject
             switch (command)
             {
                 case 1:
+                    Switch_back();
                     break;
                 case 2:
+                    inc_volume();
                     break;
                 case 3:
+                    playing();
                     break;
                 case 4:
+                    dec_volume();
                     break;
             }
         }
