@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="WPFProject.MainMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Height="1200" Width="1620">
+        Height="1152" Width="1728">
     <Grid Background="#FF8D8C8C">
         <Canvas Width="571.074" Height="571.074">
             <Canvas>

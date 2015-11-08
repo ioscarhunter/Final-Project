@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetEmotivSDK", "DotNetEmotivSDK\DotNetEmotivSDK.csproj", "{D3337309-9682-425E-8EDC-2ECFACF79565}"
 EndProject
@@ -224,6 +224,7 @@ Global
 		{24D24955-3E6F-4967-A893-87F881AD3DA6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{24D24955-3E6F-4967-A893-87F881AD3DA6}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{24D24955-3E6F-4967-A893-87F881AD3DA6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{24D24955-3E6F-4967-A893-87F881AD3DA6}.Debug|x86.Build.0 = Debug|Any CPU
 		{24D24955-3E6F-4967-A893-87F881AD3DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24D24955-3E6F-4967-A893-87F881AD3DA6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{24D24955-3E6F-4967-A893-87F881AD3DA6}.Release|ARM.ActiveCfg = Release|Any CPU
@@ -252,6 +253,7 @@ Global
 		{3E4C12CA-F4F6-48D2-8AA1-2DBC19E66CAB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{3E4C12CA-F4F6-48D2-8AA1-2DBC19E66CAB}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{3E4C12CA-F4F6-48D2-8AA1-2DBC19E66CAB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E4C12CA-F4F6-48D2-8AA1-2DBC19E66CAB}.Debug|x86.Build.0 = Debug|Any CPU
 		{3E4C12CA-F4F6-48D2-8AA1-2DBC19E66CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E4C12CA-F4F6-48D2-8AA1-2DBC19E66CAB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3E4C12CA-F4F6-48D2-8AA1-2DBC19E66CAB}.Release|ARM.ActiveCfg = Release|Any CPU
