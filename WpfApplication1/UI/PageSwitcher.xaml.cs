@@ -59,7 +59,7 @@ namespace WpfApplication1
 
             Switcher.pageSwitcher = this;
             Switcher.Switch(new MainMenu());
-            
+
 
 
             lineTrend = new LineTrend { Points = new ObservableCollection<TrendPoint>(), TrendColor = Brushes.Coral };
@@ -77,7 +77,7 @@ namespace WpfApplication1
             connect = false;
             LEDrunning = false;
             status.Content = "not connect";
-            Switcher.remotechange(3);
+            //Switcher.remotechange(3);
         }
 
         internal void starteeg()
@@ -117,12 +117,14 @@ namespace WpfApplication1
 
         public void remotechangepage(int command)
         {
-            foreach(object child in stkPanel.Children)
-            interfaces = child as ISwitchable;
-            Console.WriteLine(interfaces);
-            interfaces.sendcommand(command);
+            if (stkPanel.IsVisible)
+            {
+                foreach (object child in stkPanel.Children)
+                    interfaces = child as ISwitchable;
+                Console.WriteLine(interfaces);
+                interfaces.sendcommand(command);
+            }
         }
-
 
 
         public void showsetting()
@@ -139,15 +141,19 @@ namespace WpfApplication1
                 switch (e.lednum)
                 {
                     case 1:
+                        remotechangepage(1);
                         ledupdate.Content = "Down";
                         break;
                     case 3:
+                        remotechangepage(2);
                         ledupdate.Content = "Right";
                         break;
                     case 5:
+                        remotechangepage(3);
                         ledupdate.Content = "Up";
                         break;
                     case 7:
+                        remotechangepage(4);
                         ledupdate.Content = "Left";
                         break;
 
