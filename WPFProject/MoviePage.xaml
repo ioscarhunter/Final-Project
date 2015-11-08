@@ -5,54 +5,55 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="720">
+      d:DesignHeight="720" d:DesignWidth="720"
+    Height="1200" Width="1920">
 
-    <Grid Background="#FF8D8C8C" Margin="0,0,0,-232">
-        <Canvas Margin="72,307,70,10">
+    <Grid Background="#FF8D8C8C">
+        <Canvas Margin="674.463,314.463,674.463,314.463">
             <Canvas>
                 <Canvas>
                     <!-- Layer 1/<Group>/<Path> -->
-                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#ffc1e0f3" Data="F1 M 474.126,71.470 C 367.219,-22.892 206.544,-23.489 98.965,69.695 L 287.433,258.163 L 474.126,71.470 Z" Canvas.Top="58" Canvas.Left="1"/>
+                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#ffc1e0f3" Data="F1 M 474.126,71.470 C 367.219,-22.892 206.544,-23.489 98.965,69.695 L 287.433,258.163 L 474.126,71.470 Z" Stretch="Fill" Width="750.749" Canvas.Left="-92.875" Height="503.883" Canvas.Top="-582.942"/>
                     <!-- Layer 1/<Group>/<Path> -->
-                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#ffbbdca4" Data="F1 M 501.379,472.109 C 594.563,364.530 593.966,203.855 499.604,96.948 L 312.911,283.640 L 501.379,472.109 Z" Canvas.Top="58" Canvas.Left="1"/>
+                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#ffbbdca4" Data="F1 M 501.379,472.109 C 594.563,364.530 593.966,203.855 499.604,96.948 L 312.911,283.640 L 501.379,472.109 Z" Canvas.Left="1041" Stretch="Fill" Width="511.008" Canvas.Top="-77" Height="728.342"/>
                     <!-- Layer 1/<Group>/<Path> -->
-                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#fff7a48c" Data="F1 M 73.248,94.932 C -23.492,202.494 -24.074,365.874 71.473,474.124 L 261.956,283.640 L 73.248,94.932 Z" Canvas.Top="58" Canvas.Left="1"/>
+                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#fff7a48c" Data="F1 M 73.248,94.932 C -23.492,202.494 -24.074,365.874 71.473,474.124 L 261.956,283.640 L 73.248,94.932 Z" Height="749.616" Stretch="Fill" Canvas.Top="-87.808" Width="511.007" Canvas.Left="-988"/>
                     <!-- Layer 1/<Group>/<Path> -->
-                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#fffff0a4" Data="F1 M 96.950,499.601 C 205.200,595.148 368.580,594.566 476.142,497.826 L 287.433,309.118 L 96.950,499.601 Z" Canvas.Top="58" Canvas.Left="1"/>
+                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#fffff0a4" Data="F1 M 96.950,499.601 C 205.200,595.148 368.580,594.566 476.142,497.826 L 287.433,309.118 L 96.950,499.601 Z" Height="503.218" Canvas.Left="-95.764" Stretch="Fill" Width="751.528" Canvas.Top="651"/>
                 </Canvas>
             </Canvas>
 
-            <Button Content="Play_Pause" HorizontalAlignment="Left" Height="145" VerticalAlignment="Top" Width="236" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Foreground="#00DDDDDD" Canvas.Left="174" Canvas.Top="82" Click="Button_Click"/>
-            <Canvas>
-                <!-- Layer 1/<Path> -->
-                <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff000000" Data="F1 M 0.500,0.866 L 75.500,44.167 L 0.500,87.469 L 0.500,0.866 Z" Canvas.Left="217" Canvas.Top="115"/>
-                <!-- Layer 1/<Rectangle> -->
-                <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff000000" Data="F1 M 105.521,87.469 L 83.299,87.469 L 83.299,0.866 L 105.521,0.866 L 105.521,87.469 Z" Canvas.Left="217" Canvas.Top="115"/>
-                <!-- Layer 1/<Rectangle> -->
-                <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff000000" Data="F1 M 146.615,87.469 L 124.393,87.469 L 124.393,0.866 L 146.615,0.866 L 146.615,87.469 Z" Canvas.Left="217" Canvas.Top="115"/>
-            </Canvas>
 
-            <Button Name="Up_volume" Canvas.Left="377" Canvas.Top="269" Width="191" Height="166" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Foreground="#00DDDDDD" Click="Up_volume_Click"/>
-            <Canvas>
+            <Canvas Height="21" Width="26">
+                <!-- Layer 1/<Path> -->
+                <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff000000" Data="F1 M 0.500,0.866 L 75.500,44.167 L 0.500,87.469 L 0.500,0.866 Z" Canvas.Left="203" Canvas.Top="-294" Height="112.316" Stretch="Fill" Width="97"/>
+                <!-- Layer 1/<Rectangle> -->
+                <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff000000" Data="F1 M 105.521,87.469 L 83.299,87.469 L 83.299,0.866 L 105.521,0.866 L 105.521,87.469 Z" Canvas.Left="300.023" Canvas.Top="-294" Stretch="Fill" Width="24.954" Height="112.316"/>
+                <!-- Layer 1/<Rectangle> -->
+                <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff000000" Data="F1 M 146.615,87.469 L 124.393,87.469 L 124.393,0.866 L 146.615,0.866 L 146.615,87.469 Z" Canvas.Left="338.033" Canvas.Top="-294" Stretch="Fill" Width="24.934" Height="112.316"/>
+            </Canvas>
+            <Button Content="Play_Pause" HorizontalAlignment="Left" Height="145" VerticalAlignment="Top" Width="199" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Foreground="#00DDDDDD" Canvas.Left="178" Canvas.Top="-314" Click="Button_Click"/>
+
+
+            <Canvas Height="3" Width="155" Canvas.Left="1091" Canvas.Top="201">
                 <!-- Layer 1/+ -->
-                <TextBlock Foreground="#ff000000" Canvas.Left="439" Canvas.Top="268" FontSize="150.00" FontFamily="Myriad Pro" Height="142" Width="117">+</TextBlock>
+                <TextBlock Foreground="#ff000000" Canvas.Top="-11" FontSize="180.00" FontFamily="Myriad Pro" Height="176" Width="111" Canvas.Left="34">+</TextBlock>
             </Canvas>
-            
-            <Button  Name="Down_volume" Canvas.Left="10" Canvas.Top="267" Width="186" RenderTransformOrigin="-1.307,-1.8" Height="150" Background="#00DDDDDD" Foreground="#00DDDDDD" BorderBrush="#00DDDDDD" Click="Down_volume_Click"/>
-            <Canvas>
+            <Button Name="Up_volume" Canvas.Left="1121" Canvas.Top="201" Width="125" Height="160" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Foreground="#00DDDDDD" Click="Up_volume_Click"/>
+
+            <Canvas Height="3" Width="140" Canvas.Left="-674" Canvas.Top="201">
                 <!-- Layer 1/- -->
-                <TextBlock Foreground="#ff000000" Canvas.Left="79" Canvas.Top="236" FontSize="170" FontFamily="Myriad Pro" RenderTransformOrigin="3.55,2.292" Height="131" Width="72">-</TextBlock>
+                <TextBlock Foreground="#ff000000" Canvas.Left="45" FontSize="210" FontFamily="Myriad Pro" RenderTransformOrigin="0.486,0.496" Height="151" Width="80" Canvas.Top="-35">-</TextBlock>
             </Canvas>
-            
-            <Button Name="back" Width="199" Canvas.Left="178" Canvas.Top="456" Height="99" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Foreground="#00DDDDDD" Click="back_Click"/>
-            <Canvas>
+            <Button  Name="Down_volume" Canvas.Left="-674" Canvas.Top="211" Width="140" RenderTransformOrigin="-1.307,-1.8" Height="150" Background="#00DDDDDD" Foreground="#00DDDDDD" BorderBrush="#00DDDDDD" Click="Down_volume_Click"/>
+
+            <Canvas Height="25" Width="26" Canvas.Left="275" Canvas.Top="656">
                 <!-- Layer 1/BACK -->
-                <TextBlock Foreground="#ff000000" Canvas.Left="219" Canvas.Top="467" FontSize="68.00" FontFamily="Myriad Pro Semibold">B</TextBlock>
-                <TextBlock Foreground="#ff000000" Canvas.Left="248" Canvas.Top="467" FontSize="68.00" FontFamily="Myriad Pro Semibold">A</TextBlock>
-                <TextBlock Foreground="#ff000000" Canvas.Left="280" Canvas.Top="467" FontSize="68.00" FontFamily="Myriad Pro Semibold">CK</TextBlock>
+                <TextBlock Foreground="#ff000000" Canvas.Left="-109" Canvas.Top="85" FontSize="100.00" FontFamily="Myriad Pro Semibold" Text="BACK" Height="129"/>
             </Canvas>
+            <Button Name="back" Width="199" Canvas.Left="178" Canvas.Top="686" Height="200" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Foreground="#00DDDDDD" Click="back_Click"/>
         </Canvas>
-        <ProgressBar Name="Volume" HorizontalAlignment="Left" Height="25" Margin="197,295,0,0" VerticalAlignment="Top" Width="350" Maximum="1" LargeChange="0.25" SmallChange="0.25" Value="0.5"/>
-        <MediaElement Name ="media" HorizontalAlignment="Left" Height="262" Margin="72,10,0,0" VerticalAlignment="Top" Width="578" OverridesDefaultStyle="True" LoadedBehavior="Manual" UnloadedBehavior="Manual"/>
+        <ProgressBar Name="Volume" HorizontalAlignment="Left" Height="25" Margin="115,1110,0,0" VerticalAlignment="Top" Width="350" Maximum="1" LargeChange="0.25" SmallChange="0.25" Value="0.5"/>
+        <MediaElement Name ="media" HorizontalAlignment="Left" Height="690" Margin="193,260,0,0" VerticalAlignment="Top" Width="1522" OverridesDefaultStyle="True" LoadedBehavior="Manual" UnloadedBehavior="Manual" RenderTransformOrigin="0.5,0.5"/>
     </Grid>
 </UserControl>
