@@ -27,7 +27,7 @@ namespace WPFProject
             InitializeComponent();
             media.Source = new Uri("C:/Users/Compark/Desktop/2.mp4");
             media.Play();
-            Console.WriteLine(media.Volume);
+            
         }
         public void UtilizeState(object state)
         {
@@ -56,7 +56,9 @@ namespace WPFProject
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            playing();
+        }
+        private void playing() {
             if (status == 0)
             {
                 media.Pause();
@@ -71,6 +73,9 @@ namespace WPFProject
 
         private void Up_volume_Click(object sender, RoutedEventArgs e)
         {
+            inc_volume();
+        }
+        private void inc_volume() {
             if (media.Volume >= 0 && media.Volume < 1)
             {
                 media.Volume += 0.25;
@@ -81,13 +86,16 @@ namespace WPFProject
             {
                 media.Volume = 1;
             }
-            Console.WriteLine(media.Volume);
-            Console.WriteLine(Volume.Value);
-
+        
+        
         }
+
 
         private void Down_volume_Click(object sender, RoutedEventArgs e)
         {
+            dec_volume();
+        }
+        private void dec_volume() {
             if (media.Volume > 0 && media.Volume <= 1)
             {
                 media.Volume -= 0.25;
@@ -97,17 +105,18 @@ namespace WPFProject
             {
                 media.Volume = 0;
             }
-
-            Console.WriteLine(media.Volume);
-            Console.WriteLine(Volume.Value);
-
+        
+        
         }
 
         private void back_Click(object sender, RoutedEventArgs e)
         {
+            Switch_back();
+
+        }
+        private void Switch_back(){
             media.Stop();
             Switcher.Switch(new MainMenu());
-
         }
 
      

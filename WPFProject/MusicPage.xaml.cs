@@ -21,7 +21,7 @@ namespace WPFProject
     public partial class MusicPage : UserControl,ISwitchable
     {
         private MediaPlayer mediaplayer = new MediaPlayer();
-        private int play_status = 0;
+        private int music_status = 0;
         private string track1 = "C:/Users/Compark/Desktop/Fast.mp3";
         private string track2 = "C:/Users/Compark/Desktop/English.mp3";
         public MusicPage()
@@ -31,7 +31,7 @@ namespace WPFProject
             listbox1.Items.Add("English");
             mediaplayer.Open(new Uri(track1));
             mediaplayer.Play();
-            Console.WriteLine(mediaplayer.Volume);
+            
         }
 
         #region ISwitchable Members
@@ -42,11 +42,19 @@ namespace WPFProject
 
         private void back_button(object sender, System.Windows.RoutedEventArgs e)
         {
+            Switch_back();
+        }
+        private void Switch_back() {
             mediaplayer.Stop();
             Switcher.Switch(new MainMenu());
         }
+
         private void inc_button(object sender, RoutedEventArgs e)
         {
+            inc_volume();
+
+        }
+        private void inc_volume() {
             if (mediaplayer.Volume >= 0 && mediaplayer.Volume < 1)
             {
                 mediaplayer.Volume += 0.25;
@@ -57,12 +65,14 @@ namespace WPFProject
             {
                 mediaplayer.Volume = 1;
             }
-            Console.WriteLine(mediaplayer.Volume);
-            Console.WriteLine(Volume.Value);
-
+            
+        
         }
         private void dec_button(object sender, RoutedEventArgs e)
         {
+            dec_volume();
+        }
+        private void dec_volume() {
             if (mediaplayer.Volume > 0 && mediaplayer.Volume <= 1)
             {
                 mediaplayer.Volume -= 0.25;
@@ -73,15 +83,26 @@ namespace WPFProject
             {
                 mediaplayer.Volume = 0;
             }
-            Console.WriteLine(mediaplayer.Volume);
-            Console.WriteLine(Volume.Value);
-
         }
         private void forward_button(object sender, RoutedEventArgs e)
         {
-            mediaplayer.Open(new Uri(track2));
-            mediaplayer.Play();
 
+            forward_track();
+        }
+        private void forward_track() {
+            if (music_status == 0)
+            {
+                mediaplayer.Open(new Uri(track2));
+                mediaplayer.Play();
+                music_status = 1;
+            }
+            else
+            {
+                mediaplayer.Open(new Uri(track1));
+                mediaplayer.Play();
+                music_status = 0;
+
+            }
         }
         
 
