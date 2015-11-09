@@ -22,8 +22,8 @@ namespace WpfApplication1
     {
         private MediaPlayer mediaplayer = new MediaPlayer();
         private int music_status = 0;
-        private string track1 = "C:/Users/Compark/Desktop/Fast.mp3";
-        private string track2 = "C:/Users/Compark/Desktop/English.mp3";
+        private string track1 = "C:/Users/i_osc/Desktop/Fast.mp3";
+        private string track2 = "C:/Users/i_osc/Desktop/English.mp3";
         public MusicPage()
         {
             InitializeComponent();

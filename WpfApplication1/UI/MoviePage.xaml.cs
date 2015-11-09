@@ -25,7 +25,7 @@ namespace WpfApplication1
         public MoviePage()
         {
             InitializeComponent();
-            media.Source = new Uri("C:/Users/Compark/Desktop/2.mp4");
+            media.Source = new Uri("C:/Users/i_osc/Desktop/2.mp4");
             media.Play();
             
         }
