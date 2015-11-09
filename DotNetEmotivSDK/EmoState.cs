@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -422,7 +422,52 @@ namespace Emotiv
         {
             return EdkDll.ES_Equal(a.GetHandle(), b.GetHandle());
         }
-        
-        
+      /// <summary>
+        /// Returns short term excitement model parameters
+        /// </summary>
+        /// <param name="rawScore"> return raw score</param>
+        /// <param name="minScale,maxScale"> return scale range</param>
+        /// <returns></returns>
+        public void AffectivGetExcitementShortTermModelParams(out Double rawScore, out Double minScale, out Double maxScale)
+        {
+            EdkDll.ES_AffectivGetExcitementShortTermModelParams(hEmoState, out rawScore, out minScale, out maxScale);
+        }
+        /// <summary>
+        /// Returns Meditation model parameters
+        /// </summary>
+        /// <param name="rawScore"> return raw score</param>
+        /// <param name="minScale,maxScale"> return scale range</param>
+        /// <returns></returns>
+      
+        public void AffectivGetMeditationModelParams(out Double rawScore, out Double minScale, out Double maxScale)
+        {
+            EdkDll.ES_AffectivGetMeditationModelParams(hEmoState, out rawScore, out minScale, out maxScale);
+        }
+        /// <summary>
+        /// Returns EngagementBoredom model parameters
+        /// </summary>
+        /// <param name="rawScore"> return raw score</param>
+        /// <param name="minScale,maxScale"> return scale range</param>
+        /// <returns></returns>
+        public void AffectivGetEngagementBoredomModelParams(out Double rawScore, out Double minScale, out Double maxScale)
+        {
+            EdkDll.ES_AffectivGetEngagementBoredomModelParams(hEmoState, out rawScore, out minScale, out maxScale);
+        }
+        /// <summary>
+        ///  Returns Frustration model parameters
+        /// </summary>
+        /// <param name="rawScore"> return raw score</param>
+        /// <param name="minScale,maxScale"> return scale range</param>
+        /// <returns></returns>
+        public void AffectivGetFrustrationModelParams(out Double rawScore, out Double minScale, out Double maxScale)
+        {
+            EdkDll.ES_AffectivGetFrustrationModelParams(hEmoState, out rawScore, out minScale, out maxScale);
+        }
+        /// <summary>
+        ///  Returns Valence model parameters
+        /// </summary>
+        /// <param name="rawScore"> return raw score</param>
+        /// <param name="minScale,maxScale"> return scale range</param>
+        /// <returns></returns>
     }
 }
