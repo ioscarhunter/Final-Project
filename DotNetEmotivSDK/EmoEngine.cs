@@ -488,7 +488,8 @@ namespace Emotiv
         public event CognitivEmoStateUpdatedEventHandler CognitivEmoStateUpdated;
 
         private EmoEngine() 
-        {
+        { 
+
             hEvent = EdkDll.EE_EmoEngineEventCreate();
             hData = EdkDll.EE_DataCreate();
         }
@@ -985,6 +986,7 @@ namespace Emotiv
         /// </summary>       
         public void Connect()
         {
+           
             errorHandler(EdkDll.EE_EngineConnect("Emotiv Systems-5"));
             OnEmoEngineConnected(new EmoEngineEventArgs(UInt32.MaxValue));
         }

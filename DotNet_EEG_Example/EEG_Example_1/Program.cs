@@ -7,29 +7,53 @@ using System.Reflection;
 
 namespace EEG_Example_1
 {
-    class EEG_Logger
+    class NotConnectException:Exception{ }
+    class EEG_Logger 
     {
         EmoEngine engine; // Access to the EDK is viaa the EmoEngine 
         int userID = -1; // userID is used to uniquely identify a user's headset
-        string filename = "outfile.csv"; // output filename
+        string filename = ".\\outfile.csv"; // output filename
 
-        
+        uint userId = 0;
+        Profile profile = new Profile();
+        public string profileName = "";
+
+        public bool isLoad = true;
+        public bool oneTime = false;
+
         EEG_Logger()
         {
             // create the engine
             engine = EmoEngine.Instance;
             engine.UserAdded += new EmoEngine.UserAddedEventHandler(engine_UserAdded_Event);
-            
+            engine.EmoStateUpdated += new EmoEngine.EmoStateUpdatedEventHandler(Instance_EmoStateUpdated);
+
             // connect to Emoengine.            
             engine.Connect();
 
             // create a header for our output file
             WriteHeader();
+
         }
 
+        void Instance_EmoStateUpdated(object sender, EmoStateUpdatedEventArgs e)
+        {
+            if (isLoad)
+            {
+                LoadUP();
+                isLoad = false;
+            }
+        }
+
+        public void LoadUP()
+        {
+            engine.LoadUserProfile(userId, ".//starboy.emu");
+            profile = engine.GetUserProfile((uint)userId);
+            engine.SetUserProfile(userId, profile);
+        }
         void engine_UserAdded_Event(object sender, EmoEngineEventArgs e)
         {
-            Console.WriteLine("User Added Event has occured");
+            Console.WriteLine("User Added Event has occured"+e.userId);
 
             // record the user 
             userID = (int)e.userId;
@@ -41,17 +65,20 @@ namespace EEG_Example_1
             engine.EE_DataSetBufferSizeInSec(1); 
 
         }
+
         void Run()
         {
             // Handle any waiting events
             engine.ProcessEvents();
 
+            Console.WriteLine(userID);
+
             // If the user has not yet connected, do not proceed
             if ((int)userID == -1)
                 return;
+                //throw new NotConnectException();
 
             Dictionary<EdkDll.EE_DataChannel_t, double[]> data = engine.GetData((uint)userID);
-           
 
 
             if (data == null)
@@ -93,16 +120,22 @@ namespace EEG_Example_1
         static void Main(string[] args)
         {
             Console.WriteLine("EEG Data Reader Example");
+            try {
+                EEG_Logger p = new EEG_Logger();
 
-            EEG_Logger p = new EEG_Logger();
-
-            for (int i = 0; i < 10; i++)
-            {
-                p.Run();
-                Thread.Sleep(100);
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine(i);
+                    p.Run();
+                    Thread.Sleep(500);
+                }
             }
-
+            catch (NotConnectException e)
+            {
+                Console.WriteLine("not connect");
+            }
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
-
     }
 }

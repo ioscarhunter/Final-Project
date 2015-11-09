@@ -190,355 +190,345 @@ namespace Emotiv
             EEG_CQ_FAIR, EEG_CQ_GOOD
         } ;
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_EngineConnect")]
+        [DllImport("edk.dll", EntryPoint = "EE_EngineConnect")]
         static extern Int32 Unmanged_EE_EngineConnect(String security);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_EngineRemoteConnect")]
+        [DllImport("edk.dll", EntryPoint = "EE_EngineRemoteConnect")]
         static extern Int32 Unmanged_EE_EngineRemoteConnect(String szHost, UInt16 port);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_EngineDisconnect")]
+        [DllImport("edk.dll", EntryPoint = "EE_EngineDisconnect")]
         static extern Int32 Unmanged_EE_EngineDisconnect();
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_EnableDiagnostics")]
+        [DllImport("edk.dll", EntryPoint = "EE_EnableDiagnostics")]
         static extern Int32 Unmanged_EE_EnableDiagnostics(String szFilename, Int32 fEnable, Int32 nReserved);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_EmoEngineEventCreate")]
+        [DllImport("edk.dll", EntryPoint = "EE_EmoEngineEventCreate")]
         static extern IntPtr Unmanged_EE_EmoEngineEventCreate();
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_ProfileEventCreate")]
+        [DllImport("edk.dll", EntryPoint = "EE_ProfileEventCreate")]
         static extern IntPtr Unmanged_EE_ProfileEventCreate();
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_EmoEngineEventFree")]
+        [DllImport("edk.dll", EntryPoint = "EE_EmoEngineEventFree")]
         static extern void Unmanged_EE_EmoEngineEventFree(IntPtr hEvent);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_EmoStateCreate")]
+        [DllImport("edk.dll", EntryPoint = "EE_EmoStateCreate")]
         static extern IntPtr Unmanged_EE_EmoStateCreate();
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_EmoStateFree")]
+        [DllImport("edk.dll", EntryPoint = "EE_EmoStateFree")]
         static extern void Unmanged_EE_EmoStateFree(IntPtr hState);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_EmoEngineEventGetType")]
+        [DllImport("edk.dll", EntryPoint = "EE_EmoEngineEventGetType")]
         static extern EE_Event_t Unmanged_EE_EmoEngineEventGetType(IntPtr hEvent);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivEventGetType")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivEventGetType")]
         static extern EE_CognitivEvent_t Unmanged_EE_CognitivEventGetType(IntPtr hEvent);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_ExpressivEventGetType")]
+        [DllImport("edk.dll", EntryPoint = "EE_ExpressivEventGetType")]
         static extern EE_ExpressivEvent_t Unmanged_EE_ExpressivEventGetType(IntPtr hEvent);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_EmoEngineEventGetUserId")]
+        [DllImport("edk.dll", EntryPoint = "EE_EmoEngineEventGetUserId")]
         static extern Int32 Unmanged_EE_EmoEngineEventGetUserId(IntPtr hEvent, out UInt32 pUserIdOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_EmoEngineEventGetEmoState")]
+        [DllImport("edk.dll", EntryPoint = "EE_EmoEngineEventGetEmoState")]
         static extern Int32 Unmanged_EE_EmoEngineEventGetEmoState(IntPtr hEvent, IntPtr hEmoState);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_EngineGetNextEvent")]
+        [DllImport("edk.dll", EntryPoint = "EE_EngineGetNextEvent")]
         static extern Int32 Unmanged_EE_EngineGetNextEvent(IntPtr hEvent);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_EngineClearEventQueue")]
+        [DllImport("edk.dll", EntryPoint = "EE_EngineClearEventQueue")]
         static extern Int32 Unmanged_EE_EngineClearEventQueue(Int32 eventTypes);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_EngineGetNumUser")]
+        [DllImport("edk.dll", EntryPoint = "EE_EngineGetNumUser")]
         static extern Int32 Unmanged_EE_EngineGetNumUser(out UInt32 pNumUserOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_SetHardwarePlayerDisplay")]
+        [DllImport("edk.dll", EntryPoint = "EE_SetHardwarePlayerDisplay")]
         static extern Int32 Unmanged_EE_SetHardwarePlayerDisplay(UInt32 userId, UInt32 playerNum);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_SetUserProfile")]
+        [DllImport("edk.dll", EntryPoint = "EE_SetUserProfile")]
         static extern Int32 Unmanged_EE_SetUserProfile(UInt32 userId, Byte[] profileBuffer, UInt32 length);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_GetUserProfile")]
+        [DllImport("edk.dll", EntryPoint = "EE_GetUserProfile")]
         static extern Int32 Unmanged_EE_GetUserProfile(UInt32 userId, IntPtr hEvent);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_GetBaseProfile")]
+        [DllImport("edk.dll", EntryPoint = "EE_GetBaseProfile")]
         static extern Int32 Unmanged_EE_GetBaseProfile(IntPtr hEvent);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_GetUserProfileSize")]
+        [DllImport("edk.dll", EntryPoint = "EE_GetUserProfileSize")]
         static extern Int32 Unmanged_EE_GetUserProfileSize(IntPtr hEvt, out UInt32 pProfileSizeOut);
 
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_GetUserProfileBytes")]
+        [DllImport("edk.dll", EntryPoint = "EE_GetUserProfileBytes")]
         static extern Int32 Unmanged_EE_GetUserProfileBytes(IntPtr hEvt, Byte[] destBuffer, UInt32 length);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_LoadUserProfile")]
+        [DllImport("edk.dll", EntryPoint = "EE_LoadUserProfile")]
         static extern Int32 Unmanged_EE_LoadUserProfile(UInt32 userID, String szInputFilename);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_SaveUserProfile")]
+        [DllImport("edk.dll", EntryPoint = "EE_SaveUserProfile")]
         static extern Int32 Unmanged_EE_SaveUserProfile(UInt32 userID, String szOutputFilename);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_ExpressivSetThreshold")]
+        [DllImport("edk.dll", EntryPoint = "EE_ExpressivSetThreshold")]
         static extern Int32 Unmanged_EE_ExpressivSetThreshold(UInt32 userId, EE_ExpressivAlgo_t algoName, EE_ExpressivThreshold_t thresholdName, Int32 value);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_ExpressivGetThreshold")]
+        [DllImport("edk.dll", EntryPoint = "EE_ExpressivGetThreshold")]
         static extern Int32 Unmanged_EE_ExpressivGetThreshold(UInt32 userId, EE_ExpressivAlgo_t algoName, EE_ExpressivThreshold_t thresholdName, out Int32 pValueOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_ExpressivSetTrainingAction")]
+        [DllImport("edk.dll", EntryPoint = "EE_ExpressivSetTrainingAction")]
         static extern Int32 Unmanged_EE_ExpressivSetTrainingAction(UInt32 userId, EE_ExpressivAlgo_t action);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_ExpressivSetTrainingControl")]
+        [DllImport("edk.dll", EntryPoint = "EE_ExpressivSetTrainingControl")]
         static extern Int32 Unmanged_EE_ExpressivSetTrainingControl(UInt32 userId, EE_ExpressivTrainingControl_t control);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_ExpressivGetTrainingAction")]
+        [DllImport("edk.dll", EntryPoint = "EE_ExpressivGetTrainingAction")]
         static extern Int32 Unmanged_EE_ExpressivGetTrainingAction(UInt32 userId, out EE_ExpressivAlgo_t pActionOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_ExpressivGetTrainingTime")]
+        [DllImport("edk.dll", EntryPoint = "EE_ExpressivGetTrainingTime")]
         static extern Int32 Unmanged_EE_ExpressivGetTrainingTime(UInt32 userId, out UInt32 pTrainingTimeOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_ExpressivGetTrainedSignatureActions")]
+        [DllImport("edk.dll", EntryPoint = "EE_ExpressivGetTrainedSignatureActions")]
         static extern Int32 Unmanged_EE_ExpressivGetTrainedSignatureActions(UInt32 userId, out UInt32 pTrainedActionsOut);
 
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_ExpressivGetTrainedSignatureAvailable")]
+        [DllImport("edk.dll", EntryPoint = "EE_ExpressivGetTrainedSignatureAvailable")]
         static extern Int32 Unmanged_EE_ExpressivGetTrainedSignatureAvailable(UInt32 userId, out Int32 pfAvailableOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_ExpressivSetSignatureType")]
+        [DllImport("edk.dll", EntryPoint = "EE_ExpressivSetSignatureType")]
         static extern Int32 Unmanged_EE_ExpressivSetSignatureType(UInt32 userId, EE_ExpressivSignature_t sigType);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_ExpressivGetSignatureType")]
+        [DllImport("edk.dll", EntryPoint = "EE_ExpressivGetSignatureType")]
         static extern Int32 Unmanged_EE_ExpressivGetSignatureType(UInt32 userId, out EE_ExpressivSignature_t pSigTypeOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivSetActiveActions")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivSetActiveActions")]
         static extern Int32 Unmanged_EE_CognitivSetActiveActions(UInt32 userId, UInt32 activeActions);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivGetActiveActions")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivGetActiveActions")]
         static extern Int32 Unmanged_EE_CognitivGetActiveActions(UInt32 userId, out UInt32 pActiveActionsOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivGetTrainingTime")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivGetTrainingTime")]
         static extern Int32 Unmanged_EE_CognitivGetTrainingTime(UInt32 userId, out UInt32 pTrainingTimeOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivSetTrainingControl")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivSetTrainingControl")]
         static extern Int32 Unmanged_EE_CognitivSetTrainingControl(UInt32 userId, EE_CognitivTrainingControl_t control);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivSetTrainingAction")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivSetTrainingAction")]
         static extern Int32 Unmanged_EE_CognitivSetTrainingAction(UInt32 userId, EE_CognitivAction_t action);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivGetTrainingAction")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivGetTrainingAction")]
         static extern Int32 Unmanged_EE_CognitivGetTrainingAction(UInt32 userId, out EE_CognitivAction_t pActionOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivGetTrainedSignatureActions")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivGetTrainedSignatureActions")]
         static extern Int32 Unmanged_EE_CognitivGetTrainedSignatureActions(UInt32 userId, out UInt32 pTrainedActionsOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivGetOverallSkillRating")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivGetOverallSkillRating")]
         static extern Int32 Unmanged_EE_CognitivGetOverallSkillRating(UInt32 userId, out Single pOverallSkillRatingOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivGetActionSkillRating")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivGetActionSkillRating")]
         static extern Int32 Unmanged_EE_CognitivGetActionSkillRating(UInt32 userId, EE_CognitivAction_t action, out Single pActionSkillRatingOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivSetActivationLevel")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivSetActivationLevel")]
         static extern Int32 Unmanged_EE_CognitivSetActivationLevel(UInt32 userId, Int32 level);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivSetActionSensitivity")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivSetActionSensitivity")]
         static extern Int32 Unmanged_EE_CognitivSetActionSensitivity(UInt32 userId,
                                             Int32 action1Sensitivity, Int32 action2Sensitivity,
                                             Int32 action3Sensitivity, Int32 action4Sensitivity);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivGetActivationLevel")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivGetActivationLevel")]
         static extern Int32 Unmanged_EE_CognitivGetActivationLevel(UInt32 userId, out Int32 pLevelOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivGetActionSensitivity")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivGetActionSensitivity")]
         static extern Int32 Unmanged_EE_CognitivGetActionSensitivity(UInt32 userId,
                                             out Int32 pAction1SensitivityOut, out Int32 pAction2SensitivityOut,
                                             out Int32 pAction3SensitivityOut, out Int32 pAction4SensitivityOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivStartSamplingNeutral")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivStartSamplingNeutral")]
         static extern Int32 Unmanged_EE_CognitivStartSamplingNeutral(UInt32 userId);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivStopSamplingNeutral")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivStopSamplingNeutral")]
         static extern Int32 Unmanged_EE_CognitivStopSamplingNeutral(UInt32 userId);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivSetSignatureCaching")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivSetSignatureCaching")]
         static extern Int32 Unmanged_EE_CognitivSetSignatureCaching(UInt32 userId, UInt32 enabled);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivGetSignatureCaching")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivGetSignatureCaching")]
         static extern Int32 Unmanged_EE_CognitivGetSignatureCaching(UInt32 userId, out UInt32 pEnabledOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivSetSignatureCacheSize")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivSetSignatureCacheSize")]
         static extern Int32 Unmanged_EE_CognitivSetSignatureCacheSize(UInt32 userId, UInt32 size);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_CognitivGetSignatureCacheSize")]
+        [DllImport("edk.dll", EntryPoint = "EE_CognitivGetSignatureCacheSize")]
         static extern Int32 Unmanged_EE_CognitivGetSignatureCacheSize(UInt32 userId, out UInt32 pSizeOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_HeadsetGetSensorDetails")]
+        [DllImport("edk.dll", EntryPoint = "EE_HeadsetGetSensorDetails")]
         static extern Int32 Unmanged_EE_HeadsetGetSensorDetails(EE_InputChannels_t channelId, out InputSensorDescriptor_t pDescriptorOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_HardwareGetVersion")]
+        [DllImport("edk.dll", EntryPoint = "EE_HardwareGetVersion")]
         static extern Int32 Unmanged_EE_HardwareGetVersion(UInt32 userId, out UInt32 pHwVersionOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_SoftwareGetVersion")]
+        [DllImport("edk.dll", EntryPoint = "EE_SoftwareGetVersion")]
         static extern Int32 Unmanged_EE_SoftwareGetVersion(StringBuilder pszVersionOut, UInt32 nVersionChars, out UInt32 pBuildNumOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_HeadsetGetGyroDelta")]
+        [DllImport("edk.dll", EntryPoint = "EE_HeadsetGetGyroDelta")]
         static extern Int32 Unmanged_EE_HeadsetGetGyroDelta(UInt32 userId, out Int32 pXOut, out Int32 pYOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_HeadsetGyroRezero")]
+        [DllImport("edk.dll", EntryPoint = "EE_HeadsetGyroRezero")]
         static extern Int32 Unmanged_EE_HeadsetGyroRezero(UInt32 userId);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_OptimizationParamCreate")]
+        [DllImport("edk.dll", EntryPoint = "EE_OptimizationParamCreate")]
         static extern IntPtr Unmanged_EE_OptimizationParamCreate();
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_OptimizationParamFree")]
+        [DllImport("edk.dll", EntryPoint = "EE_OptimizationParamFree")]
         static extern void Unmanged_EE_OptimizationParamFree(IntPtr hParam);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_OptimizationEnable")]
+        [DllImport("edk.dll", EntryPoint = "EE_OptimizationEnable")]
         static extern Int32 Unmanged_EE_OptimizationEnable(IntPtr hParam);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_OptimizationIsEnabled")]
+        [DllImport("edk.dll", EntryPoint = "EE_OptimizationIsEnabled")]
         static extern Int32 Unmanged_EE_OptimizationIsEnabled(out Boolean pEnabledOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_OptimizationDisable")]
+        [DllImport("edk.dll", EntryPoint = "EE_OptimizationDisable")]
         static extern Int32 Unmanged_EE_OptimizationDisable();
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_OptimizationGetParam")]
+        [DllImport("edk.dll", EntryPoint = "EE_OptimizationGetParam")]
         static extern Int32 Unmanged_EE_OptimizationGetParam(IntPtr hParam);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_OptimizationGetVitalAlgorithm")]
+        [DllImport("edk.dll", EntryPoint = "EE_OptimizationGetVitalAlgorithm")]
         static extern Int32 Unmanged_EE_OptimizationGetVitalAlgorithm(IntPtr hParam, EE_EmotivSuite_t suite, out UInt32 pVitalAlgorithmBitVectorOut);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_OptimizationSetVitalAlgorithm")]
+        [DllImport("edk.dll", EntryPoint = "EE_OptimizationSetVitalAlgorithm")]
         static extern Int32 Unmanged_EE_OptimizationSetVitalAlgorithm(IntPtr hParam, EE_EmotivSuite_t suite, UInt32 vitalAlgorithmBitVector);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_ResetDetection")]
+        [DllImport("edk.dll", EntryPoint = "EE_ResetDetection")]
         static extern Int32 Unmanged_EE_ResetDetection(UInt32 userId, EE_EmotivSuite_t suite, UInt32 detectionBitVector);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_DataCreate")]
+        [DllImport("edk.dll", EntryPoint = "EE_DataCreate")]
         static extern IntPtr Unmanaged_EE_DataCreate();
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_DataFree")]
+        [DllImport("edk.dll", EntryPoint = "EE_DataFree")]
         static extern void Unmanaged_EE_DataFree(IntPtr hData);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_DataUpdateHandle")]
+        [DllImport("edk.dll", EntryPoint = "EE_DataUpdateHandle")]
         static extern Int32 Unmanaged_EE_DataUpdateHandle(UInt32 userId, IntPtr hData);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_DataGet")]
+        [DllImport("edk.dll", EntryPoint = "EE_DataGet")]
         static extern Int32 Unmanaged_EE_DataGet(IntPtr hData, EE_DataChannel_t channel, Double[] buffer, UInt32 bufferSizeInSample);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_DataGetMultiChannels")]
-        static extern Int32 Unmanaged_EE_DataGetMultiChannels(IntPtr hData, EE_DataChannel_t[] channelList, UInt32 nChannel  , Double[][] buffer, UInt32 bufferSizeInSample);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_DataGetNumberOfSample")]
+        [DllImport("edk.dll", EntryPoint = "EE_DataGetNumberOfSample")]
         static extern Int32 Unmanaged_EE_DataGetNumberOfSample(IntPtr hData, out UInt32 nSampleOut);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_DataSetBufferSizeInSec")]
+        [DllImport("edk.dll", EntryPoint = "EE_DataSetBufferSizeInSec")]
         static extern Int32 Unmanaged_EE_DataSetBufferSizeInSec(Single bufferSizeInSec);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_DataGetBufferSizeInSec")]
+        [DllImport("edk.dll", EntryPoint = "EE_DataGetBufferSizeInSec")]
         static extern Int32 Unmanaged_EE_DataGetBufferSizeInSec(out Single pBufferSizeInSecOut);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_DataAcquisitionEnable")]
+        [DllImport("edk.dll", EntryPoint = "EE_DataAcquisitionEnable")]
         static extern Int32 Unmanaged_EE_DataAcquisitionEnable(UInt32 userId, Boolean enable);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_DataAcquisitionIsEnabled")]
+        [DllImport("edk.dll", EntryPoint = "EE_DataAcquisitionIsEnabled")]
         static extern Int32 Unmanaged_EE_DataAcquisitionIsEnabled(UInt32 userId, out Boolean pEnableOut);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_DataSetSychronizationSignal")]
+        [DllImport("edk.dll", EntryPoint = "EE_DataSetSychronizationSignal")]
         static extern Int32 Unmanaged_EE_DataSetSychronizationSignal(UInt32 userId, Int32 signal);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_DataSetMarker")]
+        [DllImport("edk.dll", EntryPoint = "EE_DataSetMarker")]
         static extern Int32 Unmanaged_EE_DataSetMarker(UInt32 userId, Int32 marker);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EE_DataGetSamplingRate")]
+        [DllImport("edk.dll", EntryPoint = "EE_DataGetSamplingRate")]
         static extern Int32 Unmanaged_EE_DataGetSamplingRate(UInt32 userId, out UInt32 pSamplingRate);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_Create")]
+        [DllImport("edk.dll", EntryPoint = "ES_Create")]
         static extern IntPtr Unmanaged_ES_Create();
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_Free")]
+        [DllImport("edk.dll", EntryPoint = "ES_Free")]
         static extern void Unmanaged_ES_Free(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_Init")]
+        [DllImport("edk.dll", EntryPoint = "ES_Init")]
         static extern void Unmanaged_ES_Init(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_GetTimeFromStart")]
+        [DllImport("edk.dll", EntryPoint = "ES_GetTimeFromStart")]
         static extern Single Unmanaged_ES_GetTimeFromStart(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_GetHeadsetOn")]
+        [DllImport("edk.dll", EntryPoint = "ES_GetHeadsetOn")]
         static extern Int32 Unmanaged_ES_GetHeadsetOn(IntPtr state);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_GetNumContactQualityChannels")]
+        [DllImport("edk.dll", EntryPoint = "ES_GetNumContactQualityChannels")]
         static extern Int32 Unmanaged_ES_GetNumContactQualityChannels(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_GetContactQuality")]
+        [DllImport("edk.dll", EntryPoint = "ES_GetContactQuality")]
         static extern EE_EEG_ContactQuality_t Unmanaged_ES_GetContactQuality(IntPtr state, Int32 electroIdx);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_GetContactQualityFromAllChannels")]
+        [DllImport("edk.dll", EntryPoint = "ES_GetContactQualityFromAllChannels")]
         static extern Int32 Unmanaged_ES_GetContactQualityFromAllChannels(IntPtr state, EE_EEG_ContactQuality_t[] contactQuality, UInt32 numChannels);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivIsBlink")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivIsBlink")]
         static extern Boolean Unmanaged_ES_ExpressivIsBlink(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivIsLeftWink")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivIsLeftWink")]
         static extern Boolean Unmanaged_ES_ExpressivIsLeftWink(IntPtr state);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivIsRightWink")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivIsRightWink")]
         static extern Boolean Unmanaged_ES_ExpressivIsRightWink(IntPtr state);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivIsEyesOpen")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivIsEyesOpen")]
         static extern Boolean Unmanaged_ES_ExpressivIsEyesOpen(IntPtr state);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivIsLookingUp")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivIsLookingUp")]
         static extern Boolean Unmanaged_ES_ExpressivIsLookingUp(IntPtr state);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivIsLookingDown")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivIsLookingDown")]
         static extern Boolean Unmanaged_ES_ExpressivIsLookingDown(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivIsLookingLeft")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivIsLookingLeft")]
         static extern Boolean Unmanaged_ES_ExpressivIsLookingLeft(IntPtr state);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivIsLookingRight")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivIsLookingRight")]
         static extern Boolean Unmanaged_ES_ExpressivIsLookingRight(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivGetEyelidState")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivGetEyelidState")]
         static extern void Unmanaged_ES_ExpressivGetEyelidState(IntPtr state, out Single leftEye, out Single rightEye);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivGetEyeLocation")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivGetEyeLocation")]
         static extern void Unmanaged_ES_ExpressivGetEyeLocation(IntPtr state, out Single x, out Single y);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivGetEyebrowExtent")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivGetEyebrowExtent")]
         static extern Single Unmanaged_ES_ExpressivGetEyebrowExtent(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivGetSmileExtent")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivGetSmileExtent")]
         static extern Single Unmanaged_ES_ExpressivGetSmileExtent(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivGetClenchExtent")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivGetClenchExtent")]
         static extern Single Unmanaged_ES_ExpressivGetClenchExtent(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivGetUpperFaceAction")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivGetUpperFaceAction")]
         static extern EE_ExpressivAlgo_t Unmanaged_ES_ExpressivGetUpperFaceAction(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivGetUpperFaceActionPower")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivGetUpperFaceActionPower")]
         static extern Single Unmanaged_ES_ExpressivGetUpperFaceActionPower(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivGetLowerFaceAction")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivGetLowerFaceAction")]
         static extern EE_ExpressivAlgo_t Unmanaged_ES_ExpressivGetLowerFaceAction(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivGetLowerFaceActionPower")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivGetLowerFaceActionPower")]
         static extern Single Unmanaged_ES_ExpressivGetLowerFaceActionPower(IntPtr state);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivIsActive")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivIsActive")]
         static extern Boolean Unmanaged_ES_ExpressivIsActive(IntPtr state, EE_ExpressivAlgo_t type);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_AffectivGetExcitementLongTermScore")]
+        [DllImport("edk.dll", EntryPoint = "ES_AffectivGetExcitementLongTermScore")]
         static extern Single Unmanaged_ES_AffectivGetExcitementLongTermScore(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_AffectivGetExcitementShortTermScore")]
+        [DllImport("edk.dll", EntryPoint = "ES_AffectivGetExcitementShortTermScore")]
         static extern Single Unmanaged_ES_AffectivGetExcitementShortTermScore(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_AffectivIsActive")]
+        [DllImport("edk.dll", EntryPoint = "ES_AffectivIsActive")]
         static extern Boolean Unmanaged_ES_AffectivIsActive(IntPtr state, EE_AffectivAlgo_t type);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_AffectivGetMeditationScore")]
+        [DllImport("edk.dll", EntryPoint = "ES_AffectivGetMeditationScore")]
         static extern Single Unmanaged_ES_AffectivGetMeditationScore(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_AffectivGetFrustrationScore")]
+        [DllImport("edk.dll", EntryPoint = "ES_AffectivGetFrustrationScore")]
         static extern Single Unmanaged_ES_AffectivGetFrustrationScore(IntPtr state);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_AffectivGetEngagementBoredomScore")]
+        [DllImport("edk.dll", EntryPoint = "ES_AffectivGetEngagementBoredomScore")]
         static extern Single Unmanaged_ES_AffectivGetEngagementBoredomScore(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_CognitivGetCurrentAction")]
+        [DllImport("edk.dll", EntryPoint = "ES_CognitivGetCurrentAction")]
         static extern EE_CognitivAction_t Unmanaged_ES_CognitivGetCurrentAction(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_CognitivGetCurrentActionPower")]
+        [DllImport("edk.dll", EntryPoint = "ES_CognitivGetCurrentActionPower")]
         static extern Single Unmanaged_ES_CognitivGetCurrentActionPower(IntPtr state);
 
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_CognitivIsActive")]
+        [DllImport("edk.dll", EntryPoint = "ES_CognitivIsActive")]
         static extern Boolean Unmanaged_ES_CognitivIsActive(IntPtr state);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_CognitivGetCurrentLevelRating")]
+        [DllImport("edk.dll", EntryPoint = "ES_CognitivGetCurrentLevelRating")]
         static extern Single Unmanaged_ES_CognitivGetCurrentLevelRating(IntPtr state);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_GetWirelessSignalStatus")]
+        [DllImport("edk.dll", EntryPoint = "ES_GetWirelessSignalStatus")]
         static extern EE_SignalStrength_t Unmanaged_ES_GetWirelessSignalStatus(IntPtr state);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_Copy")]
+        [DllImport("edk.dll", EntryPoint = "ES_Copy")]
         static extern void Unmanaged_ES_Copy(IntPtr a, IntPtr b);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_AffectivEqual")]
+        [DllImport("edk.dll", EntryPoint = "ES_AffectivEqual")]
         static extern Boolean Unmanaged_ES_AffectivEqual(IntPtr a, IntPtr b);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_ExpressivEqual")]
+        [DllImport("edk.dll", EntryPoint = "ES_ExpressivEqual")]
         static extern Boolean Unmanaged_ES_ExpressivEqual(IntPtr a, IntPtr b);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_CognitivEqual")]
+        [DllImport("edk.dll", EntryPoint = "ES_CognitivEqual")]
         static extern Boolean Unmanaged_ES_CognitivEqual(IntPtr a, IntPtr b);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_EmoEngineEqual")]
+        [DllImport("edk.dll", EntryPoint = "ES_EmoEngineEqual")]
         static extern Boolean Unmanaged_ES_EmoEngineEqual(IntPtr a, IntPtr b);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_Equal")]
+        [DllImport("edk.dll", EntryPoint = "ES_Equal")]
         static extern Boolean Unmanaged_ES_Equal(IntPtr a, IntPtr b);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_GetBatteryChargeLevel")]
-        static extern void Unmanaged_ES_GetBatteryChargeLevel(IntPtr state, out Int32 chargeLevel, out Int32 maxChargeLevel);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_AffectivGetExcitementShortTermModelParams")]
-        static extern void Unmanaged_ES_AffectivGetExcitementShortTermModelParams(IntPtr state, out Double rawScore, out Double minScale, out Double maxScale);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_AffectivGetMeditationModelParams")]
-        static extern void Unmanaged_ES_AffectivGetMeditationModelParams(IntPtr state, out Double rawScore, out Double minScale, out Double maxScale);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_AffectivGetEngagementBoredomModelParams")]
-        static extern void Unmanaged_ES_AffectivGetEngagementBoredomModelParams(IntPtr state, out Double rawScore, out Double minScale, out Double maxScale);
-        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ES_AffectivGetFrustrationModelParams")]
-        static extern void Unmanaged_ES_AffectivGetFrustrationModelParams(IntPtr state, out Double rawScore, out Double minScale, out Double maxScale);
-    
+        [DllImport("edk.dll", EntryPoint = "ES_GetBatteryChargeLevel")]
+        static extern void Unmanaged_ES_GetBatteryChargeLevel(IntPtr state, out Int32 chargeLevel, out Int32 maxChargeLevel);       
+
         public static Int32 EE_EngineConnect(String security)
-        {            
+        {
             return Unmanged_EE_EngineConnect(security);
         }
         public static Int32 EE_EngineRemoteConnect(String szHost, UInt16 port)
@@ -894,11 +884,6 @@ namespace Emotiv
         {
             return Unmanaged_EE_DataGet(hData, channel, buffer, bufferSizeInSample);
         }
-
-        public static Int32 EE_DataGetMultiChannel(IntPtr hData, EE_DataChannel_t[] channelList, UInt32 nChannel, Double[][] buffer, UInt32 bufferSizeInSample)
-        {
-            return Unmanaged_EE_DataGetMultiChannels(hData, channelList, nChannel, buffer, bufferSizeInSample);
-        }
         
         public static Int32 EE_DataGetNumberOfSample(IntPtr hData, out UInt32 nSampleOut)
         {
@@ -1137,21 +1122,5 @@ namespace Emotiv
         {
             Unmanaged_ES_GetBatteryChargeLevel(state, out chargeLevel, out maxChargeLevel);
         }
-         public static void ES_AffectivGetExcitementShortTermModelParams(IntPtr state, out Double rawScore, out Double minScale, out Double maxScale)
-        {
-             Unmanaged_ES_AffectivGetExcitementShortTermModelParams(state,out rawScore,out minScale,out maxScale);
-         }
-         public static void ES_AffectivGetMeditationModelParams(IntPtr state, out Double rawScore, out Double minScale, out Double maxScale)
-        {
-              Unmanaged_ES_AffectivGetMeditationModelParams(state,out rawScore,out minScale,out maxScale);
-         }
-         public static void ES_AffectivGetEngagementBoredomModelParams(IntPtr state, out Double rawScore, out Double minScale, out Double maxScale)
-        {
-            Unmanaged_ES_AffectivGetEngagementBoredomModelParams(state, out rawScore, out minScale, out maxScale);
-         }
-         public static void ES_AffectivGetFrustrationModelParams(IntPtr state, out Double rawScore, out Double minScale, out Double maxScale)
-         {
-             Unmanaged_ES_AffectivGetFrustrationModelParams(state,out rawScore,out minScale,out maxScale);
-         }
     }
 }
