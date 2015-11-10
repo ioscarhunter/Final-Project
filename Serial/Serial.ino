@@ -13,25 +13,40 @@
 #define PIN 3
 #define LED_COUNT 8
 
+#define EPIN 4
+#define E_COUNT 4
+
 using namespace std;
 
 Adafruit_NeoPixel leds = Adafruit_NeoPixel(LED_COUNT, PIN, NEO_GRB + NEO_KHZ800);
 String incomingByte = " ";
 
+Adafruit_NeoPixel equipment = Adafruit_NeoPixel(E_COUNT, EPIN, NEO_GRB + NEO_KHZ800);
+
 bool isSet[LED_COUNT];
 LEDClass ledarray[LED_COUNT];
+LEDClass earray[E_COUNT];
+
 // the setup function runs once when you press reset or power the board
 void setup() {
 
 	Serial.begin(460800);           // set up Serial library at 460800 bps
 	Serial.setTimeout(5);
 	Serial.println("Hello world!");
-	
+
 	leds.begin();  // Call this to start up the LED strip.
+	equipment.begin();
+
 	clearLEDs();   // This function, defined below, turns all LEDs off...
 	leds.setBrightness(250);
 
 	leds.show();   // ...but the LEDs don't actually update until you call this.
+	equipment.show();
+
+	for (int i = 0; i < E_COUNT; i++) {
+		earray[i].init(equipment, i, WHITE);
+	}
+
 
 }
 
@@ -42,7 +57,7 @@ void loop() {
 		// read the incoming byte:
 		for (int i = 1; i < 2; i++) {
 			String command = Serial.readStringUntil(':');
-			
+
 			if (command != "") {
 
 				//Serial.println("command " + command);
@@ -53,7 +68,7 @@ void loop() {
 				//Serial.print("Pos ");
 				//Serial.println(pixel);
 				String hex = Serial.readStringUntil('#');
-				
+
 				if (command.equals("S")) {
 					if (!isSet[pixel]) {
 						unsigned long colour = hex.toInt();
@@ -68,7 +83,7 @@ void loop() {
 					}
 				}
 
-				else if (command.equals("B")&&isSet[pixel]) {
+				else if (command.equals("B") && isSet[pixel]) {
 
 					if (hex.equals("1")) {
 						ledarray[pixel].on();
@@ -84,6 +99,19 @@ void loop() {
 					}
 
 				}
+				else if (command.equals("E")) {
+					if (hex.equals("1")) {
+						for (int i = 0; i < E_COUNT; i++) {
+							earray[i].on();
+						}
+					}
+					else if (hex.equals("0")) {
+						for (int i = 0; i < E_COUNT; i++) {
+							earray[i].off();
+						}
+					}
+				}
+
 			}
 		}
 	}
@@ -93,9 +121,14 @@ void loop() {
 // call leds.show() to actually turn them off after this.
 void clearLEDs()
 {
-	for (int i = 0; i<LED_COUNT; i++)
+	for (int i = 0; i < LED_COUNT; i++)
 	{
 		leds.setPixelColor(i, 0);
+	}
+
+	for (int i = 0; i < E_COUNT; i++)
+	{
+		equipment.setPixelColor(i, 0);
 	}
 }
 

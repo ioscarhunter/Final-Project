@@ -62,7 +62,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -88,6 +90,9 @@
     <Compile Include="Serial\colourset.cs" />
     <Compile Include="Serial\SerialCom.cs" />
     <Compile Include="EEG\SignalProcessing.cs" />
+    <Compile Include="UI\controlequipment.xaml.cs">
+      <DependentUpon>controlequipment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\MoviePage.xaml.cs">
       <DependentUpon>MoviePage.xaml</DependentUpon>
     </Compile>
@@ -101,6 +106,10 @@
       <DependentUpon>PageSwitcher.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Switcher.cs" />
+    <Page Include="UI\controlequipment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\MainMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

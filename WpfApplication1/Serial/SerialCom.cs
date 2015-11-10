@@ -216,6 +216,16 @@ namespace WpfApplication1
             Console.WriteLine(port1.ReadExisting());
 
         }
+
+        private void turnonEquipment()
+        {
+            port1.Write("E:" + 1 + "&" + "1" + "#");
+        }
+
+        private void turnoffEquipment()
+        {
+            port1.Write("E:" + 0 + "&" + "1" + "#");
+        }
     }
 
     public class LED_StatusEventArgs:EventArgs
