@@ -7,21 +7,36 @@
       Height="1152" Width="1728">
 
     <Grid Background="#FF8D8C8C">
-        <Canvas Width="571.074" Height="571.074">
-            <Canvas>
-                <Canvas>
-                    <!-- Layer 1/<Group>/<Path> -->
-                    <!-- Layer 1/<Group>/<Path> -->
-                    <!-- Layer 1/<Group>/<Path> -->
-                    <!-- Layer 1/<Group>/<Path> -->
-                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#fffff0a4" Data="F1 M 96.950,499.601 C 205.200,595.148 368.580,594.566 476.142,497.826 L 287.433,309.118 L 96.950,499.601 Z" Height="503.218" Canvas.Left="-95.7" Stretch="Fill" Width="751.527" Canvas.Top="333.584"/>
-                </Canvas>
-            </Canvas>
-            <Canvas Height="25" Width="26" Canvas.Left="275" Canvas.Top="656">
-                <!-- Layer 1/BACK -->
-                <TextBlock Foreground="#ff000000" Canvas.Left="-114" Canvas.Top="-68" FontSize="100.00" FontFamily="Myriad Pro Semibold" Text="BACK" Height="129"/>
-            </Canvas>
-            <Button Content="" Width="360" Canvas.Left="100" Canvas.Top="515" Height="305" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Foreground="#00DDDDDD" Click="back_button"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="275*"/>
+            <RowDefinition Height="301*"/>
+        </Grid.RowDefinitions>
+
+
+        <!-- Layer 1/<Group>/<Path> -->
+        <!-- Layer 1/<Group>/<Path> -->
+        <!-- Layer 1/<Group>/<Path> -->
+        <!-- Layer 1/<Group>/<Path> -->
+        <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#fffff0a4" Data="F1 M 96.950,499.601 C 205.200,595.148 368.580,594.566 476.142,497.826 L 287.433,309.118 L 96.950,499.601 Z" Height="503.218" Stretch="Fill" Width="751.528" Margin="488.236,376.782,488.236,-278" Grid.Row="1"/>
+
+        <!-- Layer 1/<Compound Path> -->
+        <Path Fill="#ffffffff" Data="F1 M 400.000,448.000 C 382.900,448.000 367.100,442.500 354.100,433.300 C 330.600,461.600 295.600,480.000 256.000,480.000 C 216.400,480.000 181.400,461.600 157.900,433.300 C 144.900,442.500 129.100,448.000 112.000,448.000 C 67.800,448.000 32.000,412.200 32.000,368.000 C 32.000,323.800 67.800,288.000 112.000,288.000 C 119.800,288.000 127.100,289.500 134.100,291.500 C 136.900,292.300 139.800,292.900 142.400,294.000 C 146.800,285.400 152.300,277.600 158.400,270.200 C 181.800,242.100 216.500,223.900 256.000,223.900 C 266.100,223.900 275.800,225.400 285.300,227.600 C 295.900,230.100 305.800,233.900 315.100,238.900 C 338.400,251.300 357.500,270.400 369.600,294.000 C 379.000,290.100 389.300,287.900 400.100,287.900 C 444.300,287.900 480.100,323.700 480.100,367.900 C 480.100,412.100 444.200,448.000 400.000,448.000 Z M 208.000,128.000 C 247.800,128.000 280.600,157.200 286.700,195.300 C 276.700,193.300 266.500,192.000 256.000,192.000 C 210.100,192.000 167.500,211.800 137.600,245.300 C 131.700,234.100 128.000,221.500 128.000,208.000 C 128.000,163.800 163.800,128.000 208.000,128.000 Z M 400.000,256.000 C 394.700,256.000 389.400,256.400 384.200,257.100 C 367.400,234.200 345.100,216.800 319.700,205.600 C 318.500,145.000 268.900,96.000 208.000,96.000 C 146.200,96.000 96.000,146.300 96.000,208.000 C 96.000,225.400 100.300,241.800 107.500,256.400 C 47.900,258.900 0.000,307.800 0.000,368.000 C 0.000,429.800 50.300,480.000 112.000,480.000 C 125.700,480.000 139.100,477.500 151.700,472.700 C 180.700,498.000 217.500,512.000 256.000,512.000 C 294.500,512.000 331.300,497.900 360.300,472.700 C 372.900,477.500 386.300,480.000 400.000,480.000 C 461.800,480.000 512.000,429.700 512.000,368.000 C 512.000,306.300 461.800,256.000 400.000,256.000 Z M 83.500,106.200 C 89.800,112.500 99.900,112.500 106.100,106.200 C 112.400,99.900 112.400,89.800 106.100,83.600 L 83.500,61.000 C 77.200,54.700 67.100,54.700 60.900,61.000 C 54.600,67.300 54.600,77.400 60.900,83.600 L 83.500,106.200 Z M 352.000,208.000 C 352.000,216.800 359.200,224.000 368.000,224.000 L 400.000,224.000 C 408.800,224.000 416.000,216.800 416.000,208.000 C 416.000,199.200 408.800,192.000 400.000,192.000 L 368.000,192.000 C 359.200,192.000 352.000,199.200 352.000,208.000 Z M 16.000,224.000 L 48.000,224.000 C 56.800,224.000 64.000,216.800 64.000,208.000 C 64.000,199.200 56.800,192.000 48.000,192.000 L 16.000,192.000 C 7.200,192.000 0.000,199.200 0.000,208.000 C 0.000,216.800 7.200,224.000 16.000,224.000 Z M 332.400,106.200 L 355.000,83.600 C 361.200,77.300 361.200,67.200 355.000,61.000 C 348.700,54.700 338.600,54.700 332.400,61.000 L 309.800,83.600 C 303.500,89.900 303.500,100.000 309.800,106.200 C 316.100,112.400 326.200,112.400 332.400,106.200 Z M 208.000,64.000 C 216.800,64.000 224.000,56.800 224.000,48.000 L 224.000,16.000 C 224.000,7.200 216.800,0.000 208.000,0.000 C 199.200,0.000 192.000,7.200 192.000,16.000 L 192.000,48.000 C 192.000,56.800 199.200,64.000 208.000,64.000 Z" Margin="300.169,53,1013,95.696" Stretch="Fill"/>
+
+
+        <Canvas Height="25" Width="26" Margin="851,14,851,564" Grid.Row="1">
+            <!-- Layer 1/BACK -->
+            <TextBlock Foreground="#ff000000" Canvas.Left="-101" FontSize="100.00" FontFamily="Myriad Pro Semibold" Text="BACK" Height="129" Canvas.Top="477"/>
         </Canvas>
+        <Button Content="" Width="360" Height="305" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Foreground="#00DDDDDD" Click="back_button" Margin="690,377,678,-80" Grid.Row="1"/>
+        <Label x:Name="city" Content="Bangkok, Thailand" HorizontalAlignment="Left" Margin="953,53,0,0" VerticalAlignment="Top" Height="95" Width="673" FontSize="64" Foreground="White" FontFamily="Segoe UI Light"/>
+        <Label x:Name="weathercon" Content="Partly Sunny" HorizontalAlignment="Left" Margin="949,350,0,0" VerticalAlignment="Top" Height="127" Width="673" FontSize="80" Foreground="White" FontFamily="Segoe UI Semilight"/>
+        <Label x:Name="days" Content="13 " HorizontalAlignment="Left" Margin="953,57,0,0" VerticalAlignment="Top" Height="265" Width="187" FontSize="200" Foreground="White" FontFamily="Segoe UI Semilight" Grid.Row="1"/>
+        <Label x:Name="celces" Content="°C" HorizontalAlignment="Left" Margin="1144,237,0,0" VerticalAlignment="Top" Height="145" Width="131" FontSize="96" Foreground="White" FontFamily="Segoe UI Semilight"/>
+        <Label x:Name="Ltemp" Content="27°" HorizontalAlignment="Left" Margin="1319,266,0,0" VerticalAlignment="Top" Height="96" Width="114" FontSize="64" Foreground="White" FontFamily="Segoe UI Semilight"/>
+        <Label x:Name="Htemp" Content="33° C" HorizontalAlignment="Left" Margin="1319,180,0,0" VerticalAlignment="Top" Height="85" Width="114" FontSize="64" Foreground="White" FontFamily="Segoe UI Semilight"/>
+        <Label x:Name="temp" Content="31 " HorizontalAlignment="Left" Margin="949,125,0,0" VerticalAlignment="Top" Height="265" Width="265" FontSize="200" Foreground="White" FontFamily="Segoe UI Semilight"/>
+        <Label x:Name="day" Content="Friday" HorizontalAlignment="Left" Margin="1145,107,0,0" VerticalAlignment="Top" Height="127" Width="217" FontSize="80" Foreground="White" FontFamily="Segoe UI Semilight" Grid.Row="1"/>
+        <Label x:Name="month" Content="November 2015" HorizontalAlignment="Left" Margin="1145,204,0,0" VerticalAlignment="Top" Height="101" Width="452" FontSize="64" Foreground="White" FontFamily="Segoe UI Semilight" Grid.Row="1"/>
+        <Label Name="lblTime" Content="10:10:10" HorizontalAlignment="Left" Margin="130,65,0,0" VerticalAlignment="Top" Height="260" Width="650" FontSize="200" Foreground="White" FontFamily="Segoe UI Semilight" Grid.Row="1"/>
     </Grid>
 </UserControl>

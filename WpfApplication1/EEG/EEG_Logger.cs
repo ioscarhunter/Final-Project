@@ -37,6 +37,9 @@ namespace WpfApplication1
         private double data_o2 = 0;
         private double time_stamp = 0;
 
+        private double gyroX;
+        private double gyroY;
+
         int[] interest = new int[] { 0, 1, 9, 10 };
 
         String[] eachSignal = new String[16];
@@ -66,7 +69,6 @@ namespace WpfApplication1
 
             // connect to Emoengine.            
             engine.Connect();
-
 
             // create a header for our output file
             //WriteHeader();
@@ -146,12 +148,11 @@ namespace WpfApplication1
             engine.ProcessEvents();
 
             _timer = new System.Timers.Timer();
-            _timer.Interval = 500;
+            _timer.Interval = 100;
             _timer.Elapsed += new System.Timers.ElapsedEventHandler(processEvent);
             _timer.Enabled = true;
             //engine.EE_DataSetBufferSizeInSec(7);
         }
-
 
 
         public void setmarker(int mark)
@@ -326,7 +327,7 @@ namespace WpfApplication1
             }
             else
             {
-                OnledUpdate(score.ToList().IndexOf(-1));
+                OnledUpdate(-1);
             }
         }
 
@@ -447,6 +448,7 @@ namespace WpfApplication1
 
         private void OnledUpdate(int led)
         {
+            Console.WriteLine(led);
             //Console.WriteLine("update Var");
             if (whichsUpdate != null)
                 whichsUpdate(this, new EEG_WhichEventArgs(led));
@@ -504,12 +506,24 @@ namespace WpfApplication1
             //{
             //    Console.Write("i = {0},", cq[i]);
             //}
+
+            int deltax;
+            int deltay;
+            engine.HeadsetGetGyroDelta((uint) userID, out deltax, out deltay);
+            gyroX += radtodec(deltax / 100.0);
+            gyroY += radtodec(deltay / 100.0);
+            Console.WriteLine(gyroX + ", " + gyroY);
             OnStatusUpdate(timeFromStart,
                 headsetOn, signalStrength.ToString(), chargeLevel, maxChargeLevel, eachSignal);
 
         }
-
+        private double radtodec(double rad)
+        {
+            return (rad * 180) / Math.PI;
+        }
     }
+
+
 
     public class EEG_LoggerEventArgs:EventArgs
     {

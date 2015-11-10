@@ -127,7 +127,7 @@ namespace EEG_Example_1
                 {
                     Console.WriteLine(i);
                     p.Run();
-                    Thread.Sleep(500);
+                    Thread.Sleep(1000);
                 }
             }
             catch (NotConnectException e)
