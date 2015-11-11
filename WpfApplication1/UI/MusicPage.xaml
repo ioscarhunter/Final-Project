@@ -51,8 +51,8 @@
             </Canvas>
             <Button Content="" Width="360" Canvas.Left="100" Canvas.Top="515" Height="305" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Foreground="#00DDDDDD" Click="back_button"/>
         </Canvas>
-        <ListBox Name="listbox1" HorizontalAlignment="Left" Height="155" Margin="1186,885,0,0" VerticalAlignment="Top" Width="494" FontSize="21.333">
-            <ListBoxItem Content="ListBoxItem"/>
+        <ListBox Name="listbox1" HorizontalAlignment="Left" Height="155" Margin="1186,885,0,0" VerticalAlignment="Top" Width="494" FontSize="21.333" Background="#FF8D8C8C" BorderBrush="#00ABADB3">
+            <ListBoxItem Content="Track List" Foreground="#FFF3F3F3" Selected="ListBoxItem_Selected"/>
         </ListBox>
         <ProgressBar Name="Volume" HorizontalAlignment="Left" Height="70" Margin="1186,1055,0,0" VerticalAlignment="Top" Width="494" RenderTransformOrigin="0.5,0.5" Maximum="1" LargeChange="0.25" SmallChange="0.25" Value="0.5">
             <ProgressBar.RenderTransform>
