@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:WpfApplication1"
              StartupUri="UI/PageSwitcher.xaml">
     <Application.Resources>
-        <Style TargetType="{x:Type local:SgraphControl}">
+        <!--<Style TargetType="{x:Type local:SgraphControl}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type local:SgraphControl}">
@@ -18,7 +18,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
 
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Green"/>

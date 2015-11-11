@@ -101,6 +101,8 @@
             <Label x:Name="ledupdate" Content="0" HorizontalAlignment="Left" Margin="16,151,0,0" Grid.Row="1" VerticalAlignment="Top"/>
             <Button x:Name="button1" Content="Back" HorizontalAlignment="Left" Margin="269,340,0,0" Grid.Row="2" VerticalAlignment="Top" Width="265" Click="button1_Click" Height="116" Background="#FFE0E0E0" FontSize="34.667"/>
             <Ellipse Fill="#FFFFC4C4" HorizontalAlignment="Left" Margin="131,355,0,3" Stroke="#FFB6B6B6" Width="82" Grid.Column="1" Grid.Row="1"/>
+            <Label x:Name="gyro" Content="Label" HorizontalAlignment="Left" Margin="61,320.4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="523" FontSize="26.667"/>
+            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="304,286.2,0,0" Grid.Row="2" VerticalAlignment="Top" Width="110" Background="#FFCBCBCB" FontSize="26.667" Click="button_Click"/>
 
         </Grid>
         <StackPanel Name ="stkPanel" HorizontalAlignment="Left" Height="1152" Margin="0,0,0,0" VerticalAlignment="Top" Width="1728"/>

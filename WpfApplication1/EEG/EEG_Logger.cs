@@ -16,6 +16,7 @@ namespace WpfApplication1
         public event EventHandler<EEG_LoggerEventArgs> DataUpdate;
         public event EventHandler<EEG_StatusEventArgs> StatusUpdate;
         public event EventHandler<EEG_WhichEventArgs> whichsUpdate;
+        public event EventHandler<EEG_GyroEventArgs> GyroUpdate;
 
         private EmoEngine engine; // Access to the EDK is viaa the EmoEngine 
         private int userID = -1; // userID is used to uniquely identify a user's headset
@@ -24,6 +25,7 @@ namespace WpfApplication1
         private uint userId = 0;
         private Profile profile = new Profile();
         private string profileName = "";
+
 
 
         private bool isLoad = true;
@@ -36,6 +38,9 @@ namespace WpfApplication1
         private double data_o1 = 0;
         private double data_o2 = 0;
         private double time_stamp = 0;
+
+        private double thresholdx = 100;
+        private double thresholdy = 100;
 
         private double gyroX;
         private double gyroY;
@@ -183,6 +188,7 @@ namespace WpfApplication1
 
         }
 
+
         private void fastcopy(double[] input_o1, double[] input_time)
         {
             //Console.WriteLine(input_o1.Length);
@@ -295,6 +301,9 @@ namespace WpfApplication1
             {
                 a_data[i] = new double[samplecollect];
             }
+
+            gyroX = 0;
+            gyroY = 0;
         }
 
         public void analysis()
@@ -469,6 +478,13 @@ namespace WpfApplication1
                 StatusUpdate(this, new EEG_StatusEventArgs(time, headsetstatus, signal, battery, maxbatt, eachSignal));
         }
 
+        private void OngyroUpdate(double x, double y)
+        {
+            //Console.WriteLine("update Var");
+            if (GyroUpdate != null)
+                GyroUpdate(this, new EEG_GyroEventArgs(x, y));
+        }
+
         void engine_EmoEngineEmoStateUpdated(object sender, EmoStateUpdatedEventArgs e)
         {
             EmoState es = e.emoState;
@@ -510,13 +526,13 @@ namespace WpfApplication1
             int deltax;
             int deltay;
             engine.HeadsetGetGyroDelta((uint) userID, out deltax, out deltay);
-            gyroX += radtodec(deltax / 100.0);
-            gyroY += radtodec(deltay / 100.0);
-            Console.WriteLine(gyroX + ", " + gyroY);
+            OngyroUpdate( radtodec(deltax / 100.0), radtodec(deltay / 100.0));
             OnStatusUpdate(timeFromStart,
                 headsetOn, signalStrength.ToString(), chargeLevel, maxChargeLevel, eachSignal);
 
         }
+
+        
         private double radtodec(double rad)
         {
             return (rad * 180) / Math.PI;
@@ -565,5 +581,16 @@ namespace WpfApplication1
 
         }
 
+    }
+
+    public class EEG_GyroEventArgs:EventArgs
+    {
+        public double gyrox;
+        public double gyroy;
+        public EEG_GyroEventArgs(double x,double y)
+        {
+            gyrox = x;
+            gyroy = y;
+        }
     }
 }

@@ -41,6 +41,9 @@ namespace WpfApplication1
 
         LineTrend lineTrend;
 
+        double deltax;
+        double deltay;
+
         SgraphControl ctrl;
 
         int cycle_count = 0;
@@ -48,6 +51,7 @@ namespace WpfApplication1
         public System.Timers.Timer _timerEEGREC;
         public System.Timers.Timer _timerMARK;
 
+        private bool reset;
 
         UserControl currentuc;
 
@@ -60,8 +64,6 @@ namespace WpfApplication1
             Switcher.pageSwitcher = this;
             Switcher.Switch(new MainMenu());
 
-
-
             lineTrend = new LineTrend { Points = new ObservableCollection<TrendPoint>(), TrendColor = Brushes.Coral };
 
             status.Content = "EEG Data Reader Example";
@@ -70,6 +72,7 @@ namespace WpfApplication1
             p.DataUpdate += HandleDataUpdate;
             p.StatusUpdate += HandleStatusUpdate;
             p.whichsUpdate += HandleLedUpdate;
+            p.GyroUpdate += HandleGyroUpdate;
 
             s = new SerialCom();
             s.LEDUpdate += HandleLEDUpdate;
@@ -79,6 +82,7 @@ namespace WpfApplication1
             status.Content = "not connect";
             //Switcher.remotechange(3);
         }
+
 
         internal void starteeg()
         {
@@ -243,6 +247,22 @@ namespace WpfApplication1
                 }
             });
 
+        }
+
+        private void HandleGyroUpdate(object sender, EEG_GyroEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (reset)
+                {
+                    deltax = 0;
+                    deltay = 0;
+                    reset = false;
+                }
+                deltax += e.gyrox;
+                deltay += e.gyroy;
+                gyro.Content = deltax + ", " + deltax;
+            });
         }
 
         private void connect_but_Click(object sender, RoutedEventArgs e)
@@ -415,6 +435,11 @@ namespace WpfApplication1
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             stkPanel.Visibility = Visibility.Visible;
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }

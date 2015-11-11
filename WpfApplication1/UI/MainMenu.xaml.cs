@@ -60,7 +60,7 @@ namespace WpfApplication1
             Switch_Fan();
         }
 
-        private void Switch_Fan() { MessageBox.Show("Fan opened"); }
+        private void Switch_Fan() { Switcher.Switch(new controlequipment()); }
         #region ISwitchable Members
 
         public void UtilizeState(object state)
