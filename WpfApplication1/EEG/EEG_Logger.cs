@@ -321,9 +321,11 @@ namespace WpfApplication1
             double maxofmax38 = pos38.Max();
             int maxIndex38 = pos38.ToList().IndexOf(maxofmax38);
             score[maxIndex38]++;
+
             double maxofmax39 = pos39.Max();
             int maxIndex39 = pos39.ToList().IndexOf(maxofmax39);
             score[maxIndex39]++;
+
             double maxofmax40 = pos40.Max();
             int maxIndex40 = pos40.ToList().IndexOf(maxofmax40);
             score[maxIndex40]++;

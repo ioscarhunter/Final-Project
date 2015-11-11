@@ -94,11 +94,15 @@ namespace WpfApplication1
             {
                 mediaplayer.Open(new Uri(track2));
                 mediaplayer.Play();
+                songname.Content = "English premier";
+                artist.Content = "Andy Cole";
                 music_status = 1;
             }
             else
             {
                 mediaplayer.Open(new Uri(track1));
+                songname.Content = "Get low";
+                artist.Content = "Dillon Francis";
                 mediaplayer.Play();
                 music_status = 0;
 
