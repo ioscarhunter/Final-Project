@@ -30,6 +30,8 @@ namespace WPFProject
             listbox1.Items.Add("Fast");
             listbox1.Items.Add("English");
             mediaplayer.Open(new Uri(track1));
+            songname.Content = "Get low";
+            artist.Content = "Dillon Francis";
             mediaplayer.Play();
             
         }
@@ -94,11 +96,15 @@ namespace WPFProject
             {
                 mediaplayer.Open(new Uri(track2));
                 mediaplayer.Play();
+                songname.Content = "English premier";
+                artist.Content = "Andy Cole";
                 music_status = 1;
             }
             else
             {
                 mediaplayer.Open(new Uri(track1));
+                songname.Content = "Get low";
+                artist.Content = "Dillon Francis";
                 mediaplayer.Play();
                 music_status = 0;
 
