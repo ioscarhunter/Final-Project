@@ -13,7 +13,7 @@
 #define PIN 3
 #define LED_COUNT 8
 
-#define EPIN 4
+#define EPIN 5
 #define E_COUNT 4
 
 using namespace std;

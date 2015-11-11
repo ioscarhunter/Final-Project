@@ -30,6 +30,8 @@ namespace WpfApplication1
             listbox1.Items.Add("Fast");
             listbox1.Items.Add("English");
             mediaplayer.Open(new Uri(track1));
+            songname.Content = "Get low";
+            artist.Content = "Dillon Francis";
             mediaplayer.Play();
             
         }
