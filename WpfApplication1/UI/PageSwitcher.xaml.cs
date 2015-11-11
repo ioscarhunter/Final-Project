@@ -402,6 +402,16 @@ namespace WpfApplication1
             }
         }
 
+        public void turnlighon()
+        {
+            s.turnonEquipment();
+        }
+
+        public void turnlighoff()
+        {
+            s.turnoffEquipment();
+        }
+
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             stkPanel.Visibility = Visibility.Visible;

@@ -35,6 +35,14 @@ namespace WpfApplication1
         {
             pageSwitcher.showsetting();
         }
-        
+
+        public static void turnonlight()
+        {
+            pageSwitcher.turnlighon();
+        }
+        public static void turnofflight()
+        {
+            pageSwitcher.turnlighoff();
+        }
     }
 }

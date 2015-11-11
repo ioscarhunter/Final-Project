@@ -217,12 +217,12 @@ namespace WpfApplication1
 
         }
 
-        private void turnonEquipment()
+        public void turnonEquipment()
         {
             port1.Write("E:" + 1 + "&" + "1" + "#");
         }
 
-        private void turnoffEquipment()
+        public void turnoffEquipment()
         {
             port1.Write("E:" + 0 + "&" + "1" + "#");
         }
