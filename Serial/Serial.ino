@@ -14,7 +14,7 @@
 #define LED_COUNT 8
 
 #define EPIN 5
-#define E_COUNT 4
+#define E_COUNT 6
 
 using namespace std;
 
@@ -39,7 +39,7 @@ void setup() {
 
 	clearLEDs();   // This function, defined below, turns all LEDs off...
 	leds.setBrightness(250);
-
+	equipment.setBrightness(250);
 	leds.show();   // ...but the LEDs don't actually update until you call this.
 	equipment.show();
 
@@ -57,9 +57,8 @@ void loop() {
 		// read the incoming byte:
 		for (int i = 1; i < 2; i++) {
 			String command = Serial.readStringUntil(':');
-
+			
 			if (command != "") {
-
 				//Serial.println("command " + command);
 				//here you could check the servo number
 				String pos = Serial.readStringUntil('&');
@@ -100,6 +99,7 @@ void loop() {
 
 				}
 				else if (command.equals("E")) {
+					
 					if (hex.equals("1")) {
 						for (int i = 0; i < E_COUNT; i++) {
 							earray[i].on();
@@ -107,7 +107,7 @@ void loop() {
 					}
 					else if (hex.equals("0")) {
 						for (int i = 0; i < E_COUNT; i++) {
-							earray[i].off();
+							earray[i].blackout();
 						}
 					}
 				}

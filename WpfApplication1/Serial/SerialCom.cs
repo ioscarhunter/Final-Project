@@ -57,6 +57,9 @@ namespace WpfApplication1
                                         {1, 2, 2, 3, 1, 3, 1, 3, 2, 4, 3, 4, 4, 2, 3, 1, 1, 3, 3, 2, 4, 3, 3, 4, 4, 3, 1, 1},
                                         {4, 1, 2, 1, 4, 3, 3, 2, 1, 3, 1, 1, 3, 1, 4, 4, 3, 1, 3, 3, 4, 3, 4, 2, 2, 4, 1, 1}};
 
+        private int[,] num5 = { { 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 7, 7, 7, 7, 7 } };
+        private int[,] num7 = { { 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 7, 7, 7, 7, 7, 7, 7 } };
+
         Random rnd = new Random();
         public event EventHandler<LED_StatusEventArgs> LEDUpdate;
 
@@ -162,7 +165,7 @@ namespace WpfApplication1
             }
             counttimes = 0;
             //changeColour(colourset.VERYDARKGRAY);
-            //all_dim();
+            all_dim();
             //eeg.writedata();
             //eeg.compute();
         }
@@ -224,7 +227,7 @@ namespace WpfApplication1
 
         public void turnoffEquipment()
         {
-            port1.Write("E:" + 0 + "&" + "1" + "#");
+            port1.Write("E:" + 0 + "&" + "0" + "#");
         }
     }
 

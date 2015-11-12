@@ -42,8 +42,7 @@ namespace WpfApplication1
         private double thresholdx = 100;
         private double thresholdy = 100;
 
-        private double gyroX;
-        private double gyroY;
+
 
         int[] interest = new int[] { 0, 1, 9, 10 };
 
@@ -65,6 +64,8 @@ namespace WpfApplication1
 
         double[] temp_o1 = new double[128 * timesec];
         double[] temp_marker = new double[128 * timesec];
+        double[] temp_gyroX = new double[128 * timesec];
+        double[] temp_gyroY = new double[128 * timesec];
 
         public EEG_Logger()
         {
@@ -179,7 +180,7 @@ namespace WpfApplication1
             Console.WriteLine("Writing " + _bufferSize.ToString() + " lines of data ");
 
 
-            fastcopy(data[EdkDll.EE_DataChannel_t.O1], data[EdkDll.EE_DataChannel_t.MARKER]);
+            fastcopy(data[EdkDll.EE_DataChannel_t.O1], data[EdkDll.EE_DataChannel_t.MARKER], data[EdkDll.EE_DataChannel_t.GYROX], data[EdkDll.EE_DataChannel_t.GYROY]);
             writedata();
             filteroutdata();
             printtofile();
@@ -189,13 +190,22 @@ namespace WpfApplication1
         }
 
 
-        private void fastcopy(double[] input_o1, double[] input_time)
+        private void fastcopy(double[] input_o1, double[] input_time, double[] input_gyrox, double[] input_gyroy)
         {
             //Console.WriteLine(input_o1.Length);
             Array.Copy(input_o1, 0, temp_o1, 0, input_o1.Length);
             Array.Copy(input_time, 0, temp_marker, 0, input_time.Length);
-            temp_o1 = sn.HighPassFilter(temp_o1);
+            Array.Copy(input_gyrox, 0, temp_gyroX, 0, input_gyrox.Length);
+            Array.Copy(input_gyroy, 0, temp_gyroY, 0, input_gyroy.Length);
+            double calgyroX = temp_gyroX[0];
+            double calgyroY = temp_gyroY[0];
+            for (int i = 0;i < temp_gyroX.Length;i++)
+            {
+                temp_gyroX[i] -= calgyroX;
+                temp_gyroY[i] -= calgyroY;
+            }
 
+            temp_o1 = sn.HighPassFilter(temp_o1);
         }
 
         private void filteroutdata()
@@ -208,6 +218,7 @@ namespace WpfApplication1
                     int countnum = 0;
                     double[] nom = new double[samplecollect];
                     double[] zero = new double[samplecollect];
+
 
                     for (int j = 0;j < samplecollect;j++)
                     {
@@ -226,7 +237,8 @@ namespace WpfApplication1
                     Array.Copy(zero, 0, zthreedata[(int) temp_marker[i]][count[(int) temp_marker[i]]], 0, countnum);
                     count[(int) temp_marker[i]]++;
                     Console.WriteLine(count[(int) temp_marker[i]]);
-                    i += samplecollect-1;
+
+                    i += countnum;
                 }
             }
         }
@@ -302,8 +314,6 @@ namespace WpfApplication1
                 a_data[i] = new double[samplecollect];
             }
 
-            gyroX = 0;
-            gyroY = 0;
         }
 
         public void analysis()
@@ -334,7 +344,7 @@ namespace WpfApplication1
             if (which >= 2)
             {
                 OnledUpdate(score.ToList().IndexOf(which));
-                
+
             }
             else
             {
@@ -349,7 +359,7 @@ namespace WpfApplication1
             for (int i = 0;i < temp_marker.Length;i++)
             {
                 //Console.WriteLine(temp_marker[i]);
-                file2.WriteLine(temp_marker[i] + ", " + temp_o1[i] + ", ");
+                file2.WriteLine(temp_marker[i] + ", " + temp_o1[i] + ", " + temp_gyroX[i] + ", " + temp_gyroY[i]);
             }
             file2.Close();
         }
@@ -420,7 +430,6 @@ namespace WpfApplication1
             return output;
 
         }
-
 
         private void doublestore(double[] input, int led)
         {
@@ -528,13 +537,13 @@ namespace WpfApplication1
             int deltax;
             int deltay;
             engine.HeadsetGetGyroDelta((uint) userID, out deltax, out deltay);
-            OngyroUpdate( radtodec(deltax / 100.0), radtodec(deltay / 100.0));
+            OngyroUpdate(radtodec(deltax / 100.0), radtodec(deltay / 100.0));
             OnStatusUpdate(timeFromStart,
                 headsetOn, signalStrength.ToString(), chargeLevel, maxChargeLevel, eachSignal);
 
         }
 
-        
+
         private double radtodec(double rad)
         {
             return (rad * 180) / Math.PI;
@@ -589,7 +598,7 @@ namespace WpfApplication1
     {
         public double gyrox;
         public double gyroy;
-        public EEG_GyroEventArgs(double x,double y)
+        public EEG_GyroEventArgs(double x, double y)
         {
             gyrox = x;
             gyroy = y;

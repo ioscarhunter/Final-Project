@@ -258,10 +258,12 @@ namespace WpfApplication1
                     deltax = 0;
                     deltay = 0;
                     reset = false;
+
                 }
+
                 deltax += e.gyrox;
                 deltay += e.gyroy;
-                gyro.Content = deltax + ", " + deltax;
+                gyro.Content = deltax + ", " + deltay;
             });
         }
 
@@ -333,7 +335,9 @@ namespace WpfApplication1
         }
 
         private void setmarker(object sender, System.Timers.ElapsedEventArgs e)
+
         {
+            reset = true;
             s.blinking(ref p);
         }
 
@@ -439,7 +443,7 @@ namespace WpfApplication1
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-           
+            reset = true;
         }
     }
 }
