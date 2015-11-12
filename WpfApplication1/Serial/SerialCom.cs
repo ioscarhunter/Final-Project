@@ -224,7 +224,7 @@ namespace WpfApplication1
 
         public void turnoffEquipment()
         {
-            port1.Write("E:" + 0 + "&" + "1" + "#");
+            port1.Write("E:" + 0 + "&" + "0" + "#");
         }
     }
 
