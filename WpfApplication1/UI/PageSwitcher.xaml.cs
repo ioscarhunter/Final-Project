@@ -96,7 +96,7 @@ namespace WpfApplication1
         private void processGyro()
         {
             
-            if (Math.Abs(deltax) > Math.Abs(deltay)&&Math.Abs(deltax) > 10)
+            if (Math.Abs(deltax) > Math.Abs(deltay)&&Math.Abs(deltax) > 7)
             {
                 if (deltax > 0)
                 {
@@ -109,7 +109,7 @@ namespace WpfApplication1
                 }
             }
 
-            else if (Math.Abs(deltay) > Math.Abs(deltax) && Math.Abs(deltay) > 10)
+            else if (Math.Abs(deltay) > Math.Abs(deltax) && Math.Abs(deltay) > 7)
             {
                 if (deltay > 0)
                 {
