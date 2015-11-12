@@ -52,8 +52,8 @@ namespace WpfApplication1
 
         private SignalProcessing sn = new SignalProcessing();
 
-        private const int timesec = 18;
-        private const int times = 7;
+        private const int timesec = 13;
+        private const int times = 5;
         private int samplecollect = 64;
         int[] count = new int[8];
 

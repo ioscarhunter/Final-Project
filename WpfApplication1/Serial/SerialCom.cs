@@ -62,7 +62,7 @@ namespace WpfApplication1
 
         Random rnd = new Random();
         public event EventHandler<LED_StatusEventArgs> LEDUpdate;
-
+        public event EventHandler<LED_FinishEventArgs> LEDFinish;
         public SerialCom()
         {
             leds = new LED[lednum];
@@ -137,13 +137,13 @@ namespace WpfApplication1
             changeColour(colourset.LIMEGREEN);
             all_off();
             int set = rnd.Next(5);
-            for (int t = 0;t < 7;t++)
+            for (int t = 0;t < 5;t++)
             {
                 //int set = rnd.Next(23);
                 Thread.Sleep(10);
                 for (int i = 0;i < 4;i++)
                 {
-                    int lednum = ledsequence[randomseed7[set, counttimes]];
+                    int lednum = ledsequence[randomseed5[set, counttimes]];
 
                     OnLEDStatusUpdate(0, lednum);
                     eeg.setmarker(lednum);
@@ -163,6 +163,8 @@ namespace WpfApplication1
                 }
                 //    OnLEDStatusUpdate(1, 0);
             }
+
+            OnLEDFinish(true);
             counttimes = 0;
             //changeColour(colourset.VERYDARKGRAY);
             all_dim();
@@ -185,6 +187,12 @@ namespace WpfApplication1
         {
             if (LEDUpdate != null)
                 LEDUpdate(this, new LED_StatusEventArgs(led, i));
+        }
+
+        public void OnLEDFinish(bool fin)
+        {
+            if (LEDFinish != null)
+                LEDFinish(this,new LED_FinishEventArgs(fin));
         }
 
         private string AutodetectArduinoPort()
@@ -240,6 +248,15 @@ namespace WpfApplication1
         {
             this.cycle = cycle;
             status = ledstatus;
+        }
+    }
+    public class LED_FinishEventArgs:EventArgs
+    {
+        public bool finish;
+
+        public LED_FinishEventArgs(bool fin)
+        {
+            finish = fin;
         }
     }
 }

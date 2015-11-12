@@ -76,6 +76,7 @@ namespace WpfApplication1
 
             s = new SerialCom();
             s.LEDUpdate += HandleLEDUpdate;
+            s.LEDFinish += HandleLEDFinish;
 
             connect = false;
             LEDrunning = false;
@@ -83,6 +84,44 @@ namespace WpfApplication1
             //Switcher.remotechange(3);
         }
 
+        private void HandleLEDFinish(object sender, LED_FinishEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                processGyro();
+                reset = true;
+            });
+        }
+
+        private void processGyro()
+        {
+            
+            if (Math.Abs(deltax) > Math.Abs(deltay)&&Math.Abs(deltax) > 10)
+            {
+                if (deltax > 0)
+                {
+                    updateselection(3);
+                }
+
+                else
+                {
+                    updateselection(7);
+                }
+            }
+
+            else if (Math.Abs(deltay) > Math.Abs(deltax) && Math.Abs(deltay) > 10)
+            {
+                if (deltay > 0)
+                {
+                    updateselection(5);
+                }
+
+                else
+                {
+                    updateselection(1);
+                }
+            }
+        }
 
         internal void starteeg()
         {
@@ -142,28 +181,33 @@ namespace WpfApplication1
             // dispatch the modification to the text box to the UI thread (main window dispatcher)
             Dispatcher.Invoke(() =>
             {
-                switch (e.lednum)
-                {
-                    case 1:
-                        remotechangepage(1);
-                        ledupdate.Content = "Down";
-                        break;
-                    case 3:
-                        remotechangepage(2);
-                        ledupdate.Content = "Right";
-                        break;
-                    case 5:
-                        remotechangepage(3);
-                        ledupdate.Content = "Up";
-                        break;
-                    case 7:
-                        remotechangepage(4);
-                        ledupdate.Content = "Left";
-                        break;
-
-                }
+                //updateselection(e.lednum);
             });
 
+        }
+
+        private void updateselection(int lednum)
+        {
+            switch (lednum)
+            {
+                case 1:
+                    remotechangepage(1);
+                    ledupdate.Content = "Down";
+                    break;
+                case 3:
+                    remotechangepage(2);
+                    ledupdate.Content = "Right";
+                    break;
+                case 5:
+                    remotechangepage(3);
+                    ledupdate.Content = "Up";
+                    break;
+                case 7:
+                    remotechangepage(4);
+                    ledupdate.Content = "Left";
+                    break;
+
+            }
         }
 
         private void HandleDataUpdate(object sender, EEG_LoggerEventArgs e)
@@ -310,12 +354,12 @@ namespace WpfApplication1
             {
                 s.readystate();
                 _timerEEGREC = new System.Timers.Timer();
-                _timerEEGREC.Interval = 20000;
+                _timerEEGREC.Interval = 13000;
                 _timerEEGREC.Elapsed += new System.Timers.ElapsedEventHandler(saveEEGdata);
                 _timerEEGREC.Enabled = true;
 
                 _timerMARK = new System.Timers.Timer();
-                _timerMARK.Interval = 20000;
+                _timerMARK.Interval = 13000;
                 _timerMARK.Elapsed += new System.Timers.ElapsedEventHandler(setmarker);
                 _timerMARK.Enabled = true;
 
