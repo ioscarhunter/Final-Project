@@ -49,6 +49,7 @@ namespace WpfApplication1
         public double standard_deviation(double[] input)
         {
             double[] temp = new double[input.Length];
+            double len = input.Length;
             double average = input.Average();
             for (int i = 0;i < input.Length;i++)
             {
@@ -56,7 +57,7 @@ namespace WpfApplication1
             }
             //double sumOfSquaresOfDifferences = input.Select(val => (val - average) * (val - average)).Sum();
             double sum = temp.Sum();
-            double sd = Math.Sqrt(sum / input.Length);
+            double sd = Math.Sqrt(sum / len);
             return sd;
         }
 
