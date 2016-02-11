@@ -27,9 +27,15 @@
     <ClInclude Include="Definition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Flasher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LED.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Flasher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

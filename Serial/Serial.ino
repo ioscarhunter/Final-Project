@@ -38,8 +38,8 @@ void setup() {
 	equipment.begin();
 
 	clearLEDs();   // This function, defined below, turns all LEDs off...
-	leds.setBrightness(250);
-	equipment.setBrightness(250);
+	leds.setBrightness(255);
+	equipment.setBrightness(255);
 	leds.show();   // ...but the LEDs don't actually update until you call this.
 	equipment.show();
 
@@ -52,6 +52,11 @@ void setup() {
 
 // the loop function runs over and over again until power down or reset
 void loop() {
+	for (int i = 0; i < LED_COUNT; i++) {
+		if (isSet[i]){
+			ledarray[i].update();
+	}
+	}
 	if (Serial.available() > 0) {
 
 		// read the incoming byte:
@@ -110,6 +115,11 @@ void loop() {
 							earray[i].blackout();
 						}
 					}
+				}
+				else if (command.equals("F")) {
+					int frequency = hex.toFloat();
+					Serial.println(frequency);
+					ledarray[pixel].changefrequency(frequency);
 				}
 
 			}
