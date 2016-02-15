@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Frequencytest.Logger;
-using Frequencytest.Serial; 
+using Frequencytest.Serial;
 using System.Threading.Tasks;
 
 namespace Frequencytest
@@ -44,10 +44,15 @@ namespace Frequencytest
         }
         static void Main(string[] args)
         {
+            int time =20;
+            int freq = 20;
+            int starttime = 10;
+            String Prefix = "OCR";
+
             Console.WriteLine("EEG Data Reader Example");
             try
             {
-                p = new EEG_Logger(11+10);
+                p = new EEG_Logger(11 + time, freq, Prefix);
                 s = new SerialCom();
                 for (int i = 0; i < 2; i++)
                 {
@@ -56,14 +61,27 @@ namespace Frequencytest
                 }
 
                 p.setMarker(1);
-                Thread.Sleep(10*1000);
+                Thread.Sleep(starttime * 1000);
                 p.setMarker(1);
-                
-                s.blinking();
-                p.setMarker(10);
-                Thread.Sleep(10*1000);
-                p.setMarker(10);
+
+                s.changeColour(0, colourset.GREEN);
+                s.blinking(0, freq);
+                p.setMarker(freq);
+                Thread.Sleep((time / 2) * 1000);
+
+
+                s.changeColour(0, colourset.RED);
+                s.blinking(0, freq);
+                p.setMarker(freq);
+                Thread.Sleep((time / 2) * 1000);
+                p.setMarker(freq);
                 s.all_off();
+
+                //s.blinking(0,freq);
+                //p.setMarker(freq);
+                //Thread.Sleep(time * 1000);
+                //p.setMarker(freq);
+                //s.all_off();
 
                 p.Run();
 

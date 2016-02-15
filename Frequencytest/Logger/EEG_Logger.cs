@@ -18,7 +18,8 @@ namespace Frequencytest.Logger
     {
         EmoEngine engine; // Access to the EDK is viaa the EmoEngine 
         int userID = -1; // userID is used to uniquely identify a user's headset
-        string filename = ".\\outfile-"+ DateTime.Now.ToString("MMddyy-hhmmss")+".csv"; // output filename
+        string filename;
+        string dir;
 
         uint userId = 0;
         Profile profile = new Profile();
@@ -27,11 +28,20 @@ namespace Frequencytest.Logger
         public bool isLoad = true;
         public bool oneTime = false;
 
+        SignalProcessing sn = new SignalProcessing();
+
         int timeinsec;
 
-        public EEG_Logger(int time)
+
+        public EEG_Logger(int time, int freq,String prefix)
         {
             timeinsec = time;
+            dir = ".\\" + DateTime.Now.ToString("MMddyy");
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            filename = dir + "\\"+prefix+"-" + (timeinsec - 11) + "," + freq + "-" + DateTime.Now.ToString("MMddyy-hhmmss") + ".csv"; // output filename
             // create the engine
             engine = EmoEngine.Instance;
             engine.UserAdded += new EmoEngine.UserAddedEventHandler(engine_UserAdded_Event);
@@ -97,12 +107,24 @@ namespace Frequencytest.Logger
 
             // Write the data to a file
             TextWriter file = new StreamWriter(filename, true);
+            EdkDll.EE_DataChannel_t[] selectedchannel = new EdkDll.EE_DataChannel_t[] { EdkDll.EE_DataChannel_t.MARKER, EdkDll.EE_DataChannel_t.O1, EdkDll.EE_DataChannel_t.O2 };
+
+
+            data[EdkDll.EE_DataChannel_t.O1] = sn.zerostandard(sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O1]));
+            data[EdkDll.EE_DataChannel_t.O2] = sn.zerostandard(sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O2]));
+
 
             for (int i = 0; i < _bufferSize; i++)
             {
-                // now write the data
-                foreach (EdkDll.EE_DataChannel_t channel in data.Keys)
-                    file.Write(data[channel][i] + ",");
+                foreach (EdkDll.EE_DataChannel_t channel in selectedchannel)
+                {
+                    // now write the data
+                    if (channel == EdkDll.EE_DataChannel_t.MARKER && data[channel][i] == 0)
+                        file.Write(" " + ",");
+                    else
+                        file.Write(data[channel][i] + ",");
+
+                }
                 file.WriteLine("");
 
             }
@@ -114,9 +136,7 @@ namespace Frequencytest.Logger
         {
             TextWriter file = new StreamWriter(filename, false);
 
-            string header = "COUNTER,INTERPOLATED,RAW_CQ,AF3,F7,F3, FC5, T7, P7, O1, O2,P8" +
-                            ", T8, FC6, F4,F8, AF4,GYROX, GYROY, TIMESTAMP, ES_TIMESTAMP" +
-                            "FUNC_ID, FUNC_VALUE, MARKER, SYNC_SIGNAL,";
+            string header = "MARKER, O1, O2, ";
 
             file.WriteLine(header);
             file.Close();

@@ -33,13 +33,13 @@ namespace Frequencytest.Serial
             port1.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
             port1.Open();
             Thread.Sleep(5);
-            setupColour(colourset.LIMEGREEN);
+            setupColour(colourset.GREEN);
             all_off();
         }
 
         public void setupColour(int setcolour)
         {
-            for (int i = 0;i < lednum;i++)
+            for (int i = 0; i < lednum; i++)
             {
                 leds[i] = new LED(i, setcolour, ref port1);
                 leds[i].setupLED();
@@ -47,9 +47,15 @@ namespace Frequencytest.Serial
             }
         }
 
-        public void changeColour(int setcolour)
+        public void changeColour(int led, int setcolour)
         {
-            for (int i = 0;i < lednum;i++)
+            leds[led].changecolour(setcolour);
+            Thread.Sleep(5);
+        }
+
+        public void changeColourall(int setcolour)
+        {
+            for (int i = 0; i < lednum; i++)
             {
                 leds[i].changecolour(setcolour);
                 Thread.Sleep(5);
@@ -58,7 +64,7 @@ namespace Frequencytest.Serial
 
         public void all_on()
         {
-            for (int i = 0;i < lednum;i++)
+            for (int i = 0; i < lednum; i++)
             {
                 leds[i].turnon();
                 Thread.Sleep(5);
@@ -67,7 +73,7 @@ namespace Frequencytest.Serial
 
         public void all_off()
         {
-            for (int i = 0;i < lednum;i++)
+            for (int i = 0; i < lednum; i++)
             {
                 leds[i].blackout();
                 Thread.Sleep(5);
@@ -76,16 +82,17 @@ namespace Frequencytest.Serial
 
         public void all_dim()
         {
-            for (int i = 0;i < lednum;i++)
+            for (int i = 0; i < lednum; i++)
             {
                 leds[i].turnoff();
                 Thread.Sleep(5);
             }
         }
-        public void blinking( )
+        public void blinking(int led, int freq)
         {
-            leds[1].turnon();
-            leds[1].blink(5);
+            leds[led].turnon();
+
+            leds[led].blink(freq);
         }
 
 
@@ -98,7 +105,7 @@ namespace Frequencytest.Serial
         public void OnLEDFinish(bool fin)
         {
             if (LEDFinish != null)
-                LEDFinish(this,new LED_FinishEventArgs(fin));
+                LEDFinish(this, new LED_FinishEventArgs(fin));
         }
 
         private string AutodetectArduinoPort()
@@ -145,7 +152,7 @@ namespace Frequencytest.Serial
         }
     }
 
-    public class LED_StatusEventArgs:EventArgs
+    public class LED_StatusEventArgs : EventArgs
     {
         public int status;
         public int cycle;
@@ -156,7 +163,7 @@ namespace Frequencytest.Serial
             status = ledstatus;
         }
     }
-    public class LED_FinishEventArgs:EventArgs
+    public class LED_FinishEventArgs : EventArgs
     {
         public bool finish;
 
