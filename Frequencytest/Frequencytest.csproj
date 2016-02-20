@@ -73,6 +73,7 @@
     <Compile Include="Serial\colourset.cs" />
     <Compile Include="Serial\LED.cs" />
     <Compile Include="Serial\SerialCom.cs" />
+    <Compile Include="strip.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

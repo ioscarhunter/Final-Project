@@ -45,9 +45,9 @@ namespace Frequencytest
         static void Main(string[] args)
         {
             int time =20;
-            int freq = 20;
+            int freq = 10;
             int starttime = 10;
-            String Prefix = "OCR";
+            String Prefix = "SunGR";
 
             Console.WriteLine("EEG Data Reader Example");
             try
@@ -77,7 +77,7 @@ namespace Frequencytest
                 p.setMarker(freq);
                 s.all_off();
 
-                //s.blinking(0,freq);
+                //s.blinking(0, freq);
                 //p.setMarker(freq);
                 //Thread.Sleep(time * 1000);
                 //p.setMarker(freq);
