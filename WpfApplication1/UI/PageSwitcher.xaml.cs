@@ -109,7 +109,7 @@ namespace WpfApplication1
                 }
             }
 
-            else if (Math.Abs(deltay) > Math.Abs(deltax) && Math.Abs(deltay) > 7)
+            else if (Math.Abs(deltay) > Math.Abs(deltax) && Math.Abs(deltay) > 5)
             {
                 if (deltay > 0)
                 {
@@ -354,12 +354,12 @@ namespace WpfApplication1
             {
                 s.readystate();
                 _timerEEGREC = new System.Timers.Timer();
-                _timerEEGREC.Interval = 13000;
+                _timerEEGREC.Interval = 15000;
                 _timerEEGREC.Elapsed += new System.Timers.ElapsedEventHandler(saveEEGdata);
                 _timerEEGREC.Enabled = true;
 
                 _timerMARK = new System.Timers.Timer();
-                _timerMARK.Interval = 13000;
+                _timerMARK.Interval = 15000;
                 _timerMARK.Elapsed += new System.Timers.ElapsedEventHandler(setmarker);
                 _timerMARK.Enabled = true;
 
