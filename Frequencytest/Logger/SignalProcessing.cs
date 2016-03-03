@@ -13,26 +13,12 @@ namespace Frequencytest.Logger
         double[] output;
         public double[] Process(double[] input)
         {
-            //double[] filteredSamples = HighPassFilter(input);
-            //double[] windowedSamples = HannigWindowing(filteredSamples);
-            double[] transformedSamples = FastFourierTransform(input);
+			//double[] filteredSamples = HighPassFilter(input);
+			
+			double[] normalized = zerostandard(input);
+			//double[] windowedSamples = HannigWindowing(normalized);
+			double[] transformedSamples = FastFourierTransform(normalized);
             return transformedSamples;
-        }
-
-        public double[] normalization(double[] input)
-        {
-            double[] output = new double[input.Length];
-            double max = input.Max();
-            double min = input.Min();
-            if (Math.Abs(min) > max)
-            {
-                max = Math.Abs(min);
-            }
-            for (int i = 0;i < input.Length;i++)
-            {
-                output[i] = input[i] / max;
-            }
-            return output;
         }
 
         public double standard_deviation(double[] input)

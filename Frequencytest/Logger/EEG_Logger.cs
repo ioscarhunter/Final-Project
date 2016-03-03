@@ -110,8 +110,8 @@ namespace Frequencytest.Logger
             EdkDll.EE_DataChannel_t[] selectedchannel = new EdkDll.EE_DataChannel_t[] { EdkDll.EE_DataChannel_t.MARKER, EdkDll.EE_DataChannel_t.O1, EdkDll.EE_DataChannel_t.O2 };
 
 
-            data[EdkDll.EE_DataChannel_t.O1] = sn.zerostandard(sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O1]));
-            data[EdkDll.EE_DataChannel_t.O2] = sn.zerostandard(sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O2]));
+            data[EdkDll.EE_DataChannel_t.O1] = sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O1]);
+            data[EdkDll.EE_DataChannel_t.O2] = sn.HighPassFilter(data[EdkDll.EE_DataChannel_t.O2]);
 
 
             for (int i = 0; i < _bufferSize; i++)

@@ -47,51 +47,58 @@ namespace Frequencytest
             int time =20;
             int freq = 10;
             int starttime = 10;
-            String Prefix = "SunGR";
+            String Prefix = "WinGR";
 
-            Console.WriteLine("EEG Data Reader Example");
-            try
-            {
-                p = new EEG_Logger(11 + time, freq, Prefix);
-                s = new SerialCom();
-                for (int i = 0; i < 2; i++)
-                {
-                    p.connect();
-                    Thread.Sleep(1000);
-                }
+			strip s = new strip(".\\" + "030216" + "\\" + "Win-20,6-030216-085935");
 
-                p.setMarker(1);
-                Thread.Sleep(starttime * 1000);
-                p.setMarker(1);
+			//Console.WriteLine("EEG Data Reader Example");
+			//try
+			//{
+			//	p = new EEG_Logger(11 + time, freq, Prefix);
+			//	s = new SerialCom();
+			//	for (int i = 0; i < 2; i++)
+			//	{
+			//		p.connect();
+			//		Thread.Sleep(1000);
+			//	}
 
-                s.changeColour(0, colourset.GREEN);
-                s.blinking(0, freq);
-                p.setMarker(freq);
-                Thread.Sleep((time / 2) * 1000);
+			//	p.setMarker(1);
+			//	Thread.Sleep(starttime * 1000);
+			//	p.setMarker(1);
 
 
-                s.changeColour(0, colourset.RED);
-                s.blinking(0, freq);
-                p.setMarker(freq);
-                Thread.Sleep((time / 2) * 1000);
-                p.setMarker(freq);
-                s.all_off();
-
-                //s.blinking(0, freq);
-                //p.setMarker(freq);
-                //Thread.Sleep(time * 1000);
-                //p.setMarker(freq);
-                //s.all_off();
-
-                p.Run();
+			//	//Dual colour
+			//	s.changeColour(0, colourset.GREEN);
+			//	s.blinking(0, freq);
+			//	p.setMarker(freq);
+			//	Thread.Sleep((time / 2) * 1000);
 
 
-            }
-            catch (NotConnectException e)
-            {
-                Console.WriteLine("not connect");
-            }
-            Console.WriteLine("Press any key to continue...");
+			//	s.changeColour(0, colourset.RED);
+			//	s.blinking(0, freq);
+			//	p.setMarker(freq);
+			//	Thread.Sleep((time / 2) * 1000);
+			//	p.setMarker(freq);
+			//	s.all_off();
+
+			//	//Single colour
+
+			//	//s.blinking(0, freq);
+			//	//p.setMarker(freq);
+			//	//Thread.Sleep(time * 1000);
+			//	//p.setMarker(freq);
+			//	//s.all_off();
+
+			//	p.Run();
+
+
+			//}
+			//catch (NotConnectException e)
+			//{
+			//	Console.WriteLine("not connect");
+			//}
+
+			Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
     }
