@@ -9,19 +9,34 @@ namespace Frequencytest.Logger
 {
     class SignalProcessing
     {
-       
-        double[] output;
+
         public double[] Process(double[] input)
         {
 			//double[] filteredSamples = HighPassFilter(input);
 			
-			double[] normalized = zerostandard(input);
+			double[] normalized = normalization(input);
 			//double[] windowedSamples = HannigWindowing(normalized);
 			double[] transformedSamples = FastFourierTransform(normalized);
-            return transformedSamples;
-        }
 
-        public double standard_deviation(double[] input)
+            return normalization(transformedSamples);
+        }
+		public double[] normalization(double[] input)
+		{
+			double[] output = new double[input.Length];
+			double max = input.Max();
+			double min = input.Min();
+			if (Math.Abs(min) > max)
+			{
+				max = Math.Abs(min);
+			}
+			for (int i = 0; i < input.Length; i++)
+			{
+				output[i] = input[i] / max;
+			}
+			return output;
+		}
+
+		public double standard_deviation(double[] input)
         {
             double[] temp = new double[input.Length];
             double average = input.Average();
@@ -35,9 +50,8 @@ namespace Frequencytest.Logger
             return sd;
         }
 
-        public double[] HighPassFilter(double[] input)
+        public double[] HighPassFilter(double[] input,double fCut)
         {
-            double fCut = 0.16F;
             double W = 2.0F * 128;
 
             fCut *= 6.28318530717959F; // 2.0F * Math.Pi
@@ -46,18 +60,42 @@ namespace Frequencytest.Logger
             double a1 = -a0;
             double b1 = (W - fCut) * norm;
 
-            if (output == null)
-                output = new double[input.Length];
+			double[] output = new double[input.Length];
 
-            for (int i = 1;i < input.Length;i++)
+			for (int i = 1;i < input.Length;i++)
             {
-                output[i] = input[i] * a0 + input[i - 1] * a1 + output[i - 1] * b1;
+                output[i] = input[i] * a0 + 
+							input[i - 1] * a1 + 
+							output[i - 1] * b1;
             }
 
             return output;
         }
 
-        public double[] zerostandard(double[] input)
+		private double[] LowPassFilter(double[] input, double fCut)
+		{
+			const float W = 2.0F * 128;
+
+			fCut = 1 / (fCut * 6.28318530717959F); // 2.0F * Math.Pi
+			double norm = 1.0F / (fCut + W);
+			double a0 = W * norm;
+			double a1 = a0;
+			double b1 = (W - fCut) * norm;
+
+			double[] output = new double[input.Length];
+
+			for (int i = 0; i < input.Length - 1; i++)
+			{
+				if (i - 1 > 0)
+					output[i] = input[i] * a0 + input[i - 1] * a1 + output[i - 1] * b1;
+			}
+
+			return output;
+
+
+		}
+
+		public double[] zerostandard(double[] input)
         {
             double[] output = new double[input.Length];
             double sd = standard_deviation(input);
