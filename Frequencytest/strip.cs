@@ -68,7 +68,7 @@ namespace Frequencytest
 			folderPath = folder;
 			filePath = filename;
 
-			double[][] outnum = new double[6][];
+			double[][] outnum = new double[5][];
 			for (int i = 0; i < outnum.Length; i++)
 			{
 				outnum[i] = new double[sample];
@@ -126,25 +126,37 @@ namespace Frequencytest
 					if (preRowCount == sample)
 					{
 
-						preCount++;
+						
 						Console.WriteLine(preCount + " = " + preRowCount);
 						preRowCount = 0;
 
-						tempo1 = sn.Process(sn.HighPassFilter(tempo1, 5, 1));
-						tempo2 = sn.Process(sn.HighPassFilter(tempo2, 5, 1));
+						tempo1 = sn.Process(tempo1);
+						tempo2 = sn.Process(tempo2);
+
+						tempo1 = sn.MovingAverage(tempo1, 3);
+
+						tempo2 = sn.MovingAverage(tempo2, 3);
+						tempo1 = sn.MovingAverage(tempo1, 3);
+						tempo2 = sn.MovingAverage(tempo2, 3);
+
+
 
 						for (int i = 0; i < outnum[0].Length; i++)
 						{
-							preout[i] += ((tempo1[i] + tempo2[i])/(2.0*9.0));
+							preout[i] += ((tempo1[i] + tempo2[i]) / (2.0 * 9.0));
 						}
 
 						//preout = sn.HighPassFilter(preout, 1, 1);
 						//preout = sn.Process(preout);
 						//preout = sn.MovingAverage(preout, 7);
 
-						if (preCount == 9)
+						if (preCount == 4)
 						{
 							predata = false;
+						}
+						else
+						{
+							preCount++;
 						}
 					}
 
@@ -162,12 +174,12 @@ namespace Frequencytest
 					if (Row == sample)
 					{
 
-						count++;
+						
 						Console.WriteLine(count + " = " + Row);
 						Row = 0;
 
-						tempo1 = sn.HighPassFilter (tempo1, 3, 1);
-						tempo2 = sn.HighPassFilter(tempo2, 3, 1);
+						//tempo1 = sn.HighPassFilter (tempo1, 3, 1);
+						//tempo2 = sn.HighPassFilter(tempo2, 3, 1);
 						tempo1 = sn.Process(tempo1);
 						tempo2 = sn.Process(tempo2);
 
@@ -176,10 +188,7 @@ namespace Frequencytest
 							outnum[count][i] += (tempo1[i] + tempo2[i]) / 2.0;
 						}
 
-						if (count == 9)
-						{
-
-						}
+						count++;
 					}
 					//Console.WriteLine(Row + "," + o1 + "," + o2);
 				}
@@ -192,7 +201,8 @@ namespace Frequencytest
 			for (int i = 0; i < outnum[0].Length / 2; i++)
 			{
 				double freq = (i / 4.0);
-				outfile.Write(freq+",");
+				if (freq >= 5 && freq <= 20)
+					outfile.Write(freq + ",");
 				for (int j = 0; j < outnum.Length; j++)
 				{
 
@@ -219,7 +229,7 @@ namespace Frequencytest
 						ltheta += (outnum[j][i]);
 						ltheta2 += (preout[i]);
 
-						theta += (outnum[count][i]);
+						theta += (outnum[j][i]);
 						theta2 += (preout[i]);
 					}
 					if (freq >= 5.75 && freq <= 7.5)
@@ -227,7 +237,7 @@ namespace Frequencytest
 						htheta += (outnum[j][i]);
 						htheta2 += (preout[i]);
 
-						theta += (outnum[count][i]);
+						theta += (outnum[j][i]);
 						theta2 += (preout[i]);
 					}
 
@@ -236,7 +246,7 @@ namespace Frequencytest
 						lalpha += (outnum[j][i]);
 						lalpha2 += (preout[i]);
 
-						alpha += (outnum[count][i]);
+						alpha += (outnum[j][i]);
 						alpha2 += (preout[i]);
 					}
 					if (freq >= 10.5 && freq <= 13.0)
@@ -265,11 +275,13 @@ namespace Frequencytest
 						beta2 += (preout[i]);
 					}
 
-					
-					outfile.Write("," + preout[i] + "," + outnum[j][i] + "," + (outnum[j][i] - preout[i]) + ",");
+					if (freq >= 5 && freq <= 20)
+					{
+						outfile.Write("," + preout[i] + "," + outnum[j][i] + "," + (outnum[j][i] - preout[i]) + ",");
+					}
 				}
-
-				outfile.WriteLine();
+				if (freq >= 5 && freq <= 20)
+					outfile.WriteLine();
 			}
 
 			outfile.Close();
