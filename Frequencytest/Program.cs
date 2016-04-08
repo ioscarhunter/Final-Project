@@ -50,66 +50,66 @@ namespace Frequencytest
 
             int starttime = 10;
             String Prefix = "OCR";
-			String folder = ".\\" + "021216" + "\\";
+			String folder = ".\\" + "data" + "\\";
 
 			//strip s = new strip( + "OCR-20,10-030416-110942");
 
-			//string[] fileEntries = Directory.GetFiles(folder);
-			//foreach (string fileName in fileEntries)
+			string[] fileEntries = Directory.GetFiles(folder);
+			foreach (string fileName in fileEntries)
+			{
+				String filename = Path.GetFileName(fileName);
+				strip s = new strip(folder, filename.TrimEnd(".csv".ToCharArray()));
+			}
+
+			//Console.WriteLine("EEG Data Reader Example");
+			//try
 			//{
-			//	String filename = Path.GetFileName(fileName);
-			//	strip s = new strip(folder + filename.TrimEnd(".csv".ToCharArray()));
-			//}
+			//	p = new EEG_Logger(11 + time, freq, Prefix);
+			//	s = new SerialCom();
+			//	for (int i = 0; i < 2; i++)
+			//	{
+			//		p.connect();
+			//		Thread.Sleep(1000);
+			//	}
 
-			Console.WriteLine("EEG Data Reader Example");
-			try
-			{
-				p = new EEG_Logger(11 + time, freq, Prefix);
-				s = new SerialCom();
-				for (int i = 0; i < 2; i++)
-				{
-					p.connect();
-					Thread.Sleep(1000);
-				}
-
-				p.setMarker(1);
-				Thread.Sleep(starttime * 1000);
-				p.setMarker(1);
+			//	p.setMarker(1);
+			//	Thread.Sleep(starttime * 1000);
+			//	p.setMarker(1);
 
 
-				//Dual colour
-				//s.changeColour(0, colourset.GREEN);
-				//s.blinking(0, freq);
-				//p.setMarker(freq);
-				//Thread.Sleep((time / 2) * 1000);
+			//Dual colour
+			//s.changeColour(0, colourset.GREEN);
+			//s.blinking(0, freq);
+			//p.setMarker(freq);
+			//Thread.Sleep((time / 2) * 1000);
 
 
-				//s.changeColour(0, colourset.RED);
-				//s.blinking(0, freq);
-				//p.setMarker(freq);
-				//Thread.Sleep((time / 2) * 1000);
-				//p.setMarker(freq);
-				//s.all_off();
+			//s.changeColour(0, colourset.RED);
+			//s.blinking(0, freq);
+			//p.setMarker(freq);
+			//Thread.Sleep((time / 2) * 1000);
+			//p.setMarker(freq);
+			//s.all_off();
 
-				//Single colour
+			//Single colour
 
-				s.blinking(0, freq);
-				p.setMarker(freq);
-				Thread.Sleep(time * 1000);
-				p.setMarker(freq);
-				s.all_off();
+			//	s.blinking(0, freq);
+			//		p.setMarker(freq);
+			//		Thread.Sleep(time * 1000);
+			//		p.setMarker(freq);
+			//		s.all_off();
 
-				p.Run();
+			//		p.Run();
 
 
-			}
-			catch (NotConnectException e)
-			{
-				Console.WriteLine("not connect");
-			}
+			//	}
+			//	catch (NotConnectException e)
+			//	{
+			//		Console.WriteLine("not connect");
+			//	}
 
-			Console.WriteLine("Press any key to continue...");
-			         Console.ReadKey();
+			//	Console.WriteLine("Press any key to continue...");
+			//	         Console.ReadKey();
 		}
-    }
+	}
 }

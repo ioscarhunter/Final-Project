@@ -16,6 +16,11 @@ namespace Frequencytest
 		bool predata = false;
 		SignalProcessing sn = new SignalProcessing();
 		int sample = 512;
+		int emotivSample = 128;
+		int multiplyer;
+
+		int totaltime = 20;
+		int times;
 
 		int count = 0;
 		string chartHeader = ",Rest,Active";
@@ -33,6 +38,8 @@ namespace Frequencytest
 
 		public strip(String folder, String filename)
 		{
+			int multiplyer = (int)Math.Ceiling(sample /(double) emotivSample);
+			times = (int)Math.Ceiling(totaltime / (double)emotivSample);
 
 			double delta = 0;
 			double theta = 0;
@@ -126,7 +133,7 @@ namespace Frequencytest
 					if (preRowCount == sample)
 					{
 
-						
+
 						Console.WriteLine(preCount + " = " + preRowCount);
 						preRowCount = 0;
 
@@ -174,7 +181,7 @@ namespace Frequencytest
 					if (Row == sample)
 					{
 
-						
+
 						Console.WriteLine(count + " = " + Row);
 						Row = 0;
 
@@ -205,80 +212,81 @@ namespace Frequencytest
 					outfile.Write(freq + ",");
 				for (int j = 0; j < outnum.Length; j++)
 				{
-
-					if (freq >= 0.1 && freq < 2.25)
-					{
-						ldelta += (outnum[j][i]);
-						ldelta2 += (preout[i]);
-
-						delta += (outnum[j][i]);
-						delta2 += (preout[i]);
-					}
-
-					if (freq >= 2.25 && freq <= 3.5)
-					{
-						hdelta += (outnum[j][i]);
-						hdelta2 += (preout[i]);
-
-						delta += (outnum[j][i]);
-						delta2 += (preout[i]);
-					}
-
-					if (freq >= 4.0 && freq < 5.75)
-					{
-						ltheta += (outnum[j][i]);
-						ltheta2 += (preout[i]);
-
-						theta += (outnum[j][i]);
-						theta2 += (preout[i]);
-					}
-					if (freq >= 5.75 && freq <= 7.5)
-					{
-						htheta += (outnum[j][i]);
-						htheta2 += (preout[i]);
-
-						theta += (outnum[j][i]);
-						theta2 += (preout[i]);
-					}
-
-					if (freq >= 8.0 && freq < 10.5)
-					{
-						lalpha += (outnum[j][i]);
-						lalpha2 += (preout[i]);
-
-						alpha += (outnum[j][i]);
-						alpha2 += (preout[i]);
-					}
-					if (freq >= 10.5 && freq <= 13.0)
-					{
-						halpha += (outnum[j][i]);
-						halpha2 += (preout[i]);
-
-						alpha += (outnum[j][i]);
-						alpha2 += (preout[i]);
-					}
-
-					if (freq >= 14 && freq < 22)
-					{
-						lbeta += (outnum[j][i]);
-						lbeta2 += (preout[i]);
-
-						beta += (outnum[j][i]);
-						beta2 += (preout[i]);
-					}
-					if (freq >= 22 && freq <= 30)
-					{
-						hbeta += (outnum[j][i]);
-						hbeta2 += (preout[i]);
-
-						beta += (outnum[j][i]);
-						beta2 += (preout[i]);
-					}
-
 					if (freq >= 5 && freq <= 20)
 					{
 						outfile.Write("," + preout[i] + "," + outnum[j][i] + "," + (outnum[j][i] - preout[i]) + ",");
 					}
+
+					//	if (freq >= 0.1 && freq < 2.25)
+					//	{
+					//		ldelta += (outnum[j][i]);
+					//		ldelta2 += (preout[i]);
+
+					//		delta += (outnum[j][i]);
+					//		delta2 += (preout[i]);
+					//	}
+
+					//	if (freq >= 2.25 && freq <= 3.5)
+					//	{
+					//		hdelta += (outnum[j][i]);
+					//		hdelta2 += (preout[i]);
+
+					//		delta += (outnum[j][i]);
+					//		delta2 += (preout[i]);
+					//	}
+
+					//	if (freq >= 4.0 && freq < 5.75)
+					//	{
+					//		ltheta += (outnum[j][i]);
+					//		ltheta2 += (preout[i]);
+
+					//		theta += (outnum[j][i]);
+					//		theta2 += (preout[i]);
+					//	}
+					//	if (freq >= 5.75 && freq <= 7.5)
+					//	{
+					//		htheta += (outnum[j][i]);
+					//		htheta2 += (preout[i]);
+
+					//		theta += (outnum[j][i]);
+					//		theta2 += (preout[i]);
+					//	}
+
+					//	if (freq >= 8.0 && freq < 10.5)
+					//	{
+					//		lalpha += (outnum[j][i]);
+					//		lalpha2 += (preout[i]);
+
+					//		alpha += (outnum[j][i]);
+					//		alpha2 += (preout[i]);
+					//	}
+					//	if (freq >= 10.5 && freq <= 13.0)
+					//	{
+					//		halpha += (outnum[j][i]);
+					//		halpha2 += (preout[i]);
+
+					//		alpha += (outnum[j][i]);
+					//		alpha2 += (preout[i]);
+					//	}
+
+					//	if (freq >= 14 && freq < 22)
+					//	{
+					//		lbeta += (outnum[j][i]);
+					//		lbeta2 += (preout[i]);
+
+					//		beta += (outnum[j][i]);
+					//		beta2 += (preout[i]);
+					//	}
+					//	if (freq >= 22 && freq <= 30)
+					//	{
+					//		hbeta += (outnum[j][i]);
+					//		hbeta2 += (preout[i]);
+
+					//		beta += (outnum[j][i]);
+					//		beta2 += (preout[i]);
+					//	}
+
+
 				}
 				if (freq >= 5 && freq <= 20)
 					outfile.WriteLine();
@@ -286,29 +294,29 @@ namespace Frequencytest
 
 			outfile.Close();
 
-			TextWriter outfile_sub_chart = new StreamWriter(folderPath + subChartPath + filePath + "-d-ft-chart.csv", false);
-			outfile_sub_chart.WriteLine(chartHeader);
-			outfile_sub_chart.WriteLine("LDelta," + ldelta2 + "," + ldelta);
-			outfile_sub_chart.WriteLine("HDelta," + hdelta2 + "," + hdelta);
-			outfile_sub_chart.WriteLine("LTheta," + ltheta2 + "," + ltheta);
-			outfile_sub_chart.WriteLine("HTheta," + htheta2 + "," + htheta);
-			outfile_sub_chart.WriteLine("LAlpha," + lalpha2 + "," + lalpha);
-			outfile_sub_chart.WriteLine("HAlpha," + halpha2 + "," + halpha);
-			outfile_sub_chart.WriteLine("LBeta," + lbeta2 + "," + lbeta);
-			outfile_sub_chart.WriteLine("HBeta," + hbeta2 + "," + hbeta);
-			outfile_sub_chart.Close();
+			//TextWriter outfile_sub_chart = new StreamWriter(folderPath + subChartPath + filePath + "-d-ft-chart.csv", false);
+			//outfile_sub_chart.WriteLine(chartHeader);
+			//outfile_sub_chart.WriteLine("LDelta," + ldelta2 + "," + ldelta);
+			//outfile_sub_chart.WriteLine("HDelta," + hdelta2 + "," + hdelta);
+			//outfile_sub_chart.WriteLine("LTheta," + ltheta2 + "," + ltheta);
+			//outfile_sub_chart.WriteLine("HTheta," + htheta2 + "," + htheta);
+			//outfile_sub_chart.WriteLine("LAlpha," + lalpha2 + "," + lalpha);
+			//outfile_sub_chart.WriteLine("HAlpha," + halpha2 + "," + halpha);
+			//outfile_sub_chart.WriteLine("LBeta," + lbeta2 + "," + lbeta);
+			//outfile_sub_chart.WriteLine("HBeta," + hbeta2 + "," + hbeta);
+			//outfile_sub_chart.Close();
 
-			TextWriter outfile_chart = new StreamWriter(folderPath + chartPath + filePath + "-d-ft-chart.csv", false);
-			outfile_chart.WriteLine(chartHeader);
-			outfile_chart.WriteLine("elta," + delta2 + "," + delta);
+			//TextWriter outfile_chart = new StreamWriter(folderPath + chartPath + filePath + "-d-ft-chart.csv", false);
+			//outfile_chart.WriteLine(chartHeader);
+			//outfile_chart.WriteLine("elta," + delta2 + "," + delta);
 
-			outfile_chart.WriteLine("Theta," + theta2 + "," + theta);
+			//outfile_chart.WriteLine("Theta," + theta2 + "," + theta);
 
-			outfile_chart.WriteLine("Alpha," + alpha2 + "," + alpha);
+			//outfile_chart.WriteLine("Alpha," + alpha2 + "," + alpha);
 
-			outfile_chart.WriteLine("Beta," + beta2 + "," + beta);
+			//outfile_chart.WriteLine("Beta," + beta2 + "," + beta);
 
-			outfile_chart.Close();
+			//outfile_chart.Close();
 
 		}
 	}

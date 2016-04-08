@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Serial.ino" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.Serial.vsarduino.h">
