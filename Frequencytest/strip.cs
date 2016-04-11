@@ -34,11 +34,12 @@ namespace Frequencytest
 		double[] tempo1;
 		double[] tempo2;
 		double[] preout;
+		double[] freq;
 
 
 		public strip(String folder, String filename)
 		{
-			int multiplyer = (int)Math.Ceiling(sample /(double) emotivSample);
+			int multiplyer = (int)Math.Ceiling(sample / (double)emotivSample);
 			times = (int)Math.Ceiling(totaltime / (double)emotivSample);
 
 			double delta = 0;
@@ -83,6 +84,11 @@ namespace Frequencytest
 			tempo1 = new double[sample];
 			tempo2 = new double[sample];
 			preout = new double[sample];
+			freq = new double[sample / 2];
+			for (int i = 0; i < freq.Length; i++)
+			{
+				freq[i] = (i / (double)multiplyer);
+			}
 
 			int Row = 0;
 			int count = 0;
@@ -147,7 +153,6 @@ namespace Frequencytest
 						tempo2 = sn.MovingAverage(tempo2, 3);
 
 
-
 						for (int i = 0; i < outnum[0].Length; i++)
 						{
 							preout[i] += ((tempo1[i] + tempo2[i]) / (2.0 * 9.0));
@@ -201,95 +206,25 @@ namespace Frequencytest
 				}
 
 			}
+			Array.Copy(freq, 5 * multiplyer, freq, 0, (20 - 5) * multiplyer);
+			Array.Copy(preout, 5 * multiplyer, preout, 0, (20 - 5) * multiplyer);
+			for (int i = 0; i < outnum.Length; i++)
+			{
+				Array.Copy(outnum[i], 5 * multiplyer, outnum[i], 0, (20 - 5) * multiplyer);
+			}
+
 
 			TextWriter outfile = new StreamWriter(folderPath + processPath + filePath + "-d-ft-all.csv", false);
 			//TextWriter outfile2 = new StreamWriter(foldername + "\\band\\" + filePath + "-d-band-all.csv", false);
 
 			for (int i = 0; i < outnum[0].Length / 2; i++)
 			{
-				double freq = (i / 4.0);
-				if (freq >= 5 && freq <= 20)
-					outfile.Write(freq + ",");
+				outfile.Write(freq[i] + ",");
 				for (int j = 0; j < outnum.Length; j++)
 				{
-					if (freq >= 5 && freq <= 20)
-					{
-						outfile.Write("," + preout[i] + "," + outnum[j][i] + "," + (outnum[j][i] - preout[i]) + ",");
-					}
-
-					//	if (freq >= 0.1 && freq < 2.25)
-					//	{
-					//		ldelta += (outnum[j][i]);
-					//		ldelta2 += (preout[i]);
-
-					//		delta += (outnum[j][i]);
-					//		delta2 += (preout[i]);
-					//	}
-
-					//	if (freq >= 2.25 && freq <= 3.5)
-					//	{
-					//		hdelta += (outnum[j][i]);
-					//		hdelta2 += (preout[i]);
-
-					//		delta += (outnum[j][i]);
-					//		delta2 += (preout[i]);
-					//	}
-
-					//	if (freq >= 4.0 && freq < 5.75)
-					//	{
-					//		ltheta += (outnum[j][i]);
-					//		ltheta2 += (preout[i]);
-
-					//		theta += (outnum[j][i]);
-					//		theta2 += (preout[i]);
-					//	}
-					//	if (freq >= 5.75 && freq <= 7.5)
-					//	{
-					//		htheta += (outnum[j][i]);
-					//		htheta2 += (preout[i]);
-
-					//		theta += (outnum[j][i]);
-					//		theta2 += (preout[i]);
-					//	}
-
-					//	if (freq >= 8.0 && freq < 10.5)
-					//	{
-					//		lalpha += (outnum[j][i]);
-					//		lalpha2 += (preout[i]);
-
-					//		alpha += (outnum[j][i]);
-					//		alpha2 += (preout[i]);
-					//	}
-					//	if (freq >= 10.5 && freq <= 13.0)
-					//	{
-					//		halpha += (outnum[j][i]);
-					//		halpha2 += (preout[i]);
-
-					//		alpha += (outnum[j][i]);
-					//		alpha2 += (preout[i]);
-					//	}
-
-					//	if (freq >= 14 && freq < 22)
-					//	{
-					//		lbeta += (outnum[j][i]);
-					//		lbeta2 += (preout[i]);
-
-					//		beta += (outnum[j][i]);
-					//		beta2 += (preout[i]);
-					//	}
-					//	if (freq >= 22 && freq <= 30)
-					//	{
-					//		hbeta += (outnum[j][i]);
-					//		hbeta2 += (preout[i]);
-
-					//		beta += (outnum[j][i]);
-					//		beta2 += (preout[i]);
-					//	}
-
-
+					outfile.Write("," + preout[i] + "," + outnum[j][i] + "," + (outnum[j][i] - preout[i]) + ",");
 				}
-				if (freq >= 5 && freq <= 20)
-					outfile.WriteLine();
+				outfile.WriteLine();
 			}
 
 			outfile.Close();
