@@ -206,18 +206,30 @@ namespace Frequencytest
 				}
 
 			}
+
+			
 			Array.Copy(freq, 5 * multiplyer, freq, 0, (20 - 5) * multiplyer);
 			Array.Copy(preout, 5 * multiplyer, preout, 0, (20 - 5) * multiplyer);
+			Array.Resize(ref freq, (20 - 5) * multiplyer);
+			Array.Resize(ref preout, (20 - 5) * multiplyer);
+			Array.Resize(ref outnum, multiplyer);
+
+			preout = sn.zerostandard(preout);
+
 			for (int i = 0; i < outnum.Length; i++)
 			{
 				Array.Copy(outnum[i], 5 * multiplyer, outnum[i], 0, (20 - 5) * multiplyer);
+				Array.Resize(ref outnum[i], (20 - 5) * multiplyer);
+				outnum[i] = sn.zerostandard(outnum[i]);
 			}
+
+			
 
 
 			TextWriter outfile = new StreamWriter(folderPath + processPath + filePath + "-d-ft-all.csv", false);
 			//TextWriter outfile2 = new StreamWriter(foldername + "\\band\\" + filePath + "-d-band-all.csv", false);
 
-			for (int i = 0; i < outnum[0].Length / 2; i++)
+			for (int i = 0; i < outnum[0].Length; i++)
 			{
 				outfile.Write(freq[i] + ",");
 				for (int j = 0; j < outnum.Length; j++)
