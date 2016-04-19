@@ -214,16 +214,27 @@ namespace Frequencytest
 			Array.Resize(ref preout, (20 - 5) * multiplyer);
 			Array.Resize(ref outnum, multiplyer);
 
-			preout = sn.zerostandard(preout);
-
 			for (int i = 0; i < outnum.Length; i++)
 			{
 				Array.Copy(outnum[i], 5 * multiplyer, outnum[i], 0, (20 - 5) * multiplyer);
 				Array.Resize(ref outnum[i], (20 - 5) * multiplyer);
-				outnum[i] = sn.zerostandard(outnum[i]);
+				//outnum[i] = sn.zerostandard(outnum[i]);
 			}
 
-			
+			double[][] difrent = new double[outnum.Length][];
+			for(int i=0; i<difrent.Length;i++)
+			{
+				difrent[i] = new double[outnum[0].Length];
+			}
+
+			for (int i = 0; i < outnum.Length; i++)
+			{
+				for (int j = 0; j < outnum[i].Length; j++)
+				{
+					difrent[i][j] = outnum[i][j] - preout[j];
+				}
+				difrent[i] = sn.zerostandard(difrent[i]);
+			}
 
 
 			TextWriter outfile = new StreamWriter(folderPath + processPath + filePath + "-d-ft-all.csv", false);

@@ -45,23 +45,22 @@ namespace Frequencytest
         }
         static void Main(string[] args)
         {
-            int time =20;
+            int time = 20;
 			int freq = 10;
 
             int starttime = 10;
             String Prefix = "OCR";
+
 			String folder = ".\\" + "data" + "\\";
 
-			//strip s = new strip( + "OCR-20,10-030416-110942");
+			//string[] fileEntries = Directory.GetFiles(folder);
+			//foreach (string fileName in fileEntries)
+			//{
+			//	String filename = Path.GetFileName(fileName);
+			//	strip s = new strip(folder, filename.TrimEnd(".csv".ToCharArray()));
+			//}
 
-			string[] fileEntries = Directory.GetFiles(folder);
-			foreach (string fileName in fileEntries)
-			{
-				String filename = Path.GetFileName(fileName);
-				strip s = new strip(folder, filename.TrimEnd(".csv".ToCharArray()));
-			}
-
-			//Console.WriteLine("EEG Data Reader Example");
+			#region init
 			//try
 			//{
 			//	p = new EEG_Logger(11 + time, freq, Prefix);
@@ -71,27 +70,30 @@ namespace Frequencytest
 			//		p.connect();
 			//		Thread.Sleep(1000);
 			//	}
+			#endregion
 
+			#region Pre
 			//	p.setMarker(1);
 			//	Thread.Sleep(starttime * 1000);
 			//	p.setMarker(1);
+			#endregion
 
-
-			//Dual colour
+			#region Dual colour
 			//s.changeColour(0, colourset.GREEN);
 			//s.blinking(0, freq);
 			//p.setMarker(freq);
-			//Thread.Sleep((time / 2) * 1000);
+			//Thread.Sleep((time) * 1000);
 
 
 			//s.changeColour(0, colourset.RED);
 			//s.blinking(0, freq);
 			//p.setMarker(freq);
-			//Thread.Sleep((time / 2) * 1000);
+			//Thread.Sleep((time) * 1000);
 			//p.setMarker(freq);
 			//s.all_off();
+			#endregion
 
-			//Single colour
+			#region Single colour
 
 			//	s.blinking(0, freq);
 			//		p.setMarker(freq);
@@ -100,7 +102,7 @@ namespace Frequencytest
 			//		s.all_off();
 
 			//		p.Run();
-
+			#endregion
 
 			//	}
 			//	catch (NotConnectException e)
