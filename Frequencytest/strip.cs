@@ -245,7 +245,7 @@ namespace Frequencytest
 				outfile.Write(freq[i] + ",");
 				for (int j = 0; j < outnum.Length; j++)
 				{
-					outfile.Write("," + preout[i] + "," + outnum[j][i] + "," + (outnum[j][i] - preout[i]) + ",");
+					outfile.Write("," + preout[i] + "," + outnum[j][i] + "," + (difrent[j][i]) + ",");
 				}
 				outfile.WriteLine();
 			}

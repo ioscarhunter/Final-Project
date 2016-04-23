@@ -34,8 +34,12 @@ namespace Frequencytest.Serial
             port1.Open();
             Thread.Sleep(5);
             setupColour(colourset.GREEN);
-            all_off();
-        }
+			Thread.Sleep(5);
+			all_blink(0);
+			all_dim();
+			Thread.Sleep(5);
+
+		}
 
         public void setupColour(int setcolour)
         {
@@ -88,12 +92,24 @@ namespace Frequencytest.Serial
                 Thread.Sleep(5);
             }
         }
-        public void blinking(int led, int freq)
-        {
-            leds[led].turnon();
 
-            leds[led].blink(freq);
-        }
+		public void all_blink(int freq)
+		{
+			for (int i = 0; i < lednum; i++)
+			{
+				leds[i].turnoff();
+				Thread.Sleep(5);
+				leds[i].blink(freq);
+				Thread.Sleep(5);
+			}
+		}
+		public void blinking(int led, int freq)
+        {
+            leds[led].turnoff();
+			Thread.Sleep(5);
+			leds[led].blink(freq);
+			Thread.Sleep(5);
+		}
 
 
         public void OnLEDStatusUpdate(int i, int led)
