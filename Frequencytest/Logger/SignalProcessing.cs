@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AForge.Math;
 
+
 namespace Frequencytest.Logger
 {
 	class SignalProcessing
@@ -17,11 +18,11 @@ namespace Frequencytest.Logger
 			//input = zerostandard(input);
 			//double[] windowedSamples = HannigWindowing(normalized);
 
-
+			//input = HannigWindowing(input);
 			input = HammingWindowing(input);
 			input = FastFourierTransform(input);
 
-			//input = convertToLog(input);
+			//////input = convertToLog(input);
 
 			return input;
 		}
@@ -150,8 +151,6 @@ namespace Frequencytest.Logger
 
 		}
 
-
-
 		public double[] zerostandard(double[] input)
 		{
 			double[] output = new double[input.Length];
@@ -209,10 +208,11 @@ namespace Frequencytest.Logger
 
 		public double[] MovingAverage(double[] data, int period)
 		{
+			int halfperiod = (int)Math.Floor(period / 2.0);
 			double[] buffer = new double[period];
 			double[] output = new double[data.Length];
 			int current_index = 0;
-			for (int i = 0; i < data.Length; i++)
+			for (int i = halfperiod; i < data.Length; i++)
 			{
 				buffer[current_index] = data[i] / period;
 				double ma = 0.0;
@@ -220,7 +220,7 @@ namespace Frequencytest.Logger
 				{
 					ma += buffer[j];
 				}
-				output[i] = ma;
+				output[i - halfperiod] = ma;
 				current_index = (current_index + 1) % period;
 			}
 			return output;
@@ -232,9 +232,48 @@ namespace Frequencytest.Logger
 			double[] output = new double[data.Length];
 			for (int i = 0; i < data.Length; i++)
 			{
-				output[i] = 10*Math.Log10(data[i]);
+				output[i] = 10 * Math.Log10(data[i]);
 			}
-				return output;
+			return output;
+		}
+
+		public double[] FindPeaks(double[] values, int rangeOfPeaks)
+		{
+			double[] peak = MovingAverage(values, 7);
+			peak = MovingAverage(peak, 3);
+
+			for (int j = 0; j < values.Length; j++)
+			{
+				peak[j] = values[j] - (peak[j] + 1);
+			}
+
+			double[] peaks = new double[values.Length];
+			int checksOnEachSide = rangeOfPeaks / 2;
+			for (int i = 0; i < values.Length; i++)
+			{
+				double current = peak[i];
+				IEnumerable<double> range = peak;
+				if (i > checksOnEachSide)
+					range = range.Skip(i - checksOnEachSide);
+				range = range.Take(rangeOfPeaks);
+				if (current == range.Max() && values[i] > 0 && peak[i] > 0)
+					peaks.SetValue(values[i], i);
+			}
+			return peaks;
+
+		}
+
+		public double[] RemoveBaseline(double[] input)
+		{
+			double[] output = new double[input.Length];
+			double[] baseL = MovingAverage(input, 7);
+			baseL = MovingAverage(baseL, 3);
+			for (int i = 0; i < input.Length; i++)
+			{
+				output[i] = input[i] - baseL[i];
+			}
+			return output;
 		}
 	}
+
 }

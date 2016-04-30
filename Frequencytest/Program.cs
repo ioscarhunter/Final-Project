@@ -75,81 +75,79 @@ namespace Frequencytest
 			}
 			#endregion
 
-			//#region time and space
+			#region time and space
 			//s = new SerialCom();
 
-			//for (int count = 18; count >= 8; count--)
+			////for (int count = 18; count >= 8; count--)
+			////{
+			//int starttime = 10;
+
+			//int time = 40;
+			//int freq = 6;
+
+			//String Prefix = "BomGR";
+
+			//#region init
+			//try
 			//{
-			//	int starttime = 10;
+			//	p = new EEG_Logger(1 + starttime + time, freq, Prefix);
 
-			//	int time = 20;
-			//	int freq = count;
-
-			//	String Prefix = "OCR";
-
-
-			//	#region init
-			//	try
+			//	for (int i = 0; i < 2; i++)
 			//	{
-			//		p = new EEG_Logger(1 + starttime + time, freq, Prefix);
-
-			//		for (int i = 0; i < 2; i++)
-			//		{
-			//			p.connect();
-			//			Thread.Sleep(500);
-			//		}
-			//		#endregion
-
-			//		#region Pre
-			//		Thread.Sleep(10);
-
-			//		p.setMarker(1);
-			//		Thread.Sleep(starttime*1000);
-			//		p.setMarker(1);
-			//		#endregion
-
-			//		#region Dual colour
-			//		//s.changeColour(0, colourset.GREEN);
-			//		//s.blinking(0, freq);
-			//		//p.setMarker(freq);
-			//		//countDown(time / 2);
-
-
-			//		//s.changeColour(0, colourset.RED);
-			//		//s.blinking(0, freq);
-			//		//p.setMarker(freq);
-			//		//countDown(time/ 2);
-
-			//		//p.setMarker(freq);
-			//		#endregion
-
-			//		#region Single colour
-			//		//s.changeColour(0, colourset.RED);
-			//		s.changeColour(0, colourset.GREEN);
-			//		s.blinking(0, freq);
-			//		p.setMarker(freq);
-			//		countDown(time);
-			//		p.setMarker(freq);
-
-
-			//		#endregion
-			//		Thread.Sleep(10);
-			//		p.Run();
-			//		//s.changeColour(0, colourset.GREEN);
-			//		s.blinking(0, 0);
-			//		Thread.Sleep(20);
-			//		s.all_dim();
+			//		p.connect();
 			//		Thread.Sleep(500);
 			//	}
-			//	catch (NotConnectException e)
-			//	{
-			//		Console.WriteLine("not connect");
-			//	}
+			//	#endregion
 
+			//	#region Pre
+			//	Thread.Sleep(2);
+
+			//	p.setMarker(1);
+			//	Thread.Sleep(starttime * 1000);
+			//	p.setMarker(1);
+			//	#endregion
+
+			//	#region Dual colour
+			//	s.changeColour(0, colourset.GREEN);
+			//	s.blinking(0, freq);
+			//	p.setMarker(freq);
+			//	Thread.Sleep((time / 2) * 1000);
+
+
+			//	s.changeColour(0, colourset.RED);
+			//	s.blinking(0, freq);
+			//	p.setMarker(freq);
+			//	Thread.Sleep((time / 2) * 1000);
+
+			//	p.setMarker(freq);
+			//	#endregion
+
+			//	#region Single colour
+			//	//s.changeColour(0, colourset.RED);
+			//	////s.changeColour(0, colourset.GREEN);
+			//	//s.blinking(0, freq);
+			//	//p.setMarker(freq);
+			//	//Thread.Sleep(time * 1000);
+			//	//p.setMarker(freq);
+
+			//	#endregion
+			//	Thread.Sleep(200);
+			//	p.Run();
+			//	//s.changeColour(0, colourset.GREEN);
+			//	s.blinking(0, 0);
+			//	Thread.Sleep(10);
+			//	s.all_dim();
+			//	Thread.Sleep(500);
 			//}
+			//catch (NotConnectException e)
+			//{
+			//	Console.WriteLine("not connect");
+			//}
+
+			////}
 			//Thread.Sleep(5);
 			//s.all_off();
-			//#endregion
+			#endregion
 
 		}
 	}
