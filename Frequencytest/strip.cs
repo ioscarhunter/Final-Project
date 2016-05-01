@@ -138,8 +138,9 @@ namespace Frequencytest
 						tempo1 = sn.MovingAverage(tempo1, 3);
 
 						tempo2 = sn.MovingAverage(tempo2, 3);
-						tempo1 = sn.MovingAverage(tempo1, 3);
-						tempo2 = sn.MovingAverage(tempo2, 3);
+
+						//tempo1 = sn.MovingAverage(tempo1, 3);
+						//tempo2 = sn.MovingAverage(tempo2, 3);
 
 
 						for (int i = 0; i < outnum[0].Length; i++)
@@ -149,7 +150,7 @@ namespace Frequencytest
 
 						//preout = sn.HighPassFilter(preout, 1, 1);
 						//preout = sn.Process(preout);
-						//preout = sn.MovingAverage(preout, 7);
+						preout = sn.MovingAverage(preout, 3);
 
 						if (preCount == 4)
 						{
@@ -255,7 +256,14 @@ namespace Frequencytest
 			TextWriter outfile = new StreamWriter(folderPath + processPath + filePath + "-d-ft-all.csv", false);
 			//TextWriter outfile2 = new StreamWriter(foldername + "\\band\\" + filePath + "-d-band-all.csv", false);
 
-			for (int i = 0; i < active[0].Length; i++)
+			outfile.Write("Frequency,");
+			for (int j = 1; j <= active.Length; j += 1)
+			{
+				outfile.Write("," + "Baseline " + j + "," + "Active " + j + "," + "Diffrent " + j + "," + "Peak "+j + ",");
+			}
+			outfile.WriteLine();
+
+				for (int i = 0; i < active[0].Length; i++)
 			{
 				outfile.Write(freq[i] + ",");
 				for (int j = 0; j < active.Length; j += 1)
@@ -269,6 +277,32 @@ namespace Frequencytest
 			}
 
 			outfile.Close();
+
+
+			TextWriter outfile_sub = new StreamWriter(folderPath + subChartPath + filePath + "-d-ft-chart.csv", false);
+			//TextWriter outfile2 = new StreamWriter(foldername + "\\band\\" + filePath + "-d-band-all.csv", false);
+
+			outfile_sub.Write("Frequency,");
+			for (int j = 1; j <= active.Length; j += 1)
+			{
+				outfile_sub.Write( "Peak " + j + ",");
+			}
+			outfile_sub.WriteLine();
+
+			for (int i = 0; i < active[0].Length; i++)
+			{
+				outfile_sub.Write(freq[i] + ",");
+				for (int j = 0; j < active.Length; j += 1)
+				{
+					if (peaks[j][i] != 0)
+						outfile_sub.Write(peaks[j][i] + ",");
+					else
+						outfile_sub.Write(",");
+				}
+				outfile_sub.WriteLine();
+			}
+
+			outfile_sub.Close();
 
 			//TextWriter outfile_sub_chart = new StreamWriter(folderPath + subChartPath + filePath + "-d-ft-chart.csv", false);
 

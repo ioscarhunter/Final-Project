@@ -266,7 +266,7 @@ namespace Frequencytest.Logger
 		public double[] RemoveBaseline(double[] input)
 		{
 			double[] output = new double[input.Length];
-			double[] baseL = MovingAverage(input, 7);
+			double[] baseL = MovingAverage(input, 3);
 			baseL = MovingAverage(baseL, 3);
 			for (int i = 0; i < input.Length; i++)
 			{
