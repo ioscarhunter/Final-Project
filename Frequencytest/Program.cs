@@ -71,7 +71,10 @@ namespace Frequencytest
 			foreach (string fileName in fileEntries)
 			{
 				String filename = Path.GetFileName(fileName);
-				strip s = new strip(folder, filename.TrimEnd(".csv".ToCharArray()));
+				if (filename.EndsWith(".csv"))
+				{
+					strip s = new strip(folder, filename.TrimEnd(".csv".ToCharArray()));
+				}
 			}
 			#endregion
 

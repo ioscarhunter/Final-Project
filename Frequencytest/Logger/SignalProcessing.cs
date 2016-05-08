@@ -98,7 +98,6 @@ namespace Frequencytest.Logger
 
 			return output;
 
-
 		}
 
 		public double[] HighPassFilter(double[] input, double fCut, double r)

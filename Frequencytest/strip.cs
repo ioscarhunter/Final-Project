@@ -18,10 +18,14 @@ namespace Frequencytest
 		int windowsSize = 256;
 		int sample = 256;
 		int emotivSample = 128;
+
+
 		int multiplyer;
+		int times;
 
 		int totaltime = 20;
-		int times;
+
+
 
 		int count = 0;
 		string chartHeader = ",Rest,Active";
@@ -32,6 +36,11 @@ namespace Frequencytest
 		string subChartPath = "subchart\\";
 
 		double[][] outnum;
+		double[][] active;
+
+		double[][] difrent;
+		double[][] peaks;
+
 		double[] tempo1;
 		double[] tempo2;
 		double[] preout;
@@ -48,60 +57,24 @@ namespace Frequencytest
 			return result;
 		}
 
-		public strip(String folder, String filename)
+		private double[][] readtoArray()
 		{
-			int multiplyer = (int)Math.Ceiling(windowsSize / (double)emotivSample);
-			int times = (int)Math.Ceiling(emotivSample * totaltime / (double)windowsSize);
-
-			//double delta = 0;
-			//double theta = 0;
-			//double alpha = 0;
-			//double beta = 0;
-
-			//double delta2 = 0;
-			//double theta2 = 0;
-			//double alpha2 = 0;
-			//double beta2 = 0;
-
-
-			//double ldelta = 0;
-			//double ltheta = 0;
-			//double lalpha = 0;
-			//double lbeta = 0;
-
-			//double ldelta2 = 0;
-			//double ltheta2 = 0;
-			//double lalpha2 = 0;
-			//double lbeta2 = 0;
-
-			//double hdelta = 0;
-			//double htheta = 0;
-			//double halpha = 0;
-			//double hbeta = 0;
-
-			//double hdelta2 = 0;
-			//double htheta2 = 0;
-			//double halpha2 = 0;
-			//double hbeta2 = 0;
-
-			folderPath = folder;
-			filePath = filename;
-
-			double[][] outnum = new double[times][];
-			double[][] active = new double[times / 2][];
-			for (int i = 0; i < outnum.Length; i++)
+			string[] Line = File.ReadAllLines(folderPath + filePath + ".csv");
+			double[][] data = new double[Line.Length-1][];
+			for (int i = 1; i < data.Length-1; i++)
 			{
-				outnum[i] = new double[windowsSize];
+				data[i-1] = new double[3];
+				string[] temp = Line[i].Split(',');
+				if (!temp[0].Equals(" "))
+					data[i-1][0] = Convert.ToDouble(temp[0]);
+				data[i-1][1] = Convert.ToDouble(temp[1]);
+				data[i-1][2] = Convert.ToDouble(temp[2]);
 			}
-			tempo1 = new double[windowsSize];
-			tempo2 = new double[windowsSize];
-			preout = new double[windowsSize];
-			freq = new double[windowsSize / 2];
-			for (int i = 0; i < freq.Length; i++)
-			{
-				freq[i] = (i / (double)multiplyer);
-			}
+			return data;
+		}
 
+		private void readfile()
+		{
 			int Row = 0;
 			int count = 0;
 			int preRowCount = 0;
@@ -110,9 +83,6 @@ namespace Frequencytest
 			StreamReader sr = new StreamReader(folderPath + filePath + ".csv");
 			string[] Line = sr.ReadLine().Split(',');
 
-			Directory.CreateDirectory(folderPath + processPath);
-			Directory.CreateDirectory(folderPath + chartPath);
-			Directory.CreateDirectory(folderPath + subChartPath);
 
 			while (!sr.EndOfStream)
 			{
@@ -183,13 +153,19 @@ namespace Frequencytest
 						//tempo2 = sn.HighPassFilter(tempo2, 3, 1);
 						tempo1 = sn.Process(tempo1);
 						tempo2 = sn.Process(tempo2);
-
-						for (int i = 0; i < outnum[count].Length; i++)
+						try
 						{
-							outnum[count][i] += (tempo1[i] + tempo2[i]) / 2.0;
-						}
+							for (int i = 0; i < outnum[count].Length; i++)
+							{
+								outnum[count][i] += (tempo1[i] + tempo2[i]) / 2.0;
+							}
 
-						count++;
+							count++;
+						}
+						catch (IndexOutOfRangeException e)
+						{
+							INdata = false;
+						}
 					}
 					//Console.WriteLine(Row + "," + o1 + "," + o2);
 				}
@@ -218,6 +194,10 @@ namespace Frequencytest
 				}
 			}
 
+		}
+
+		private void processing()
+		{
 			preout = sn.RemoveBaseline(preout);
 			for (int i = 0; i < active.Length; i++)
 			{
@@ -235,8 +215,8 @@ namespace Frequencytest
 			Array.Resize(ref preout, (highbond - lowbound) * multiplyer);
 			//Array.Resize(ref outnum, multiplyer);
 
-			double[][] difrent = new double[active.Length][];
-			double[][] peaks = new double[active.Length][];
+			difrent = new double[active.Length][];
+			peaks = new double[active.Length][];
 
 			for (int i = 0; i < active.Length; i++)
 			{
@@ -250,8 +230,16 @@ namespace Frequencytest
 				}
 				difrent[i] = sn.zerostandard(difrent[i]);
 
-				peaks[i] = sn.FindPeaks(difrent[i], 5);
+				peaks[i] = sn.FindPeaks(difrent[i], 3);
 			}
+
+		}
+
+		private void writeResult()
+		{
+			Directory.CreateDirectory(folderPath + processPath);
+			Directory.CreateDirectory(folderPath + chartPath);
+			Directory.CreateDirectory(folderPath + subChartPath);
 
 			TextWriter outfile = new StreamWriter(folderPath + processPath + filePath + "-d-ft-all.csv", false);
 			//TextWriter outfile2 = new StreamWriter(foldername + "\\band\\" + filePath + "-d-band-all.csv", false);
@@ -259,11 +247,11 @@ namespace Frequencytest
 			outfile.Write("Frequency,");
 			for (int j = 1; j <= active.Length; j += 1)
 			{
-				outfile.Write("," + "Baseline " + j + "," + "Active " + j + "," + "Diffrent " + j + "," + "Peak "+j + ",");
+				outfile.Write("," + "Baseline " + j + "," + "Active " + j + "," + "Diffrent " + j + "," + "Peak " + j + ",");
 			}
 			outfile.WriteLine();
 
-				for (int i = 0; i < active[0].Length; i++)
+			for (int i = 0; i < active[0].Length; i++)
 			{
 				outfile.Write(freq[i] + ",");
 				for (int j = 0; j < active.Length; j += 1)
@@ -285,7 +273,7 @@ namespace Frequencytest
 			outfile_sub.Write("Frequency,");
 			for (int j = 1; j <= active.Length; j += 1)
 			{
-				outfile_sub.Write( "Peak " + j + ",");
+				outfile_sub.Write("Trial " + j + ",");
 			}
 			outfile_sub.WriteLine();
 
@@ -294,10 +282,10 @@ namespace Frequencytest
 				outfile_sub.Write(freq[i] + ",");
 				for (int j = 0; j < active.Length; j += 1)
 				{
-					if (peaks[j][i] != 0)
-						outfile_sub.Write(peaks[j][i] + ",");
-					else
-						outfile_sub.Write(",");
+					//if (peaks[j][i] != 0)
+					outfile_sub.Write(peaks[j][i] + ",");
+					//else
+					//	outfile_sub.Write(",");
 				}
 				outfile_sub.WriteLine();
 			}
@@ -335,6 +323,45 @@ namespace Frequencytest
 			//outfile_chart.WriteLine("Beta," + beta2 + "," + beta);
 
 			//outfile_chart.Close();
+		}
+
+		private void init(String folder, String filename)
+		{
+			multiplyer = (int)Math.Ceiling(windowsSize / (double)emotivSample);
+			times = (int)Math.Ceiling(emotivSample * totaltime / (double)windowsSize);
+
+			folderPath = folder;
+			filePath = filename;
+
+			outnum = new double[times][];
+			active = new double[times / 2][];
+			for (int i = 0; i < outnum.Length; i++)
+			{
+				outnum[i] = new double[windowsSize];
+			}
+			tempo1 = new double[windowsSize];
+			tempo2 = new double[windowsSize];
+			preout = new double[windowsSize];
+			freq = new double[windowsSize / 2];
+
+			for (int i = 0; i < freq.Length; i++)
+			{
+				freq[i] = (i / (double)multiplyer);
+			}
+		}
+
+
+		public strip(String folder, String filename)
+		{
+
+
+			init(folder, filename);
+			readtoArray();
+			readfile();
+			processing();
+			writeResult();
+
+
 
 		}
 	}
