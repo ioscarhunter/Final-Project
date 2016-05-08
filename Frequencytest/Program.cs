@@ -76,6 +76,8 @@ namespace Frequencytest
 					strip s = new strip(folder, filename.TrimEnd(".csv".ToCharArray()));
 				}
 			}
+
+			Console.ReadKey();
 			#endregion
 
 			#region time and space

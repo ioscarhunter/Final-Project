@@ -238,12 +238,13 @@ namespace Frequencytest.Logger
 
 		public double[] FindPeaks(double[] values, int rangeOfPeaks)
 		{
-			double[] peak = MovingAverage(values, 7);
+			double[] peak = MovingAverage(values, 3);
 			peak = MovingAverage(peak, 3);
+
 
 			for (int j = 0; j < values.Length; j++)
 			{
-				peak[j] = values[j] - (peak[j] + 1);
+				peak[j] = values[j] - (peak[j] + 0.5);
 			}
 
 			double[] peaks = new double[values.Length];
