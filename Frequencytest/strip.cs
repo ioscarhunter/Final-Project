@@ -24,8 +24,8 @@ namespace Frequencytest
 		int times;
 
 
-		int activetime = 10;
-		int resttime = 8;
+		int activetime = 12;
+		int resttime = 4;
 
 		int resttimes;
 		int activetimes;
@@ -49,11 +49,12 @@ namespace Frequencytest
 		double[] preout;
 		double[] freq;
 
-		int lowbound = 7;
+		int lowbound = 12;
 		int highbond = 31;
 		private double[] tempavg;
 		private int[] peakcount;
 		private double[] avgall;
+		private double[] avgpeak;
 
 		public static T[] SubArray<T>(T[] data, int indexfrom, int indexto)
 		{
@@ -131,7 +132,7 @@ namespace Frequencytest
 			active[1] = sn.HighPassFilter(active[1], 0.16, 0.5);
 
 			int index = 0;
-
+			#region baseline
 			for (int i = 0; i < resttimes - 1; i++)
 			{
 				Array.Copy(baseline[0], index, tempo1, 0, windowsSize);
@@ -165,7 +166,9 @@ namespace Frequencytest
 
 				index += (int)overlap;
 			}
+			#endregion
 
+			#region Activ
 			index = 0;
 			outnum = new double[activetimes][];
 
@@ -200,9 +203,10 @@ namespace Frequencytest
 					outnum[i][j] += ((tempo1[j] + tempo2[j]) / (2.0));
 					//outnum[i][j] = tempavg[j];
 				}
-				//outnum[i] = sn.RemoveBaseline(outnum[i]);
+				outnum[i] = sn.RemoveBaseline(outnum[i]);
 				index += (int)overlap;
 			}
+			#endregion
 		}
 
 		private void processing()
@@ -244,6 +248,8 @@ namespace Frequencytest
 				peaks[i] = sn.FindPeaks(difrent[i], 3);
 			}
 
+
+			avgpeak = new double[active[0].Length];
 			peakcount = new int[active[0].Length];
 			avgall = new double[active[0].Length];
 
@@ -254,11 +260,13 @@ namespace Frequencytest
 					avgall[i] += difrent[j][i] / (double)active.Length;
 					if (peaks[j][i] != 0)
 						peakcount[i]++;
+					avgpeak[i] += peaks[j][i] / (double)active.Length;
 				}
 			}
-			avgall = sn.FindPeaks(avgall, 3);
+			avgall = sn.FindPeaks(avgall, 3);   //find peak
 
 			int[] pXa = new int[peakcount.Length];
+			double[] max = new double[peakcount.Length];
 
 			for (int i = 0; i < peakcount.Length; i++)
 			{
@@ -266,33 +274,14 @@ namespace Frequencytest
 				{
 					pXa[i] = peakcount[i];
 				}
+				max[i] = pXa[i] * (avgpeak[i] + avgall[i]) / 2.0;
 			}
 
-			int maxPeakCount = pXa.Max();
-			if (maxPeakCount > 0)
-			{
-				List<int> f = new List<int>();
+			// Positioning max
 
-				for (int i = 0; i < peakcount.Length; i++)
-				{
-					if (pXa[i] != maxPeakCount)
-						pXa[i] = 0;
-					else
-					{
-						f.Add(i);
-						//Console.Write(freq[i] + ",");
-					}
-				}
-				if(f.Count > 1)
-				{
-					Console.Write(freq[Array.IndexOf(pXa, pXa.Max())]);
-					
-				}
-				else Console.Write(freq[f.ElementAt(0)]);
-				Console.WriteLine();
-				Console.ReadKey();
-			}
-
+			int p = Array.IndexOf(max, max.Max());
+			Console.WriteLine(freq[p]);
+			Console.ReadKey();
 		}
 
 		private void writeResult()
@@ -326,18 +315,15 @@ namespace Frequencytest
 
 			outfile.Close();
 
-
 			TextWriter outfile_sub = new StreamWriter(folderPath + peakPath + filePath + "-d-ft-chart.csv", false);
 			//TextWriter outfile2 = new StreamWriter(foldername + "\\band\\" + filePath + "-d-band-all.csv", false);
-
-
 
 			outfile_sub.Write("Frequency,,");
 			for (int j = 1; j <= active.Length; j += 1)
 			{
 				outfile_sub.Write("Trial " + j + ",");
 			}
-			outfile_sub.WriteLine("Peak Count, Avg Peak");
+			outfile_sub.WriteLine("Peak Count, Avg Peak, Avg all, multiply");
 
 			for (int i = 0; i < active[0].Length; i++)
 			{
@@ -349,7 +335,13 @@ namespace Frequencytest
 					//else
 					//	outfile_sub.Write(",");
 				}
-				outfile_sub.WriteLine(peakcount[i] + "," + avgall[i]);
+				outfile_sub.Write(peakcount[i] + "," + avgall[i]);
+				outfile_sub.Write("," + (avgpeak[i] + avgall[i]) / 2.0);
+				outfile_sub.Write("," + peakcount[i] * (avgpeak[i] + avgall[i]) / 2.0);
+
+
+				outfile_sub.WriteLine();
+
 			}
 
 			outfile_sub.Close();

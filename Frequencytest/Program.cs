@@ -77,7 +77,7 @@ namespace Frequencytest
 				}
 			}
 
-			Console.ReadKey();
+			//Console.ReadKey();
 			#endregion
 
 			#region time and space

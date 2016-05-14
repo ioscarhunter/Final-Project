@@ -256,7 +256,7 @@ namespace Frequencytest.Logger
 				if (i > checksOnEachSide)
 					range = range.Skip(i - checksOnEachSide);
 				range = range.Take(rangeOfPeaks);
-				if (current == range.Max() && values[i] > 0 && peak[i] > 0)
+				if (current == range.Max() && values[i] > 0 && peak[i] > 0&&i>1)
 					peaks.SetValue(values[i], i);
 			}
 			return peaks;
