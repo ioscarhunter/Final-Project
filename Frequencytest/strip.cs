@@ -18,14 +18,13 @@ namespace Frequencytest
 		int windowsSize = 256;
 		int sample = 256;
 		int emotivSample = 128;
-
+		double overlapsize = 0.5;
 
 		int multiplyer;
 		int times;
 
-
+		int resttime = 6;
 		int activetime = 12;
-		int resttime = 4;
 
 		int resttimes;
 		int activetimes;
@@ -49,8 +48,8 @@ namespace Frequencytest
 		double[] preout;
 		double[] freq;
 
-		int lowbound = 12;
-		int highbond = 31;
+		int lowbound = 11;
+		int highbond = 21;
 		private double[] tempavg;
 		private int[] peakcount;
 		private double[] avgall;
@@ -100,12 +99,12 @@ namespace Frequencytest
 			active[0] = new double[(emotivSample * activetime) + 1];
 			active[1] = new double[(emotivSample * activetime) + 1];
 
-			double overlap = Math.Floor(windowsSize * 0.5);
+			double overlap = Math.Floor(windowsSize * overlapsize);
 			resttimes = (int)Math.Floor(emotivSample * resttime / overlap);
 			activetimes = (int)Math.Floor(emotivSample * activetime / overlap);
 
 			int startindex = Array.IndexOf(data[0], 1) + 1;
-			if (startindex > 1000)
+			if (startindex > 500)
 			{
 				startindex = 0;
 			}
@@ -141,8 +140,8 @@ namespace Frequencytest
 				//tempo1 = sn.RemoveBaseline(tempo1);
 				//tempo2 = sn.RemoveBaseline(tempo2);
 
-				tempo1 = sn.zerostandard(tempo1);
-				tempo2 = sn.zerostandard(tempo2);
+				//tempo1 = sn.zerostandard(tempo1);
+				//tempo2 = sn.zerostandard(tempo2);
 
 				//for (int j = 0; j < preout.Length; j++)
 				//{
@@ -163,7 +162,7 @@ namespace Frequencytest
 					preout[j] += ((tempo1[j] + tempo2[j]) / (2.0 * resttimes - 1));
 					//preout[j] += (tempavg[j]) / (resttimes - 1);
 				}
-
+				preout = sn.RemoveBaseline(preout);
 				index += (int)overlap;
 			}
 			#endregion
@@ -244,6 +243,7 @@ namespace Frequencytest
 					difrent[i][j] = active[i][j] - preout[j];
 				}
 				difrent[i] = sn.zerostandard(difrent[i]);
+				//difrent[i] = sn.windowsZscore(difrent[i],40);
 
 				peaks[i] = sn.FindPeaks(difrent[i], 3);
 			}
@@ -264,13 +264,18 @@ namespace Frequencytest
 				}
 			}
 			avgall = sn.FindPeaks(avgall, 3);   //find peak
+			double[] interest = new double[] { 13.0, 15.0, 17.0, 19.0, 21.0, 23.0, 25.0, 27.0, 29.0 };
+			double[] notinterest = new double[] { 14.0, 16.0, 18.0, 20.0, 22.0, 24.0, 26.0, 28.0, 30.0 };
+			//peakcount = neutron(peakcount, 5, interest);
+			//avgall = neutron(avgall, 5, interest);
+			//avgpeak = neutron(avgpeak, 5, interest);
 
 			int[] pXa = new int[peakcount.Length];
 			double[] max = new double[peakcount.Length];
 
 			for (int i = 0; i < peakcount.Length; i++)
 			{
-				if (avgall[i] > 0 && peakcount[i] > 0)
+				if (avgall[i] > 0 && peakcount[i] > 0 /*&& !notinterest.Contains(freq[i])*/);
 				{
 					pXa[i] = peakcount[i];
 				}
@@ -406,16 +411,41 @@ namespace Frequencytest
 
 		public strip(String folder, String filename)
 		{
-
-
 			init(folder, filename);
 
 			processFile(readtoArray());
 			processing();
 			writeResult();
+		}
 
+		private int[] neutron(int[] input, int size, double[] number)
+		{
+			int[] output = new int[input.Length];
+			for (int i = 0; i < input.Length; i++)
+			{
+				if (number.Contains(freq[i]))
+				{
+					for (int j = -((size / 2) - 1); j < (size / 2) - 1; j++)
+						output[i] += input[i + j];
+				}
+			}
 
+			return output;
+		}
 
+		private double[] neutron(double[] input, int size, double[] number)
+		{
+			double[] output = new double[input.Length];
+			for (int i = 0; i < input.Length; i++)
+			{
+				if (number.Contains(freq[i]))
+				{
+					for (int j = -((size / 2) - 1); j < (size / 2) - 1; j++)
+						output[i] += input[i + j];
+				}
+			}
+
+			return output;
 		}
 	}
 }

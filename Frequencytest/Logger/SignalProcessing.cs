@@ -239,8 +239,6 @@ namespace Frequencytest.Logger
 		public double[] FindPeaks(double[] values, int rangeOfPeaks)
 		{
 			double[] peak = MovingAverage(values, 3);
-			peak = MovingAverage(peak, 3);
-
 
 			for (int j = 0; j < values.Length; j++)
 			{
@@ -271,6 +269,19 @@ namespace Frequencytest.Logger
 			for (int i = 0; i < input.Length; i++)
 			{
 				output[i] = input[i] - baseL[i];
+			}
+			return output;
+		}
+
+		public double[] windowsZscore(double[] input,int size)
+		{
+			double[] output = new double[input.Length];
+			double[] temp = new double[size];
+			for(int i = 0; i <= input.Length-size; i += size)
+			{
+				Array.Copy(input, i, temp, 0, size);
+				temp = zerostandard(temp);
+				Array.Copy(temp, 0, output, i, size);
 			}
 			return output;
 		}

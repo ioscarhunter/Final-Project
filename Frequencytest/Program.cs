@@ -77,7 +77,8 @@ namespace Frequencytest
 				}
 			}
 
-			//Console.ReadKey();
+			Console.ReadKey();
+
 			#endregion
 
 			#region time and space
@@ -85,12 +86,12 @@ namespace Frequencytest
 
 			////for (int count = 18; count >= 8; count--)
 			////{
-			//int starttime = 10;
+			//int starttime = 6;
 
-			//int time = 40;
-			//int freq = 6;
+			//int time = 15;
+			//int freq = 24;
 
-			//String Prefix = "BomGR";
+			//String Prefix = "Win";
 
 			//#region init
 			//try
@@ -113,32 +114,31 @@ namespace Frequencytest
 			//	#endregion
 
 			//	#region Dual colour
-			//	s.changeColour(0, colourset.GREEN);
-			//	s.blinking(0, freq);
-			//	p.setMarker(freq);
-			//	Thread.Sleep((time / 2) * 1000);
+			//	//s.changeColour(0, colourset.GREEN);
+			//	//s.blinking(0, freq);
+			//	//p.setMarker(freq);
+			//	//Thread.Sleep((time / 2) * 1000);
 
-
-			//	s.changeColour(0, colourset.RED);
-			//	s.blinking(0, freq);
-			//	p.setMarker(freq);
-			//	Thread.Sleep((time / 2) * 1000);
+			//	//s.changeColour(0, colourset.RED);
+			//	//s.blinking(0, freq);
+			//	//p.setMarker(freq);
+			//	//Thread.Sleep((time / 2) * 1000);
 
 			//	p.setMarker(freq);
 			//	#endregion
 
 			//	#region Single colour
 			//	//s.changeColour(0, colourset.RED);
-			//	////s.changeColour(0, colourset.GREEN);
-			//	//s.blinking(0, freq);
-			//	//p.setMarker(freq);
-			//	//Thread.Sleep(time * 1000);
-			//	//p.setMarker(freq);
+			//	s.changeColour(0, colourset.GREEN);
+			//	s.blinking(0, freq);
+			//	p.setMarker(freq);
+			//	Thread.Sleep(time * 1000);
+			//	p.setMarker(freq);
 
 			//	#endregion
 			//	Thread.Sleep(200);
 			//	p.Run();
-			//	//s.changeColour(0, colourset.GREEN);
+			//	s.changeColour(0, colourset.GREEN);
 			//	s.blinking(0, 0);
 			//	Thread.Sleep(10);
 			//	s.all_dim();
@@ -149,11 +149,12 @@ namespace Frequencytest
 			//	Console.WriteLine("not connect");
 			//}
 
-			////}
+			//}
 			//Thread.Sleep(5);
 			//s.all_off();
 			#endregion
-
+			//Console.WriteLine("End");
+			//Console.ReadLine();
 		}
 	}
 
