@@ -32,12 +32,13 @@ namespace Frequencytest.Serial
             port1.BaudRate = bRate;
             port1.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
             port1.Open();
-            Thread.Sleep(5);
+            Thread.Sleep(10);
             setupColour(colourset.GREEN);
-			Thread.Sleep(5);
+			Thread.Sleep(10);
 			all_blink(0);
+			Thread.Sleep(10);
 			all_dim();
-			Thread.Sleep(5);
+			Thread.Sleep(10);
 
 		}
 
@@ -47,14 +48,14 @@ namespace Frequencytest.Serial
             {
                 leds[i] = new LED(i, setcolour, ref port1);
                 leds[i].setupLED();
-                Thread.Sleep(8);
+                Thread.Sleep(10);
             }
         }
 
         public void changeColour(int led, int setcolour)
         {
             leds[led].changecolour(setcolour);
-            Thread.Sleep(5);
+            Thread.Sleep(10);
         }
 
         public void changeColourall(int setcolour)
@@ -62,7 +63,7 @@ namespace Frequencytest.Serial
             for (int i = 0; i < lednum; i++)
             {
                 leds[i].changecolour(setcolour);
-                Thread.Sleep(5);
+                Thread.Sleep(10);
             }
         }
 
@@ -71,7 +72,7 @@ namespace Frequencytest.Serial
             for (int i = 0; i < lednum; i++)
             {
                 leds[i].turnon();
-                Thread.Sleep(5);
+                Thread.Sleep(10);
             }
         }
 
@@ -80,7 +81,7 @@ namespace Frequencytest.Serial
             for (int i = 0; i < lednum; i++)
             {
                 leds[i].blackout();
-                Thread.Sleep(5);
+                Thread.Sleep(10);
             }
         }
 
@@ -89,7 +90,7 @@ namespace Frequencytest.Serial
             for (int i = 0; i < lednum; i++)
             {
                 leds[i].turnoff();
-                Thread.Sleep(5);
+                Thread.Sleep(10);
             }
         }
 
@@ -98,17 +99,17 @@ namespace Frequencytest.Serial
 			for (int i = 0; i < lednum; i++)
 			{
 				leds[i].turnoff();
-				Thread.Sleep(5);
+				Thread.Sleep(10);
 				leds[i].blink(freq);
-				Thread.Sleep(5);
+				Thread.Sleep(10);
 			}
 		}
 		public void blinking(int led, int freq)
         {
             leds[led].turnoff();
-			Thread.Sleep(5);
+			Thread.Sleep(10);
 			leds[led].blink(freq);
-			Thread.Sleep(5);
+			Thread.Sleep(10);
 		}
 
 

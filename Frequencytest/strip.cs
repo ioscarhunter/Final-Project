@@ -15,8 +15,8 @@ namespace Frequencytest
 		bool INdata = false;
 		bool predata = false;
 		SignalProcessing sn = new SignalProcessing();
-		int windowsSize = 256;
-		int sample = 256;
+		int windowsSize = 512;
+		int sample = 512;
 		int emotivSample = 128;
 		double overlapsize = 0.5;
 

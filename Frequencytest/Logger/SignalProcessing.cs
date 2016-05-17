@@ -242,7 +242,7 @@ namespace Frequencytest.Logger
 
 			for (int j = 0; j < values.Length; j++)
 			{
-				peak[j] = values[j] - (peak[j] + 0.5);
+				peak[j] = values[j] - (peak[j] + 1);
 			}
 
 			double[] peaks = new double[values.Length];

@@ -16,6 +16,10 @@ namespace Frequencytest
 		private Thread loggerThread;
 		private Thread LEDThread;
 
+
+
+		private static int lednum = 8;
+
 		static System.Media.SoundPlayer finishSound = new System.Media.SoundPlayer(@"c:\\Windows\\media\\Windows Proximity Notification.wav");
 		static void ClearLine()
 		{
@@ -77,21 +81,24 @@ namespace Frequencytest
 				}
 			}
 
-			Console.ReadKey();
+			//Console.ReadKey();
 
 			#endregion
 
 			#region time and space
 			//s = new SerialCom();
+			//						// LD,D , RD , R , UR , U , LU , L
+			//int[] freqset = new int[] { 0, 13, 14, 15, 16, 17, 18, 0 };
 
-			////for (int count = 18; count >= 8; count--)
-			////{
+
+
 			//int starttime = 6;
 
 			//int time = 15;
-			//int freq = 24;
+			//int freq = 16;
 
-			//String Prefix = "Win";
+
+			//String Prefix = "WinT";
 
 			//#region init
 			//try
@@ -124,24 +131,33 @@ namespace Frequencytest
 			//	//p.setMarker(freq);
 			//	//Thread.Sleep((time / 2) * 1000);
 
-			//	p.setMarker(freq);
+			//	//p.setMarker(freq);
 			//	#endregion
 
 			//	#region Single colour
 			//	//s.changeColour(0, colourset.RED);
 			//	s.changeColour(0, colourset.GREEN);
-			//	s.blinking(0, freq);
+			//	for (int i = 0; i < lednum; i++)
+			//	{
+			//		s.blinking(i, freqset[i]);
+			//		Thread.Sleep(3);
+			//	}
+
 			//	p.setMarker(freq);
+
 			//	Thread.Sleep(time * 1000);
 			//	p.setMarker(freq);
 
 			//	#endregion
-			//	Thread.Sleep(200);
-			//	p.Run();
-			//	s.changeColour(0, colourset.GREEN);
-			//	s.blinking(0, 0);
+			//	Thread.Sleep(100);
+			//	s.all_blink(0);
 			//	Thread.Sleep(10);
-			//	s.all_dim();
+			//	s.all_off();
+			//	p.Run();
+			//	//s.changeColour(0, colourset.GREEN);
+
+
+
 			//	Thread.Sleep(500);
 			//}
 			//catch (NotConnectException e)
@@ -151,11 +167,11 @@ namespace Frequencytest
 
 			//}
 			//Thread.Sleep(5);
-			//s.all_off();
+			//	s.all_off();
 			#endregion
 			//Console.WriteLine("End");
 			//Console.ReadLine();
 		}
 	}
 
-}
+	}

@@ -19,7 +19,7 @@ namespace Frequencytest.Logger
 		EmoEngine engine; // Access to the EDK is viaa the EmoEngine 
 		int userID = -1; // userID is used to uniquely identify a user's headset
 		string filename;
-		string dir;
+		string folder;
 
 		uint userId = 0;
 		Profile profile = new Profile();
@@ -36,12 +36,12 @@ namespace Frequencytest.Logger
 		public EEG_Logger(int time, int freq, String prefix)
 		{
 			timeinsec = time;
-			dir = ".\\" + DateTime.Now.ToString("MMddyy");
-			if (!Directory.Exists(dir))
+			folder = ".\\" + DateTime.Now.ToString("MMddyy")+"\\";
+			if (!Directory.Exists(folder))
 			{
-				Directory.CreateDirectory(dir);
+				Directory.CreateDirectory(folder);
 			}
-			filename = dir + "\\" + prefix + "-" + (timeinsec - 11) + "," + freq + "-" + DateTime.Now.ToString("MMddyy-hhmmss") + ".csv"; // output filename
+			filename = prefix + "-" + (timeinsec - 11) + "," + freq + "-" + DateTime.Now.ToString("MMddyy-hhmmss") + ".csv"; // output filename
 																																		  // create the engine
 			engine = EmoEngine.Instance;
 			engine.UserAdded += new EmoEngine.UserAddedEventHandler(engine_UserAdded_Event);
@@ -106,7 +106,7 @@ namespace Frequencytest.Logger
 			Console.WriteLine("Writing " + _bufferSize.ToString() + " lines of data ");
 
 			// Write the data to a file
-			TextWriter file = new StreamWriter(filename, true);
+			TextWriter file = new StreamWriter(folder+filename, true);
 			EdkDll.EE_DataChannel_t[] selectedchannel = new EdkDll.EE_DataChannel_t[] { EdkDll.EE_DataChannel_t.MARKER, EdkDll.EE_DataChannel_t.O1, EdkDll.EE_DataChannel_t.O2 };
 
 
@@ -123,18 +123,17 @@ namespace Frequencytest.Logger
 						file.Write(" " + ",");
 					else
 						file.Write(data[channel][i] + ",");
-
 				}
 				file.WriteLine("");
-
 			}
 			file.Close();
 
+			strip s = new strip(folder, filename.TrimEnd(".csv".ToCharArray()));
 		}
 
 		public void WriteHeader()
 		{
-			TextWriter file = new StreamWriter(filename, false);
+			TextWriter file = new StreamWriter(folder + filename, false);
 
 			string header = "MARKER, O1, O2, ";
 
