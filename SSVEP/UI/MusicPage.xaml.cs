@@ -44,7 +44,7 @@ namespace WpfApplication1
 				string[] temp = track[i].Split('.');
 				listbox1.Items.Add(temp[0] + " - " + temp[1]);
 			}
-
+			
 			mediaplayer.Open(new Uri(folder + track[currsong]));
 			songname.Content = track[currsong].Split('.')[0];
 			artist.Content = track[currsong].Split('.')[1];
@@ -117,10 +117,10 @@ namespace WpfApplication1
 			listbox1.Items.Clear();
 			if (music_status == 0)
 			{
-
-
+				
+				
 				string[] temp = track[currsong].Split('.');
-				mediaplayer.Open(new Uri(folder + track[currsong]));
+				mediaplayer.Open(new Uri(folder+track[currsong]));
 				mediaplayer.Play();
 				songname.Content = temp[0];
 				artist.Content = temp[1];

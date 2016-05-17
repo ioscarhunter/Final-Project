@@ -1,0 +1,70 @@
+﻿<UserControl
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d"
+      x:Class="WpfApplication1.MusicPage"
+      Height="1152" Width="1728">
+
+    <Grid Background="#FF8D8C8C">
+        <Canvas Margin="320,303,683,67">
+            <Canvas>
+                <Canvas>
+                    <!-- Layer 1/<Group>/<Path> -->
+                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#ffc1e0f3" Data="F1 M 474.126,71.470 C 367.219,-22.892 206.544,-23.489 98.965,69.695 L 287.433,258.163 L 474.126,71.470 Z" Stretch="Fill" Width="750.748" Canvas.Left="-103.874" Height="503.883" Canvas.Top="-274.942"/>
+                    <!-- Layer 1/<Group>/<Path> -->
+                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#ffbbdca4" Data="F1 M 501.379,472.109 C 594.563,364.530 593.966,203.855 499.604,96.948 L 312.911,283.640 L 501.379,472.109 Z" Canvas.Left="318" Stretch="Fill" Width="511.008" Canvas.Top="-89" Height="728.342"/>
+                    <!-- Layer 1/<Group>/<Path> -->
+                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#fff7a48c" Data="F1 M 73.248,94.932 C -23.492,202.494 -24.074,365.874 71.473,474.124 L 261.956,283.640 L 73.248,94.932 Z" Height="749.616" Stretch="Fill" Canvas.Top="-99.808" Width="511.007" Canvas.Left="-288"/>
+                    <!-- Layer 1/<Group>/<Path> -->
+                    <Path StrokeThickness="0.5" Stroke="#ffb2b2b2" StrokeMiterLimit="1.0" Fill="#fffff0a4" Data="F1 M 96.950,499.601 C 205.200,595.148 368.580,594.566 476.142,497.826 L 287.433,309.118 L 96.950,499.601 Z" Height="503.218" Canvas.Left="-104.764" Stretch="Fill" Width="751.528" Canvas.Top="322"/>
+                </Canvas>
+            </Canvas>
+
+            <Canvas Width="152" Height="88" Canvas.Left="54" Canvas.Top="61">
+                <Canvas>
+                    <!-- Layer 1/<Path> -->
+                    <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff000000" Data="F1 M 0.500,0.866 L 75.500,44.167 L 0.500,87.469 L 0.500,0.866 Z" Canvas.Top="-202.974" Canvas.Left="119.226" Height="134.948" Stretch="Fill" Width="116.548"/>
+                    <!-- Layer 1/<Path> -->
+                    <Path StrokeThickness="1.0" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff000000" Data="F1 M 75.500,0.866 L 150.500,44.167 L 75.500,87.469 L 75.500,0.866 Z" Canvas.Top="-202.966" Canvas.Left="236" Stretch="Fill" Width="115" Height="134.932"/>
+                </Canvas>
+            </Canvas>
+            <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="296" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Foreground="#00DDDDDD" Click="forward_button" Canvas.Left="100" Canvas.Top="-235"/>
+
+            <Canvas>
+                <!-- Layer 1/+ -->
+                <TextBlock Foreground="#ff000000" Canvas.Left="576" Canvas.Top="163" FontSize="180.00" FontFamily="Myriad Pro" Height="175" Width="114">+</TextBlock>
+            </Canvas>
+            <Button Content="" Canvas.Left="484" Canvas.Top="120" Width="316" Height="320" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Foreground="#00DDDDDD" Click="inc_button"/>
+
+            <Canvas>
+                <!-- Layer 1/- -->
+                <TextBlock Foreground="#ff000000" Canvas.Top="143" FontSize="210" FontFamily="Myriad Pro" RenderTransformOrigin="3.55,2.292" Width="65" Height="138" Canvas.Left="-135">-</TextBlock>
+            </Canvas>
+            <Button Content="" Canvas.Left="-270" Canvas.Top="149" Width="325" RenderTransformOrigin="-1.307,-1.8" Height="291" Background="#00DDDDDD" Foreground="#00DDDDDD" BorderBrush="#00DDDDDD" Click="dec_button"/>
+
+
+            <Canvas Height="25" Width="26" Canvas.Left="275" Canvas.Top="656">
+                <!-- Layer 1/BACK -->
+                <TextBlock Foreground="#ff000000" Canvas.Left="-114" Canvas.Top="-68" FontSize="100.00" FontFamily="Myriad Pro Semibold" Text="BACK" Height="129"/>
+            </Canvas>
+            <Button Content="" Width="360" Canvas.Left="100" Canvas.Top="515" Height="305" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Foreground="#00DDDDDD" Click="back_button"/>
+        </Canvas>
+        <ListBox Name="listbox1" HorizontalAlignment="Left" Height="155" Margin="1186,885,0,0" VerticalAlignment="Top" Width="494" FontSize="21.333" Background="#FF8D8C8C" BorderBrush="#00ABADB3">
+            <ListBoxItem Content="Track List" Foreground="#FFF3F3F3" />
+        </ListBox>
+        <ProgressBar Name="Volume" HorizontalAlignment="Left" Height="70" Margin="1186,1055,0,0" VerticalAlignment="Top" Width="494" RenderTransformOrigin="0.5,0.5" Maximum="1" LargeChange="0.25" SmallChange="0.25" Value="0.5">
+            <ProgressBar.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ProgressBar.RenderTransform>
+        </ProgressBar>
+        <Label x:Name="songname" Content="Sonenamesongnamesongname" HorizontalAlignment="Left" Margin="1186,784,0,0" VerticalAlignment="Top" Width="494" FontSize="32" Foreground="White"/>
+        <Label x:Name="artist" Content="ArtistArtist" HorizontalAlignment="Left" Margin="1186,825,0,0" VerticalAlignment="Top" FontSize="24" Foreground="White"/>
+
+    </Grid>
+</UserControl>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetEmotivSDK", "DotNetEmotivSDK\DotNetEmotivSDK.csproj", "{D3337309-9682-425E-8EDC-2ECFACF79565}"
 EndProject
@@ -29,6 +29,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoPage", "VideoPage\VideoPage.csproj", "{3E4C12CA-F4F6-48D2-8AA1-2DBC19E66CAB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frequencytest", "Frequencytest\Frequencytest.csproj", "{BA911569-289B-4B8F-8B08-FB7FCCC6C3E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSVEP", "SSVEP\SSVEP.csproj", "{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -261,6 +263,26 @@ Global
 		{BA911569-289B-4B8F-8B08-FB7FCCC6C3E9}.Release|x64.Build.0 = Release|Any CPU
 		{BA911569-289B-4B8F-8B08-FB7FCCC6C3E9}.Release|x86.ActiveCfg = Release|Any CPU
 		{BA911569-289B-4B8F-8B08-FB7FCCC6C3E9}.Release|x86.Build.0 = Release|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Debug|ARM.Build.0 = Debug|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Debug|x64.Build.0 = Debug|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Debug|x86.Build.0 = Debug|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Release|ARM.ActiveCfg = Release|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Release|ARM.Build.0 = Release|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Release|x64.ActiveCfg = Release|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Release|x64.Build.0 = Release|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Release|x86.ActiveCfg = Release|Any CPU
+		{A3E2C4C1-A227-4B22-85E3-46CEE2FA3D01}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
