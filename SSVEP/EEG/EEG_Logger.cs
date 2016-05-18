@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Emotiv;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Threading;
 
 
 namespace WpfApplication1
@@ -39,8 +35,9 @@ namespace WpfApplication1
 		int timeinsec;
 
 
-		public EEG_Logger(int time, int freq, String prefix)
+		public EEG_Logger(int time, String prefix)
 		{
+			int freq = 0;
 			timeinsec = time;
 			folder = ".\\" + DateTime.Now.ToString("MMddyy") + "\\";
 			if (!Directory.Exists(folder))

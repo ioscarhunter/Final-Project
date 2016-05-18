@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Frequencytest.Logger;
 
 namespace WpfApplication1
 {
@@ -211,13 +207,41 @@ namespace WpfApplication1
 		}
 
 		private int getfreq()
-
-		internal int getdata()
 		{
-			if (number >= 12.5 && number <= 13.5)
+			if (bestpeak >= 12.5 && bestpeak <= 13.5)
 			{
 				return 13;
 			}
+
+			else if (bestpeak > 13.5 && bestpeak <= 14.5)
+			{
+				return 14;
+			}
+
+			else if (bestpeak > 14.5 && bestpeak <= 15.5)
+			{
+				return 15;
+			}
+			else if (bestpeak > 15.5 && bestpeak <= 16.5)
+			{
+				return 16;
+			}
+
+			else if (bestpeak > 16.5 && bestpeak <= 17.5)
+			{
+				return 17;
+			}
+			else if (bestpeak > 17.5 && bestpeak <= 18.5)
+			{
+				return 18;
+			}
+
+			else return -1;
+		}
+
+		internal int getdata()
+		{
+			return 0;
 		}
 
 		private void processing()

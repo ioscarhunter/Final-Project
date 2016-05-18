@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Runtime.InteropServices;
 
 namespace WpfApplication1
 {
@@ -20,6 +12,10 @@ namespace WpfApplication1
 	/// </summary>
 	public partial class MusicPage : UserControl, ISwitchable
 	{
+
+		[DllImport("user32.dll")]
+		static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
+
 		private MediaPlayer mediaplayer = new MediaPlayer();
 		private int music_status = 0;
 		private string folder = "D:\\SkyDrive\\Documents\\Visual Studio 2015\\Projects\\examples_DotNet\\build\\Debug\\";
@@ -75,6 +71,7 @@ namespace WpfApplication1
 		}
 		private void inc_volume()
 		{
+			//keybd_event((byte)System.Windows.Forms.Keys.VolumeUp, 0, 0, 0); // increase volume
 			if (mediaplayer.Volume >= 0 && mediaplayer.Volume < 1)
 			{
 				mediaplayer.Volume += 0.25;
@@ -94,6 +91,7 @@ namespace WpfApplication1
 		}
 		private void dec_volume()
 		{
+			//keybd_event((byte)System.Windows.Forms.Keys.VolumeDown, 0, 0, 0); // decrease volume
 			if (mediaplayer.Volume > 0 && mediaplayer.Volume <= 1)
 			{
 				mediaplayer.Volume -= 0.25;
@@ -104,6 +102,7 @@ namespace WpfApplication1
 			{
 				mediaplayer.Volume = 0;
 			}
+
 		}
 		private void forward_button(object sender, RoutedEventArgs e)
 		{

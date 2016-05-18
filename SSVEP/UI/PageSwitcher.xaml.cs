@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using System.Threading;
@@ -55,21 +48,31 @@ namespace WpfApplication1
 
         UserControl currentuc;
 
-        private ISwitchable interfaces;
+		private int lednum = 8;
+		String folder = ".\\" + "data" + "\\";
+		String Prefix = "WinT";
+
+		// LD,D , RD , R , UR , U , LU , L
+		private int[] freqset = new int[] { 0, 13, 14, 15, 16, 17, 18, 0 };
+		private int baselineTime = 6;
+		private int activeTime = 15;
+		private int processingTime;
+
+		private ISwitchable interfaces;
         public PageSwitcher()
         {
 
             InitializeComponent();
-
-            Switcher.pageSwitcher = this;
+			processingTime = 1 + baselineTime + activeTime;
+			Switcher.pageSwitcher = this;
             Switcher.Switch(new MainMenu());
 
             lineTrend = new LineTrend { Points = new ObservableCollection<TrendPoint>(), TrendColor = Brushes.Coral };
 
             status.Content = "EEG Data Reader Example";
 
-            p = new EEG_Logger();
-            p.DataUpdate += HandleDataUpdate;
+			p = new EEG_Logger(1 + baselineTime + activeTime, Prefix);
+			p.DataUpdate += HandleDataUpdate;
             p.StatusUpdate += HandleStatusUpdate;
             p.whichsUpdate += HandleLedUpdate;
             p.GyroUpdate += HandleGyroUpdate;
@@ -308,19 +311,13 @@ namespace WpfApplication1
         {
             if (!LEDrunning)
             {
-                s.readystate();
-                _timerEEGREC = new System.Timers.Timer();
-                _timerEEGREC.Interval = 20000;
-                _timerEEGREC.Elapsed += new System.Timers.ElapsedEventHandler(saveEEGdata);
-                _timerEEGREC.Enabled = true;
+				_timerEEGREC = new System.Timers.Timer();
+				_timerEEGREC.Interval = processingTime * 1000;
+				_timerEEGREC.Elapsed += new System.Timers.ElapsedEventHandler(saveEEGdata);
+				_timerEEGREC.Enabled = true;
 
-                _timerMARK = new System.Timers.Timer();
-                _timerMARK.Interval = 20000;
-                _timerMARK.Elapsed += new System.Timers.ElapsedEventHandler(setmarker);
-                _timerMARK.Enabled = true;
-
-                LEDrunning = true;
-            }
+				LEDrunning = true;
+			}
             else
             {
                 LEDThread.Abort();
@@ -330,16 +327,35 @@ namespace WpfApplication1
 
         private void saveEEGdata(object sender, System.Timers.ElapsedEventArgs e)
         {
-            p.getEEG();
+			#region Pre
+			Thread.Sleep(2);
 
-        }
+			p.setMarker(1);
+			Thread.Sleep(baselineTime * 1000);
+			p.setMarker(1);
+			#endregion
+			#region Single colour
+			for (int i = 0; i < lednum; i++)
+			{
+				s.blinking(i, freqset[i]);
+				Thread.Sleep(3);
+			}
 
-        private void setmarker(object sender, System.Timers.ElapsedEventArgs e)
+			p.setMarker(20);
 
-        {
-            reset = true;
-            s.blinking(ref p);
-        }
+			Thread.Sleep(activeTime * 1000);
+			p.setMarker(20);
+
+			#endregion
+
+			Thread.Sleep(10);
+			p.Run();
+			s.all_blink(0);
+			Thread.Sleep(10);
+			s.all_off();
+
+		}
+
 
         private void updateGraph(ref Grid graph, double[] value)
         {

@@ -114,7 +114,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="EEG\EEG_Logger.cs" />
-    <Compile Include="EEG\FilterButterworth.cs" />
     <Compile Include="EEG\HeadsetBaseState.cs" />
     <Compile Include="EEG\NotConnectException.cs" />
     <Compile Include="EEG\SignalProcessing.cs" />

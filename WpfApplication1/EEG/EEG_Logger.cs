@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using Emotiv;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Threading;
 
 namespace WpfApplication1
 {
