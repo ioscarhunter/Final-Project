@@ -53,7 +53,7 @@ namespace WpfApplication1
 		String Prefix = "WinT";
 
 		// LD,D , RD , R , UR , U , LU , L
-		public static int[] freqset = new int[] { 0, 13, 14, 15, 16, 17, 18, 0 };
+		public static int[] freqset = new int[] { 0, 13, 0, 15, 0, 17, 0, 14 };
 		private int baselineTime = 6;
 		private int activeTime = 15;
 		private int processingTime;
@@ -330,7 +330,7 @@ namespace WpfApplication1
 		{
 			#region Pre
 			Thread.Sleep(2);
-
+			s.all_dim();
 			p.setMarker(1);
 			Thread.Sleep(baselineTime * 1000);
 			p.setMarker(1);
