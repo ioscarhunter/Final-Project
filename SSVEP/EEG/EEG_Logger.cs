@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Emotiv;
 using System.IO;
-
+using System.Threading;
 
 namespace WpfApplication1
 {
@@ -31,6 +31,7 @@ namespace WpfApplication1
 		public bool isLoad = true;
 		public bool oneTime = false;
 
+		public System.Timers.Timer _timer;
 
 		int timeinsec;
 
@@ -47,17 +48,20 @@ namespace WpfApplication1
 			filename = prefix + "-" + (timeinsec - 11) + "," + freq + "-" + DateTime.Now.ToString("MMddyy-hhmmss") + ".csv"; // output filename
 																															 // create the engine
 			engine = EmoEngine.Instance;
-			engine.UserAdded += new EmoEngine.UserAddedEventHandler(engine_UserAdded_Event);
-			engine.EmoStateUpdated += new EmoEngine.EmoStateUpdatedEventHandler(Instance_EmoStateUpdated);
-
+			linkEmo();
 			// connect to Emoengine.            
 			engine.Connect();
 
 			// create a header for our output file
 			WriteHeader();
-
 		}
 
+		private void linkEmo()
+		{
+			engine.UserAdded += new EmoEngine.UserAddedEventHandler(engine_UserAdded_Event);
+			engine.EmoStateUpdated += new EmoEngine.EmoStateUpdatedEventHandler(Instance_EmoStateUpdated);
+			engine.EmoEngineEmoStateUpdated += new EmoEngine.EmoEngineEmoStateUpdatedEventHandler(engine_EmoEngineEmoStateUpdated);
+		}
 		void Instance_EmoStateUpdated(object sender, EmoStateUpdatedEventArgs e)
 		{
 			if (isLoad)
@@ -69,7 +73,7 @@ namespace WpfApplication1
 
 		public void LoadUP()
 		{
-			engine.LoadUserProfile(userId, ".//starboy.emu");
+			engine.LoadUserProfile(userId, ".\\starboy.emu");
 			profile = engine.GetUserProfile((uint)userId);
 			engine.SetUserProfile(userId, profile);
 		}
@@ -94,11 +98,15 @@ namespace WpfApplication1
 			// Handle any waiting events
 			engine.ProcessEvents();
 
+			_timer = new System.Timers.Timer();
+			_timer.Interval = 100;
+			_timer.Elapsed += new System.Timers.ElapsedEventHandler(processEvent);
+			_timer.Enabled = true;
+
 		}
 
 		public void Run()
 		{
-
 			Console.WriteLine(engine.EE_DataGetBufferSizeInSec());
 			Dictionary<EdkDll.EE_DataChannel_t, double[]> data = engine.GetData((uint)userID);
 			if (data == null)
@@ -151,7 +159,7 @@ namespace WpfApplication1
 			//Console.WriteLine(mark);
 		}
 
-		
+
 		private void processEvent(object sender, System.Timers.ElapsedEventArgs e)
 		{
 			// Handle any waiting events

@@ -241,6 +241,19 @@ namespace WpfApplication1
 
 		internal int getdata()
 		{
+			int [] freset = PageSwitcher.freqset;
+			int index = Array.IndexOf(freset,getfreq());
+
+			switch (index)
+			{
+				case 1:	return 1;
+				case 3:	return 2;
+				case 5: return 3;
+				case 7:	return 4;
+				default: return 0;
+
+			}
+
 			return 0;
 		}
 
