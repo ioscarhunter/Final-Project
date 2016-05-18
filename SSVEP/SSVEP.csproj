@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EEG\strip.cs" />
     <Compile Include="Serial\colourset.cs" />
     <Compile Include="Serial\LED.cs" />
     <Compile Include="Serial\SerialCom.cs" />
