@@ -69,109 +69,109 @@ namespace Frequencytest
 		{
 
 			#region strip
-			String folder = ".\\" + "data" + "\\";
+			//String folder = ".\\" + "data" + "\\";
 
-			string[] fileEntries = Directory.GetFiles(folder);
-			foreach (string fileName in fileEntries)
-			{
-				String filename = Path.GetFileName(fileName);
-				if (filename.EndsWith(".csv"))
-				{
-					strip s = new strip(folder, filename.TrimEnd(".csv".ToCharArray()));
-				}
-			}
+			//string[] fileEntries = Directory.GetFiles(folder);
+			//foreach (string fileName in fileEntries)
+			//{
+			//	String filename = Path.GetFileName(fileName);
+			//	if (filename.EndsWith(".csv"))
+			//	{
+			//		strip s = new strip(folder, filename.TrimEnd(".csv".ToCharArray()));
+			//	}
+			//}
 
 			//Console.ReadKey();
 
 			#endregion
 
 			#region time and space
-			//s = new SerialCom();
-			//						// LD,D , RD , R , UR , U , LU , L
-			//int[] freqset = new int[] { 0, 13, 14, 15, 16, 17, 18, 0 };
+			s = new SerialCom();
+			// LD,D , RD , R , UR , U , LU , L
+			int[] freqset = new int[] { 0, 13, 0, 15, 0, 17, 0, 14 };
 
 
 
-			//int starttime = 6;
+			int starttime = 6;
 
-			//int time = 15;
-			//int freq = 16;
-
-
-			//String Prefix = "WinT";
-
-			//#region init
-			//try
-			//{
-			//	p = new EEG_Logger(1 + starttime + time, freq, Prefix);
-
-			//	for (int i = 0; i < 2; i++)
-			//	{
-			//		p.connect();
-			//		Thread.Sleep(500);
-			//	}
-			//	#endregion
-
-			//	#region Pre
-			//	Thread.Sleep(2);
-
-			//	p.setMarker(1);
-			//	Thread.Sleep(starttime * 1000);
-			//	p.setMarker(1);
-			//	#endregion
-
-			//	#region Dual colour
-			//	//s.changeColour(0, colourset.GREEN);
-			//	//s.blinking(0, freq);
-			//	//p.setMarker(freq);
-			//	//Thread.Sleep((time / 2) * 1000);
-
-			//	//s.changeColour(0, colourset.RED);
-			//	//s.blinking(0, freq);
-			//	//p.setMarker(freq);
-			//	//Thread.Sleep((time / 2) * 1000);
-
-			//	//p.setMarker(freq);
-			//	#endregion
-
-			//	#region Single colour
-			//	//s.changeColour(0, colourset.RED);
-			//	s.changeColour(0, colourset.GREEN);
-			//	for (int i = 0; i < lednum; i++)
-			//	{
-			//		s.blinking(i, freqset[i]);
-			//		Thread.Sleep(3);
-			//	}
-
-			//	p.setMarker(freq);
-
-			//	Thread.Sleep(time * 1000);
-			//	p.setMarker(freq);
-
-			//	#endregion
-			//	Thread.Sleep(100);
-			//	s.all_blink(0);
-			//	Thread.Sleep(10);
-			//	s.all_off();
-			//	p.Run();
-			//	//s.changeColour(0, colourset.GREEN);
+			int time = 15;
+			int freq = 16;
 
 
+			String Prefix = "WinT";
 
-			//	Thread.Sleep(500);
-			//}
-			//catch (NotConnectException e)
-			//{
-			//	Console.WriteLine("not connect");
-			//}
+			#region init
+			try
+			{
+				p = new EEG_Logger(1 + starttime + time, freq, Prefix);
 
-			//}
-			//Thread.Sleep(5);
-			//	s.all_off();
-			#endregion
-			//Console.WriteLine("End");
-			//Console.ReadLine();
-		}
+				for (int i = 0; i < 2; i++)
+				{
+					p.connect();
+					Thread.Sleep(500);
+				}
+				#endregion
+
+				#region Pre
+				Thread.Sleep(2);
+
+				p.setMarker(1);
+				Thread.Sleep(starttime * 1000);
+				p.setMarker(1);
+				#endregion
+
+				//#region Dual colour
+				//	//s.changeColour(0, colourset.GREEN);
+				//	//s.blinking(0, freq);
+				//	//p.setMarker(freq);
+				//	//Thread.Sleep((time / 2) * 1000);
+
+				//	//s.changeColour(0, colourset.RED);
+				//	//s.blinking(0, freq);
+				//	//p.setMarker(freq);
+				//	//Thread.Sleep((time / 2) * 1000);
+
+				//	//p.setMarker(freq);
+				//	#endregion
+
+				#region Single colour
+				//s.changeColour(0, colourset.RED);
+				s.changeColour(0, colourset.GREEN);
+				for (int i = 0; i < lednum; i++)
+				{
+					s.blinking(i, freqset[i]);
+					Thread.Sleep(3);
+				}
+
+				p.setMarker(freq);
+
+				Thread.Sleep(time * 1000);
+				p.setMarker(freq);
+
+				#endregion
+				Thread.Sleep(100);
+				s.all_blink(0);
+				Thread.Sleep(10);
+				s.all_off();
+				p.Run();
+				//s.changeColour(0, colourset.GREEN);
+
+
+
+				Thread.Sleep(500);
+			}
+			catch (NotConnectException e)
+			{
+				Console.WriteLine("not connect");
+			}
+
+		//}
+		Thread.Sleep(5);
+					s.all_off();
+				#endregion
+		//		//Console.WriteLine("End");
+		//Console.ReadLine();
 	}
+}
 
 	}
