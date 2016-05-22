@@ -85,6 +85,6 @@
 			<Label x:Name="label11" Content="O 2&#xD;&#xA;" Grid.Column="1" HorizontalAlignment="Left" Margin="251,215,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="26" FontFamily="Segoe UI Semilight" Width="56" Height="43"/>
 
 		</Grid>
-		<StackPanel Name ="stkPanel" HorizontalAlignment="Left" Height="1152" Margin="10,10,-10,-10" VerticalAlignment="Top" Width="1728"/>
+		<StackPanel Name ="stkPanel" HorizontalAlignment="Left" Height="1152" VerticalAlignment="Top" Width="1728"/>
 	</Grid>
 </Window>
