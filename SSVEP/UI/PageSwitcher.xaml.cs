@@ -69,21 +69,15 @@ namespace WpfApplication1
 
 			lineTrend = new LineTrend { Points = new ObservableCollection<TrendPoint>(), TrendColor = Brushes.Coral };
 
-			status.Content = "EEG Data Reader Example";
-
 			p = new EEG_Logger(1 + baselineTime + activeTime, Prefix);
-			p.DataUpdate += HandleDataUpdate;
 			p.StatusUpdate += HandleStatusUpdate;
 			p.whichsUpdate += HandleLedUpdate;
 			p.GyroUpdate += HandleGyroUpdate;
 		
-
 			s = new SerialCom();
-			s.LEDUpdate += HandleLEDUpdate;
 
 			connect = false;
 			LEDrunning = false;
-			status.Content = "not connect";
 			//Switcher.remotechange(3);
 		}
 
@@ -150,33 +144,18 @@ namespace WpfApplication1
 				{
 					case 1:
 						remotechangepage(1);
-						ledupdate.Content = "Down";
 						break;
 					case 3:
 						remotechangepage(2);
-						ledupdate.Content = "Right";
 						break;
 					case 5:
 						remotechangepage(3);
-						ledupdate.Content = "Up";
 						break;
 					case 7:
 						remotechangepage(4);
-						ledupdate.Content = "Left";
 						break;
 
 				}
-			});
-
-		}
-
-		private void HandleDataUpdate(object sender, EEG_LoggerEventArgs e)
-		{
-			// dispatch the modification to the text box to the UI thread (main window dispatcher)
-			Dispatcher.Invoke(() =>
-			{
-				updateGraph(ref graph_o1, e.Data_O1);
-				updateGraph(ref graph_o2, e.Data_O2);
 			});
 
 		}
@@ -187,20 +166,15 @@ namespace WpfApplication1
 			Dispatcher.Invoke(() =>
 			{
 				//Console.WriteLine("ff");
-				time.Content = "Time on " + e.timePass;
-				headseton.Content = "Headset status " + e.headsetOn;
 				if (!connect && e.headsetOn == 1)
 				{
 					connect = true;
-					status.Content = "Connected";
 				}
 				if (connect && e.headsetOn == 0)
 				{
 					connect = false;
-					status.Content = "not connect";
 				}
 
-				signal.Content = "Signal " + e.signalStrength;
 				update_signal_quality(c_signal, e.signalStrength);
 				batt.Content = e.chargeLevel + "/" + e.maxChargeLevel;
 				if (e.chargeLevel != battery_level)
@@ -222,36 +196,6 @@ namespace WpfApplication1
 
 		}
 
-		private void HandleLEDUpdate(object sender, LED_StatusEventArgs e)
-		{
-			if (light == null)
-				light = new Label[] { light1, light2, light3, light4, light5, light6, light7, light8 };
-			Dispatcher.Invoke(() =>
-			{
-				if (e.cycle == 1)
-				{
-
-				}
-				else
-				{
-
-					for (int i = 0; i < light.Length; i++)
-					{
-						//if (i == 0 || i == 2 || i == 4 || i == 6) { p.getEEG(128, 64, i); }
-						if (e.status == i)
-						{
-							light[i].Foreground = Brushes.ForestGreen;
-						}
-
-						else
-						{
-							light[i].Foreground = Brushes.WhiteSmoke;
-						}
-					}
-				}
-			});
-
-		}
 
 		private void HandleGyroUpdate(object sender, EEG_GyroEventArgs e)
 		{
@@ -267,7 +211,7 @@ namespace WpfApplication1
 
 				deltax += e.gyrox;
 				deltay += e.gyroy;
-				gyro.Content = deltax + ", " + deltay;
+				//gyro.Content = deltax + ", " + deltay;
 			});
 		}
 
@@ -275,7 +219,7 @@ namespace WpfApplication1
 		{
 			if (!connect)
 			{
-				status.Content = "not connect";
+				//status.Content = "not connect";
 				connect_but.Content = "Connecting";
 				for (int i = 0; i < 2; i++)
 				{
@@ -291,7 +235,7 @@ namespace WpfApplication1
 					}
 					catch (NotConnectException error)
 					{
-						status.Content = "trying to connect";
+						//status.Content = "trying to connect";
 						continue;
 					}
 					catch (TaskCanceledException error)
