@@ -11,12 +11,12 @@ namespace WpfApplication1
     /// </summary>
     public partial class MoviePage : UserControl,ISwitchable
     {
-		private string folder = "D:\\SkyDrive\\Documents\\Visual Studio 2015\\Projects\\examples_DotNet\\build\\Debug\\";
+		private string folder = "C:\\Onedrive\\Documents\\Visual Studio 2015\\Projects\\examples_DotNet\\build\\Debug\\";
 		private int status = 0;
         public MoviePage()
         {
             InitializeComponent();
-            media.Source = new Uri(folder+"2.mp4");
+            media.Source = new Uri(folder+ "2.mkv");
             media.Play();
             
         }
