@@ -8,7 +8,7 @@ namespace WpfApplication1
 	class SerialCom
 	{
 		private SerialPort port1;
-		private int bRate = 460800;
+		private int bRate = 9600;
 		private LED[] leds;
 		private int lednum = 8;
 		private int[] ledstatus;
@@ -123,19 +123,22 @@ namespace WpfApplication1
 		private string AutodetectArduinoPort()
 		{
 			ManagementScope connectionScope = new ManagementScope();
-			SelectQuery serialQuery = new SelectQuery("SELECT * FROM Win32_SerialPort");
+			SelectQuery serialQuery = new SelectQuery("SELECT * FROM Win32_PnPEntity WHERE Caption like '%(COM%'");
 			ManagementObjectSearcher searcher = new ManagementObjectSearcher(connectionScope, serialQuery);
+			string[] ArrayComPortsNames = SerialPort.GetPortNames();
+
+
 
 			try
 			{
 				foreach (ManagementObject item in searcher.Get())
 				{
 					string desc = item["Description"].ToString();
-					string deviceId = item["DeviceID"].ToString();
+					string deviceId = item["Caption"].ToString();
 
-					if (desc.Contains("Arduino"))
-					{
-						return deviceId;
+					if (desc.Contains("CH340")||desc.Contains("Arduino"))
+					{						
+						return deviceId.Split('(')[1].TrimEnd(')');
 					}
 				}
 			}
@@ -164,6 +167,8 @@ namespace WpfApplication1
 		}
 	}
 
+
+
 	public class LED_StatusEventArgs : EventArgs
 	{
 		public int status;
@@ -184,4 +189,6 @@ namespace WpfApplication1
 			finish = fin;
 		}
 	}
+
+
 }

@@ -20,7 +20,7 @@
 			</Grid.ColumnDefinitions>
 			<Grid x:Name="graph_o1_fft" Height="200" Margin="38.333,208.667,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="192" Background="#FFF6F6F6" Grid.Column="1" Visibility="Hidden" Grid.Row="1" Grid.RowSpan="2"/>
 			<Grid x:Name="graph_o2_fft" Height="200" Margin="38.333,75.667,0,-25" HorizontalAlignment="Left" Width="192" Background="#FFF6F6F6" VerticalAlignment="Top" Grid.Column="1" Visibility="Hidden" Grid.Row="2"/>
-			<Button x:Name="connect_but" Content="Connect Emotiv" Margin="61,0,0,34" HorizontalAlignment="Left" Width="363" Height="65" VerticalAlignment="Bottom" Click="connect_but_Click" Grid.Row="2" Background="White" FontSize="48" Foreground="#FF00AEFF" FontFamily="Segoe UI Light"/>
+			<Button x:Name="connect_but" Content="Connect Emotiv" Margin="62,0,0,92" HorizontalAlignment="Left" Width="363" Height="65" VerticalAlignment="Bottom" Click="connect_but_Click" Grid.Row="2" Background="White" FontSize="48" Foreground="#FF00AEFF" FontFamily="Segoe UI Light"/>
 			<Grid Grid.Column="1" Margin="195,407,358,0" Grid.Row="2">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="0*"/>
@@ -39,7 +39,7 @@
 			<Label x:Name="OL" Content="O1" HorizontalAlignment="Left" Margin="38,98,0,0" VerticalAlignment="Top" Height="44" Width="80" Grid.Row="2" FontSize="26.667" Grid.Column="1"/>
 			<Label x:Name="OR" Content="O2" HorizontalAlignment="Left" Margin="261,98,0,0" VerticalAlignment="Top" Height="44" Width="80" Grid.Row="2" FontSize="26.667" Grid.Column="1"/>
 
-			<Button x:Name="startlight" Content="Start Light" HorizontalAlignment="Left" Margin="10,579,0,-190" VerticalAlignment="Top" Width="179" Click="startlight_Click" Height="82" Grid.Row="2" Background="#FFD4D4D4" FontSize="26.667"/>
+			<Button x:Name="startlight" Content="Start Light" HorizontalAlignment="Left" Margin="160,405,0,0" VerticalAlignment="Top" Width="179" Click="startlight_Click" Height="65" Grid.Row="2" Background="White" FontSize="40" BorderBrush="White" Foreground="#FF0046FF" FontFamily="Segoe UI Light"/>
 			<!--<Button Margin="255,345,30,-45" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>

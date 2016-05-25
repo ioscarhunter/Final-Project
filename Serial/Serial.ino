@@ -30,7 +30,7 @@ LEDClass earray[E_COUNT];
 // the setup function runs once when you press reset or power the board
 void setup() {
 
-	Serial.begin(460800);           // set up Serial library at 460800 bps
+	Serial.begin(9600);           // set up Serial library at 9600 bps
 	Serial.setTimeout(5);
 	Serial.println("Hello world!");
 
