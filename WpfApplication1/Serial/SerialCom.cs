@@ -9,7 +9,7 @@ namespace WpfApplication1
     class SerialCom
     {
         private SerialPort port1;
-        private int bRate = 460800;
+        private int bRate = 9600;
         private LED[] leds;
         private int lednum = 8;
         private int[] ledstatus;
@@ -183,33 +183,36 @@ namespace WpfApplication1
                 LEDUpdate(this, new LED_StatusEventArgs(led, i));
         }
 
-        private string AutodetectArduinoPort()
-        {
-            ManagementScope connectionScope = new ManagementScope();
-            SelectQuery serialQuery = new SelectQuery("SELECT * FROM Win32_SerialPort");
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(connectionScope, serialQuery);
+		private string AutodetectArduinoPort()
+		{
+			ManagementScope connectionScope = new ManagementScope();
+			SelectQuery serialQuery = new SelectQuery("SELECT * FROM Win32_PnPEntity WHERE Caption like '%(COM%'");
+			ManagementObjectSearcher searcher = new ManagementObjectSearcher(connectionScope, serialQuery);
+			string[] ArrayComPortsNames = SerialPort.GetPortNames();
 
-            try
-            {
-                foreach (ManagementObject item in searcher.Get())
-                {
-                    string desc = item["Description"].ToString();
-                    string deviceId = item["DeviceID"].ToString();
 
-                    if (desc.Contains("Arduino"))
-                    {
-                        return deviceId;
-                    }
-                }
-            }
-            catch (ManagementException e)
-            {
-                throw new NotConnectException();
-            }
 
-            return null;
-        }
-        private void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
+			try
+			{
+				foreach (ManagementObject item in searcher.Get())
+				{
+					string desc = item["Description"].ToString();
+					string deviceId = item["Caption"].ToString();
+
+					if (desc.Contains("CH340") || desc.Contains("Arduino"))
+					{
+						return deviceId.Split('(')[1].TrimEnd(')');
+					}
+				}
+			}
+			catch (ManagementException e)
+			{
+				throw new NotConnectException();
+			}
+
+			return null;
+		}
+		private void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             //Write the serial port data to the console.
             Console.WriteLine(port1.ReadExisting());

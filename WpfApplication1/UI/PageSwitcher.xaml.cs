@@ -219,7 +219,7 @@ namespace WpfApplication1
             if (!connect)
             {
                 //status.Content = "not connect";
-                connect_but.Content = "Connecting";
+                connect_but.Content = "Connected";
                 for (int i = 0;i < 2;i++)
                 {
                     Console.WriteLine(i);

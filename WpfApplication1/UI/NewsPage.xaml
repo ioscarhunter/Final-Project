@@ -36,7 +36,7 @@
         <Label x:Name="Htemp" Content="33° C" HorizontalAlignment="Left" Margin="1319,180,0,0" VerticalAlignment="Top" Height="85" Width="114" FontSize="64" Foreground="White" FontFamily="Segoe UI Semilight"/>
         <Label x:Name="temp" Content="31 " HorizontalAlignment="Left" Margin="949,125,0,0" VerticalAlignment="Top" Height="265" Width="265" FontSize="200" Foreground="White" FontFamily="Segoe UI Semilight"/>
         <Label x:Name="day" Content="Friday" HorizontalAlignment="Left" Margin="1145,107,0,0" VerticalAlignment="Top" Height="127" Width="217" FontSize="80" Foreground="White" FontFamily="Segoe UI Semilight" Grid.Row="1"/>
-        <Label x:Name="month" Content="November 2015" HorizontalAlignment="Left" Margin="1145,204,0,0" VerticalAlignment="Top" Height="101" Width="452" FontSize="64" Foreground="White" FontFamily="Segoe UI Semilight" Grid.Row="1"/>
+        <Label x:Name="month" Content="May 2016" HorizontalAlignment="Left" Margin="1145,204,0,0" VerticalAlignment="Top" Height="101" Width="452" FontSize="64" Foreground="White" FontFamily="Segoe UI Semilight" Grid.Row="1"/>
         <Label Name="lblTime" Content="10:10:10" HorizontalAlignment="Left" Margin="130,64.6,0,0" VerticalAlignment="Top" Height="260" Width="765" FontSize="200" Foreground="White" FontFamily="Segoe UI Semilight" Grid.Row="1"/>
     </Grid>
 </UserControl>
