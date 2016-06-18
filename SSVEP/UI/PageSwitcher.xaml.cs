@@ -53,8 +53,8 @@ namespace WpfApplication1
 		String Prefix = "WinT";
 
 		// LD,D , RD , R , UR , U , LU , L
-		public static int[] freqset = new int[] { 0, 13, 0, 15, 0, 17, 0, 14 };
-		private int baselineTime = 6;
+		public static int[] freqset = new int[] { 0, 3, 0, 15, 0, 17, 0, 2 };
+		private int baselineTime = 0;
 		private int activeTime = 15;
 		private int processingTime;
 

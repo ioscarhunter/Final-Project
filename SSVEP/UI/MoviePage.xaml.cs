@@ -1,6 +1,8 @@
 ﻿using System;
+
 using System.Windows;
 using System.Windows.Controls;
+
 
 namespace WpfApplication1
 {
@@ -9,7 +11,7 @@ namespace WpfApplication1
 	/// </summary>
 	public partial class MoviePage : UserControl, ISwitchable
 	{
-		private string folder = "C:\\Onedrive\\Documents\\Visual Studio 2015\\Projects\\examples_DotNet\\build\\Debug\\";
+		private string folder = "C:\\2015 Project\\build\\Debug\\";
 		private int status = 0;
 		public MoviePage()
 		{

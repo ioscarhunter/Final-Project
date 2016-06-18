@@ -253,6 +253,7 @@ namespace WpfApplication1
 
         private void startlight_Click(object sender, RoutedEventArgs e)
         {
+			s.connectSerial();
             if (!LEDrunning)
             {
                 s.readystate();

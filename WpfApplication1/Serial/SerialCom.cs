@@ -64,17 +64,22 @@ namespace WpfApplication1
             leds = new LED[lednum];
             ledstatus = new int[lednum];
 
-            Console.WriteLine(AutodetectArduinoPort());
-            port1 = new SerialPort();
-            port1.PortName = AutodetectArduinoPort();
-            port1.BaudRate = bRate;
-            port1.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
-            port1.Open();
-            Thread.Sleep(5);
-            counttimes = 0;
-            setupColour(colourset.LIMEGREEN);
-            all_off();
+
         }
+
+		public void connectSerial()
+		{
+			Console.WriteLine(AutodetectArduinoPort());
+			port1 = new SerialPort();
+			port1.PortName = AutodetectArduinoPort();
+			port1.BaudRate = bRate;
+			port1.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
+			port1.Open();
+			Thread.Sleep(5);
+			counttimes = 0;
+			setupColour(colourset.LIMEGREEN);
+			all_off();
+		}
 
         public void readystate()
         {

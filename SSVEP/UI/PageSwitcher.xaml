@@ -76,8 +76,8 @@
 			<Ellipse x:Name ="c_o1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="62" Margin="27,148,0,0" Stroke="Black" VerticalAlignment="Top" Width="62" RenderTransformOrigin="0.529,0.55" Grid.Row="2" Grid.Column="1"/>
 			<Ellipse x:Name ="c_base1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="60" Margin="539,434,0,0" Stroke="Black" VerticalAlignment="Top" Width="60" RenderTransformOrigin="0.529,0.55" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
 			<Ellipse x:Name ="c_base2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="60" Margin="334,434,0,0" Stroke="Black" VerticalAlignment="Top" Width="60" RenderTransformOrigin="0.607,0.622" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"/>
-			<Label x:Name="baseR" Content="Base R" HorizontalAlignment="Left" Margin="364,59,0,0" VerticalAlignment="Top" Height="40" Width="90" Grid.Row="2" FontSize="26.667" Grid.Column="1" FontFamily="Segoe UI Semilight"/>
-			<Label x:Name="baseL" Content="Base L" HorizontalAlignment="Left" Margin="476,59,0,0" VerticalAlignment="Top" Height="40" Width="88" Grid.Row="2" FontSize="26.667" FontFamily="Segoe UI Semilight"/>
+			<Label x:Name="baseR" Content="Ref. R" HorizontalAlignment="Left" Margin="364,59,0,0" VerticalAlignment="Top" Height="40" Width="90" Grid.Row="2" FontSize="26.667" Grid.Column="1" FontFamily="Segoe UI Semilight"/>
+			<Label x:Name="baseL" Content="Ref. L" HorizontalAlignment="Left" Margin="476,59,0,0" VerticalAlignment="Top" Height="40" Width="88" Grid.Row="2" FontSize="26.667" FontFamily="Segoe UI Semilight"/>
 			<Label x:Name="label" Content="Emotiv Status" HorizontalAlignment="Left" Margin="127,54,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="36" FontFamily="Segoe UI Light" Foreground="#FF323232"/>
 			<Label x:Name="label8" Content="Electrode Contact Quality" HorizontalAlignment="Left" Margin="568,83,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="36" Grid.ColumnSpan="2" FontFamily="Segoe UI Light"/>
 			<Label x:Name="label9" Content="Setting Page" Grid.Column="1" HorizontalAlignment="Left" Margin="38,30,0,0" VerticalAlignment="Top" Height="75" FontSize="48" FontFamily="Segoe UI Light" Grid.RowSpan="2"/>

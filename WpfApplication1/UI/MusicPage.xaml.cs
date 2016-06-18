@@ -18,7 +18,7 @@ namespace WpfApplication1
 
 		private MediaPlayer mediaplayer = new MediaPlayer();
 		private int music_status = 0;
-		private string folder = "C:\\Onedrive\\Documents\\Visual Studio 2015\\Projects\\examples_DotNet\\build\\Debug\\";
+		private string folder = "C:\\2015 Project\\build\\Debug\\";
 
 		private string[] track = new string[6];
 		int currsong;
